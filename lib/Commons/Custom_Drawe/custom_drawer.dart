@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/Commons/Custom_Drawe/Custom_Drawer_Header.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawe/drawer_title.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -9,6 +10,7 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         // ignore: prefer_const_literals_to_create_immutables
         children: [
+          CustomDrawerHeader(),
           const DrawerTitle(iconData: Icons.home, title: "Home", page: 0),
           const DrawerTitle(iconData: Icons.list, title: "Cartas", page: 1),
           const DrawerTitle(

@@ -43,7 +43,6 @@ dependencies:
   flutter_easyloading: ^3.0.3
   mobx: ^2.0.6+1
   cool_alert: ^1.1.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

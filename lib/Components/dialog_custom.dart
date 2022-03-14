@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:flutter/cupertino.dart';
 
 class DialogsCustom {
   showDialogAlert(context, titleMsg, descMsg) {
@@ -11,14 +11,25 @@ class DialogsCustom {
     );
   }
 
-  showAlertSucess(context, sucessMsg) {
+  showAlertErro(context, errMsg) {
     CoolAlert.show(
       context: context,
-      type: CoolAlertType.success,
-      text: sucessMsg,
-      autoCloseDuration: const Duration(seconds: 4),
+      type: CoolAlertType.error,
+      title: 'Oops...',
+      text: errMsg,
+      loopAnimation: false,
     );
   }
 
-
+  showAlertSucessRedirectMenu(context, sucessMsg) {
+    CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        title:'Sucesso',
+        text: sucessMsg,
+        confirmBtnText: "OK",
+        onConfirmBtnTap: () {
+          Navigator.of(context).pushNamed('/');
+        });
+  }
 }

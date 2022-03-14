@@ -1,5 +1,7 @@
-// ignore_for_file: deprecated_member_use
+import 'dart:async';
+import 'dart:developer';
 
+import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,7 @@ class LoginScreen extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/signup');
+                Navigator.of(context).pushNamed('/signup');
               },
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -77,10 +79,13 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 44,
                 child: RaisedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (formKey.currentState?.validate() == true) {
-                      context.read<UserService>().loginUser(UserLogin(
-                          emailController.text, passwrodController.text));
+                      LoadCustom().openLoadMsg("Logando....");
+                      var res = await context.read<UserService>().loginUser(
+                          UserLogin(
+                              emailController.text, passwrodController.text),
+                          context);
                     }
                   },
                   child: const Text(

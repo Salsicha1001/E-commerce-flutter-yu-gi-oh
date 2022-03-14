@@ -3,12 +3,18 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_ecommerce/Screens/Base/base_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/register_user.dart';
+import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
   configLoading();
+  runApp(MultiProvider(
+    providers: [
+    ChangeNotifierProvider(create: (context) => UserManager(), lazy: false,),
+    ],
+    child: MyApp(),
+  ));
 }
 
 void configLoading() {
@@ -41,13 +47,15 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.indigo,
           // brightness: Brightness.dark,
         ),
-        initialRoute: '/base',
+        initialRoute: '/',
         builder: EasyLoading.init(),
         onGenerateRoute: (settings) {
           switch (settings.name) {
             case '/signup':
               return MaterialPageRoute(builder: (_) => RegisterUser());
-            case '/base':
+            case '/login':
+              return MaterialPageRoute(builder: (_) => LoginScreen());
+            case '/':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
           }
