@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_ecommerce/Screens/Base/base_screen.dart';
+import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/register_user.dart';
+import 'package:flutter_ecommerce/Utils/pallete_color.dart';
+import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +14,18 @@ void main() {
   configLoading();
   runApp(MultiProvider(
     providers: [
-    ChangeNotifierProvider(create: (context) => UserManager(), lazy: false,),
+      ChangeNotifierProvider(
+        create: (context) => UserManager(),
+        lazy: false,
+      ),
+         ChangeNotifierProvider(
+        create: (context) => ThemeApp(),
+        lazy: false,
+      ),
+      Provider(
+        create: (_) => UserService(),
+        lazy: false,
+      ),
     ],
     child: MyApp(),
   ));
@@ -36,16 +50,15 @@ void configLoading() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (_) => UserService(),
-      child: MaterialApp(
+    return Consumer<ThemeApp>(builder: (_, themeApp, __) {
+      return MaterialApp(
         title: 'YU-GI-OH shopp',
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
+          primarySwatch: generateMaterialColor(Palette.primary),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: const AppBarTheme(elevation: 0),
-          scaffoldBackgroundColor: Colors.indigo,
-          // brightness: Brightness.dark,
+          scaffoldBackgroundColor: Color(0xFF000080),
+          brightness: themeApp.getTheme? Brightness.dark : Brightness.light,
         ),
         initialRoute: '/',
         builder: EasyLoading.init(),
@@ -55,12 +68,16 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => RegisterUser());
             case '/login':
               return MaterialPageRoute(builder: (_) => LoginScreen());
+            case '/settings':
+              return MaterialPageRoute(builder: (_) => ConfigScreen());
             case '/':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
           }
         },
-      ),
-    );
+      );
+    });
   }
 }
+
+class _ {}

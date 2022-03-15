@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/Commons/Custom_Drawe/Custom_Drawer_Header.dart';
-import 'package:flutter_ecommerce/Commons/Custom_Drawe/drawer_title.dart';
+import 'package:flutter_ecommerce/Commons/Custom_Drawer/Custom_Drawer_Header.dart';
+import 'package:flutter_ecommerce/Commons/Custom_Drawer/drawer_title.dart';
 
 class CustomDrawer extends StatelessWidget {
 
@@ -24,7 +24,7 @@ class CustomDrawer extends StatelessWidget {
               const DrawerTitle(
               iconData: Icons.settings,
               title: "Configurações",
-              page: 3),
+              page:4),
         ],
       ),
     );

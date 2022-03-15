@@ -39,10 +39,10 @@ class CustomDrawerHeader extends StatelessWidget {
                 child: Column(
                   children: [
                     if (userManager.isLoggedIn == false) ...[
-                      Text(
+                      const Text(
                         "Entrar ou Cadastre-ser >",
                         style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                            decoration: TextDecoration.underline,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic),

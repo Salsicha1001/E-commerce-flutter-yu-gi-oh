@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/model/page_manager.dart';
 import 'package:provider/provider.dart';
 
-
 class DrawerTitle extends StatelessWidget {
-  const DrawerTitle({required this.iconData, 
-  required this.title, required this.page});
+  const DrawerTitle(
+      {required this.iconData, required this.title, required this.page});
   final IconData iconData;
   final String title;
   final int page;
@@ -26,7 +25,8 @@ class DrawerTitle extends StatelessWidget {
               child: Icon(
                 iconData,
                 size: 32,
-                color: curlPage == page ? const Color.fromARGB(255, 35, 10, 148) : Colors.grey[700],
+                color:
+                    curlPage == page ? Color.fromARGB(255, 64, 28, 223) : null,
               ),
             ),
             const SizedBox(width: 32),
@@ -34,8 +34,10 @@ class DrawerTitle extends StatelessWidget {
               title,
               style: TextStyle(
                   fontSize: 16,
-                  color:
-                      curlPage == page ? const Color.fromARGB(255, 35, 10, 148)  : Colors.grey[700]),
+                  fontWeight: FontWeight.bold,
+                  color: curlPage == page
+                      ? Color.fromARGB(255, 64, 28, 223)
+                      : null),
             )
           ],
         ),

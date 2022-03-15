@@ -10,6 +10,16 @@ class DialogsCustom {
       text: descMsg,
     );
   }
+    showDialogError(context, titleMsg, descMsg) {
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.error,
+      title: titleMsg,
+      text: descMsg,
+    );
+  }
+
+
 
   showAlertErro(context, errMsg) {
     CoolAlert.show(
@@ -25,7 +35,7 @@ class DialogsCustom {
     CoolAlert.show(
         context: context,
         type: CoolAlertType.success,
-        title:'Sucesso',
+        title: 'Sucesso',
         text: sucessMsg,
         confirmBtnText: "OK",
         onConfirmBtnTap: () {

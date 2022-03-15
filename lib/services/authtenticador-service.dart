@@ -32,11 +32,14 @@ class UserService {
       };
       Provider.of<UserManager>(context, listen: false).user =
           User.fromMap(user);
-
       LoadCustom().closeLoad();
-       DialogsCustom().showAlertSucessRedirectMenu(context, ' ${msg['msg']}');
+      DialogsCustom().showAlertSucessRedirectMenu(context, ' ${msg['msg']}');
     } else {
-      // return json.decode(utf8.decode(response.bodyBytes));
+      var msg = json.decode(utf8.decode(response.bodyBytes));
+      LoadCustom().closeLoad();
+      DialogsCustom().showDialogError(
+          context, 'Erro  ${response.statusCode}', ' ${msg['msg']}');
+      return msg['msg'];
     }
   }
 

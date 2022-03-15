@@ -86,13 +86,16 @@ class LoginScreen extends StatelessWidget {
                           UserLogin(
                               emailController.text, passwrodController.text),
                           context);
+                      if (res != null) {
+                        passwrodController.text ="";
+                      }
                     }
                   },
                   child: const Text(
                     "Entrar",
                     style: TextStyle(fontSize: 18),
                   ),
-                  color: Colors.indigo,
+                  color: Color(0xFF000080),
                   textColor: Colors.white,
                 ),
               )
