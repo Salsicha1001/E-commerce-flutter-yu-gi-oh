@@ -5,12 +5,14 @@ import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/register_user.dart';
 import 'package:flutter_ecommerce/Utils/pallete_color.dart';
+import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   configLoading();
   runApp(MultiProvider(
     providers: [
@@ -18,8 +20,8 @@ void main() {
         create: (context) => UserManager(),
         lazy: false,
       ),
-         ChangeNotifierProvider(
-        create: (context) => ThemeApp(),
+      ChangeNotifierProvider(
+        create: (context) => ThemeAppConfig(),
         lazy: false,
       ),
       Provider(
@@ -50,15 +52,24 @@ void configLoading() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeApp>(builder: (_, themeApp, __) {
+    return Consumer<ThemeAppConfig>(builder: (_, themeAppConfig, __) {
       return MaterialApp(
         title: 'YU-GI-OH shopp',
+        supportedLocales: LocaleProvider.delegate.supportedLocales,
+        localizationsDelegates: const [
+          LocaleProvider.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
+        locale: themeAppConfig.getLocale,
         theme: ThemeData(
           primarySwatch: generateMaterialColor(Palette.primary),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: const AppBarTheme(elevation: 0),
-          scaffoldBackgroundColor: Color(0xFF000080),
-          brightness: themeApp.getTheme? Brightness.dark : Brightness.light,
+          scaffoldBackgroundColor: const Color(0xFF000080),
+          brightness:
+              themeAppConfig.getTheme ? Brightness.dark : Brightness.light,
         ),
         initialRoute: '/',
         builder: EasyLoading.init(),
@@ -79,5 +90,3 @@ class MyApp extends StatelessWidget {
     });
   }
 }
-
-class _ {}

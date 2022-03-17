@@ -27,7 +27,6 @@ class DialogsCustom {
       type: CoolAlertType.error,
       title: 'Oops...',
       text: errMsg,
-      loopAnimation: false,
     );
   }
 

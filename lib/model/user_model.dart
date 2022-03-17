@@ -12,10 +12,10 @@ class User {
     this.email,
     this.token,
   }) : super();
-  int? id_user;
-  String? name;
-  String? email;
-  String? token;
+  int id_user;
+  String name;
+  String email;
+  String token;
 
   Map toJson() => {
         'id_user': id_user,

@@ -85,20 +85,20 @@ class _RegisterUserState extends State<RegisterUser> {
       }
 
       Address userAddress = Address(
-          street: address.findControl('street')!.value,
-          district: address.findControl('district')!.value,
-          city: address.findControl('city')!.value,
-          state: address.findControl('state')!.value,
-          number_address: address.findControl('number_address')!.value,
-          cep: address.findControl('cep')!.value);
+          street: address.findControl('street').value,
+          district: address.findControl('district').value,
+          city: address.findControl('city').value,
+          state: address.findControl('state').value,
+          number_address: address.findControl('number_address').value,
+          cep: address.findControl('cep').value);
       List<Address> address_user = [];
       address_user.add(userAddress);
       UserRegister user = UserRegister(
-        name: formUser.findControl('name')!.value,
-        email: formUser.findControl('email')!.value,
-        phone: formUser.findControl('phone')!.value,
-        password: formUser.findControl('password')!.value,
-        cpf: formUser.findControl('cpf')!.value,
+        name: formUser.findControl('name').value,
+        email: formUser.findControl('email').value,
+        phone: formUser.findControl('phone').value,
+        password: formUser.findControl('password').value,
+        cpf: formUser.findControl('cpf').value,
         address_user: address_user,
       );
       var response = await UserService().registerUserAdd(user, context);

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 class DrawerTitle extends StatelessWidget {
   const DrawerTitle(
-      {required this.iconData, required this.title, required this.page});
+      { this.iconData,  this.title,  this.page});
   final IconData iconData;
   final String title;
   final int page;
