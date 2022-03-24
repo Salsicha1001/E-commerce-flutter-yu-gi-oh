@@ -1,7 +1,5 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter_ecommerce/Components/load_custom.dart';
+import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +25,8 @@ class LoginScreen extends StatelessWidget {
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
-              child: const Text(
-                "Criar conta",
+              child: Text(
+                LocaleProvider.of(context).register,
                 style: TextStyle(fontSize: 16),
               ))
         ],
@@ -57,7 +55,8 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 16),
               TextFormField(
                 controller: passwrodController,
-                decoration: const InputDecoration(hintText: "Senha"),
+                decoration: InputDecoration(
+                    hintText: LocaleProvider.of(context).password),
                 autocorrect: false,
                 obscureText: true,
                 validator: (password) {
@@ -72,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                 child: FlatButton(
                   onPressed: () {},
                   padding: EdgeInsets.zero,
-                  child: const Text("Esqueci minha senha"),
+                  child: Text(LocaleProvider.of(context).forgot_password),
                 ),
               ),
               const SizedBox(height: 32),
@@ -87,12 +86,12 @@ class LoginScreen extends StatelessWidget {
                               emailController.text, passwrodController.text),
                           context);
                       if (res != null) {
-                        passwrodController.text ="";
+                        passwrodController.text = "";
                       }
                     }
                   },
-                  child: const Text(
-                    "Entrar",
+                  child: Text(
+                    LocaleProvider.of(context).Login,
                     style: TextStyle(fontSize: 18),
                   ),
                   color: Color(0xFF000080),

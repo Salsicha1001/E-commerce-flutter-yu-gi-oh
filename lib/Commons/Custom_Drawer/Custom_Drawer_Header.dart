@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,8 @@ class CustomDrawerHeader extends StatelessWidget {
                 style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
               ),
               Text(
-                'Bem vindo, ${userManager.user.name ?? ''}',
+                LocaleProvider.of(context).welcome +
+                    ' ${userManager.user.name ?? ''}',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style:
@@ -36,10 +38,11 @@ class CustomDrawerHeader extends StatelessWidget {
                 },
                 child: Column(
                   children: [
+                    // ignore: sdk_version_ui_as_code
                     if (userManager.isLoggedIn == false) ...[
-                      const Text(
-                        "Entrar ou Cadastre-ser >",
-                        style: TextStyle(
+                      Text(
+                        LocaleProvider.of(context).login_register,
+                        style: const TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -47,7 +50,7 @@ class CustomDrawerHeader extends StatelessWidget {
                       ),
                     ] else ...[
                       Text(
-                        "Sair",
+                        LocaleProvider.of(context).logout,
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 16,

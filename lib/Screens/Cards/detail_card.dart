@@ -1,0 +1,258 @@
+import 'dart:developer';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/Screens/Cards/detail_image.dart';
+import 'package:flutter_ecommerce/Screens/Cards/detail_price.dart';
+import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
+import 'package:card_swiper/card_swiper.dart';
+import 'package:tab_container/tab_container.dart';
+
+class CardDetail extends StatefulWidget {
+  CardDetailDto card;
+  CardDetail(this.card, {Key key}) : super(key: key);
+  @override
+  State<CardDetail> createState() => _CardDetailState();
+}
+
+class _CardDetailState extends State<CardDetail> {
+  List<String> images = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _createCarousel();
+  }
+
+  _createCarousel() {
+    if (widget.card.card_images.isNotEmpty) {
+      for (var image in widget.card.card_images) {
+        images.add(image.image_url);
+      }
+    }
+  }
+
+  List<String> _getTabs2() {
+    return <String>['Descrição', 'Preços', 'Cartas Relacionadas'];
+  }
+
+  List<Widget> _getChildren2() {
+    return <Widget>[
+      ListView(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8.0),
+            child: Row(children: [
+              if (widget.card.level > 0)
+                Text("Level:", style: TextStyle(fontSize: 20)),
+              for (int i = 0; i < widget.card.level; i++)
+                Image.asset(
+                  'images/img_star.png',
+                  height: 25,
+                )
+            ]),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+            child: Row(children: [
+              Expanded(
+                  flex: 2,
+                  child: Wrap(children: [
+                    Text("Tipo de Card:", style: TextStyle(fontSize: 20)),
+                  ])),
+              Expanded(
+                  flex: 2,
+                  child: Wrap(
+                    children: [
+                      Text("Tipo:", style: TextStyle(fontSize: 20)),
+                    ],
+                  )),
+            ]),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+            child: Row(children: [
+              Expanded(
+                  flex: 2,
+                  child: Wrap(children: [
+                    Text("${widget.card.type}",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                  ])),
+              Expanded(
+                  flex: 2,
+                  child: Wrap(
+                    children: [
+                      Text("${widget.card.race}",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                    ],
+                  )),
+            ]),
+          ),
+          if (widget.card.type.contains("Monstro") ||
+              widget.card.type.contains("Monster"))
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+              child: Row(children: [
+                Expanded(
+                    flex: 1,
+                    child: Wrap(children: [
+                      Text("Ataque:", style: TextStyle(fontSize: 20)),
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Wrap(
+                      children: [
+                        Text("Defesa:", style: TextStyle(fontSize: 20)),
+                      ],
+                    )),
+                if (widget.card.attribute != null)
+                  Expanded(
+                      flex: 1,
+                      child: Wrap(
+                        children: [
+                          Text("Atributo:", style: TextStyle(fontSize: 20)),
+                        ],
+                      )),
+              ]),
+            ),
+          if (widget.card.type.contains("Monstro") ||
+              widget.card.type.contains("Monster"))
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              child: Row(children: [
+                Expanded(
+                    flex: 1,
+                    child: Wrap(children: [
+                      Text("${widget.card.atk}",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                    ])),
+                Expanded(
+                    flex: 1,
+                    child: Wrap(
+                      children: [
+                        Text("${widget.card.def}",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
+                      ],
+                    )),
+                if (widget.card.attribute != null)
+                  Expanded(
+                      flex: 1,
+                      child: Wrap(
+                        children: [
+                          Text("${widget.card.attribute}",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                        ],
+                      )),
+              ]),
+            ),
+          const SizedBox(height: 20),
+          Text(
+            "Descrição:",
+            style: TextStyle(
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+            child: Wrap(children: [
+              Text(
+                "${widget.card.desc}",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              )
+            ]),
+          ),
+        ],
+      ),
+      PriceDetail(price: widget.card.card_prices[0]),
+      Text("321"),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: DefaultTextStyle(
+              style: const TextStyle(
+                fontSize: 24,
+                fontFamily: 'Bobbers',
+              ),
+              child: AnimatedTextKit(
+                animatedTexts: [TyperAnimatedText('${widget.card.name}')],
+                repeatForever: true,
+              )),
+        ),
+        body: Card(
+            child: Container(
+                child: Column(children: <Widget>[
+          Expanded(
+            child: Swiper(
+                itemBuilder: (context, index) {
+                  final img = images[index];
+                  return Image.network(
+                    img,
+                    alignment: Alignment.topCenter,
+                    scale: 1.5,
+                  );
+                },
+                itemCount: images.length,
+                autoplay: true,
+                autoplayDisableOnInteraction: true,
+                duration: 1500,
+                physics: ScrollPhysics(),
+                onTap: (img) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return DetailScreen(images[img]);
+                  }));
+                },
+                loop: true),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+              child: Column(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: AspectRatio(
+                  aspectRatio: 10 / 8,
+                  child: TabContainer(
+                    radius: 25,
+                    tabEdge: TabEdge.top,
+                    tabCurve: Curves.easeInSine,
+                    transitionBuilder: (child, animation) {
+                      animation = CurvedAnimation(
+                          curve: Curves.easeIn, parent: animation);
+                      return SlideTransition(
+                        position: Tween(
+                          begin: const Offset(0.2, 0.0),
+                          end: const Offset(0.0, 0.0),
+                        ).animate(animation),
+                        child: FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        ),
+                      );
+                    },
+                    children: _getChildren2(),
+                    tabs: _getTabs2(),
+                    selectedTextStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    unselectedTextStyle: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ))
+        ]))));
+  }
+}

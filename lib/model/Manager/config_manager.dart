@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ThemeAppConfig extends ChangeNotifier {
   var _theme = false;
-  Locale _locale = Locale('pt','BR');
+  Locale _locale = const Locale('pt','BR');
   bool get getTheme => _theme;
   Locale get getLocale => _locale;
+  
   set setThemeAppConfig(bool user) {
     _theme = user;
     notifyListeners();

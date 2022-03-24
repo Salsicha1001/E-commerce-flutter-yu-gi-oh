@@ -4,4 +4,27 @@
     "portuguese": "Português",
     "change_lenguage": "Escolha o idioma",
     "settings": "Configuração",
+    "welcome": "Bem Vindo",
+    "login_register": "Entrar ou Cadastre-se",
+    "cards": "Cartas",
+    "my_ordes": "Meus Pedidos",
+    "my_favorites_cards": "Minhas Cartas Favoritas",
+    "logout": "Sair",
+    "create_account": "Criar Conta",
+    "forgot_password": "Esqueci minha senha",
+    "Login": "Entrar",
+    "user_account": "Cadastro de Usuário",
+    "persona_data": "Dados Pessoais",
+    "name": "Nome",
+    "number": "Número",
+    "password": "Senha",
+    "repeat_password": "Repita sua Senha",
+    "delivery_address": "Endereço para Entrega",
+    "street": "Rua",
+    "district": "Bairro",
+    "city": "Cidade",
+    "state": "Estado",
+    "register": "Cadastar"
+
+
 }

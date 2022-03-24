@@ -4,5 +4,26 @@
     "portuguese": "Portuguese",
     "change_lenguage": "Change Language",
     "settings": "Settings",
-    
+    "welcome": "Welcome",
+    "login_register": "Login or Register",
+    "cards": "Cards",
+    "my_ordes": "My Orders",
+    "my_favorites_cards": "My Favorite Cards",
+    "logout": "Logout",
+    "create_account": "Create Account",
+    "forgot_password": "Forgot My Password",
+    "Login": "Log in",
+    "user_account": "User Registration",
+    "persona_data": "Personal Data",
+    "name": "Name",
+    "number": "Number",
+    "password": "Password",
+    "repeat_password": "Repeat your password",
+    "delivery_address": "Delivery Address",
+    "street": "Street",
+    "district": "District",
+    "city": "City",
+    "state": "State",
+    "register": "Register"
+
 }

@@ -21,11 +21,31 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "Login" : MessageLookupByLibrary.simpleMessage("Log in"),
+    "cards" : MessageLookupByLibrary.simpleMessage("Cards"),
     "change_lenguage" : MessageLookupByLibrary.simpleMessage("Change Language"),
+    "city" : MessageLookupByLibrary.simpleMessage("City"),
+    "create_account" : MessageLookupByLibrary.simpleMessage("Create Account"),
     "dark_mode" : MessageLookupByLibrary.simpleMessage("Dark Mode"),
+    "delivery_address" : MessageLookupByLibrary.simpleMessage("Delivery Address"),
+    "district" : MessageLookupByLibrary.simpleMessage("District"),
     "english" : MessageLookupByLibrary.simpleMessage("English"),
+    "forgot_password" : MessageLookupByLibrary.simpleMessage("Forgot My Password"),
+    "login_register" : MessageLookupByLibrary.simpleMessage("Login or Register"),
+    "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
+    "my_favorites_cards" : MessageLookupByLibrary.simpleMessage("My Favorite Cards"),
+    "my_ordes" : MessageLookupByLibrary.simpleMessage("My Orders"),
+    "name" : MessageLookupByLibrary.simpleMessage("Name"),
+    "number" : MessageLookupByLibrary.simpleMessage("Number"),
+    "password" : MessageLookupByLibrary.simpleMessage("Password"),
+    "persona_data" : MessageLookupByLibrary.simpleMessage("Personal Data"),
     "portuguese" : MessageLookupByLibrary.simpleMessage("Portuguese"),
+    "register" : MessageLookupByLibrary.simpleMessage("Register"),
+    "repeat_password" : MessageLookupByLibrary.simpleMessage("Repeat your password"),
     "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
-    "test" : MessageLookupByLibrary.simpleMessage("Test")
+    "state" : MessageLookupByLibrary.simpleMessage("State"),
+    "street" : MessageLookupByLibrary.simpleMessage("Street"),
+    "user_account" : MessageLookupByLibrary.simpleMessage("User Registration"),
+    "welcome" : MessageLookupByLibrary.simpleMessage("Welcome")
   };
 }
