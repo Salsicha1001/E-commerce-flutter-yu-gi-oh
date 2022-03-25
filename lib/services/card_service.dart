@@ -20,6 +20,7 @@ class CardService {
         "Content-Type": "application/json;charset=UTF-8",
       },
     );
+
     var msg = json.decode(utf8.decode(response.bodyBytes));
     if (response.statusCode == 200) {
       var listMap = (msg['data'] as List);
@@ -51,6 +52,29 @@ class CardService {
           .toList();
       LoadCustom().closeLoad();
       return listCard.first;
+    } else {
+      LoadCustom().closeLoad();
+      DialogsCustom().showDialogAlert(
+          context, 'Erro  ${response.statusCode}', ' ${msg['msg']}');
+    }
+  }
+
+  Future<List<CardList>> getCardByArctype(context, archetype) async {
+    final response = await http.get(
+      Uri.parse(url +
+          '/getByArchetype?' +
+          "archetype=${archetype}&language=${getLanguge(context)}"),
+      headers: <String, String>{
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    );
+    var msg = json.decode(utf8.decode(response.bodyBytes));
+    if (response.statusCode == 200) {
+      var listMap = (msg['data'] as List);
+      List<CardList> listCard =
+          listMap.map<CardList>((json) => CardList.fromJson(json)).toList();
+      LoadCustom().closeLoad();
+      return listCard;
     } else {
       LoadCustom().closeLoad();
       DialogsCustom().showDialogAlert(

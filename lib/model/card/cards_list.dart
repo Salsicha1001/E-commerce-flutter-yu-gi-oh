@@ -1,16 +1,17 @@
-
 class CardList {
   int id;
   String name;
   String imageSmall;
+  String archetype;
 
-  CardList({this.id, this.name, this.imageSmall});
+  CardList({this.id, this.name, this.imageSmall, this.archetype});
 
   factory CardList.fromJson(Map<String, dynamic> json) {
     return CardList(
       id: json['id'],
       name: json['name'] as String,
       imageSmall: json['imageSmall'] as String,
+      archetype: json['archetype'] as String,
     );
   }
 
@@ -19,7 +20,7 @@ class CardList {
     data["id"] = this.id;
     data["name"] = this.name;
     data["imageSmall"] = this.imageSmall;
+    data["archetype"] = this.archetype;
     return data;
   }
-
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
@@ -18,7 +17,7 @@ class CardsScreen extends StatefulWidget {
 class _CardsScreenState extends State<CardsScreen> {
   get hei => MediaQuery.of(context).size.height;
   List<CardList> cards = [];
-  int page = 2700;
+  int page = 0;
   final RefreshController refreshController = RefreshController();
   @override
   void initState() {
@@ -112,7 +111,7 @@ class _CardsScreenState extends State<CardsScreen> {
             openDialog();
           },
           elevation: 10.0,
-          child: const Icon(Icons.search_outlined),
+          child: const Icon(Icons.filter_alt_outlined),
           backgroundColor: Color.fromARGB(255, 0, 36, 155),
         ));
   }

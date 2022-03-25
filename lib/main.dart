@@ -90,8 +90,9 @@ class MyApp extends StatelessWidget {
             case '/settings':
               return MaterialPageRoute(builder: (_) => ConfigScreen());
             case '/detail-card':
+              List<dynamic> args = settings.arguments;
               return MaterialPageRoute(
-                builder: (_) => CardDetail(settings.arguments as CardDetailDto),
+                builder: (_) => CardDetail(args[0] as CardDetailDto,args[1] as List<CardList>),
               );
             case '/':
             default:

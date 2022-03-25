@@ -65,6 +65,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/img_star.png
+    - images/load.gif
   generate: true
 
 dependency_overrides:

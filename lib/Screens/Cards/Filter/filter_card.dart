@@ -25,6 +25,8 @@ class _FilterCardState extends State<FilterCard> {
   List<String> tagsType = [];
   List<String> tagsAttribute = [];
 
+  List<String> tagsRace = [];
+
   String teste;
   _FilterCardState(this.teste);
   List<Map<String, String>> TypeCardsMonster = [
@@ -36,6 +38,31 @@ class _FilterCardState extends State<FilterCard> {
     {'value': 'Pendulum Normal Monster', 'title': 'Pêndulo'},
     {'value': 'XYZ Monster', 'title': 'XYZ'},
     {'value': 'Synchro Monster', 'title': 'Sincro'},
+  ];
+  List<Map<String, String>> RaceCard = [
+    {'value': 'Aqua', 'title': 'Água'},
+    {'value': 'Beast', 'title': 'Fera'},
+    {'value': 'Beast-Warrior"', 'title': 'Besta-Guerreira'},
+    {'value': 'Creator-God', 'title': 'Deus-Criador'},
+    {'value': 'Cyberse', 'title': 'Cyberso'},
+    {'value': 'Dinosaur', 'title': 'Dinossauro'},
+    {'value': 'Fairy', 'title': 'Fada'},
+    {'value': 'Divine-Beast', 'title': 'Besta Divina'},
+    {'value': 'Dragon', 'title': 'Dragão'},
+    {'value': 'Fiend"', 'title': 'Demônio'},
+    {'value': 'Fish', 'title': 'Peixe'},
+    {'value': 'Insect', 'title': 'Inseto'},
+    {'value': 'Machine', 'title': 'Máquina'},
+    {'value': 'Plant', 'title': 'Planta'},
+    {'value': 'Psychic', 'title': 'Psíquico'},
+    {'value': 'Pyro', 'title': 'Pyro'},
+    {'value': 'Reptile', 'title': 'Réptil'},
+    {'value': 'Rock', 'title': 'Rocha'},
+    {'value': 'Sea Serpent', 'title': 'Serpente do mar'},
+    {'value': 'Spellcaster', 'title': 'Feiticeiro'},
+    {'value': 'Thunder', 'title': 'Trovão'},
+    {'value': 'Warrior', 'title': 'Guerreiro'},
+    {'value': 'Winged Beast', 'title': 'Besta Alada'},
   ];
   List<Map<String, String>> AtributeCard = [
     {'value': 'DARK', 'title': 'Trevas'},
@@ -70,7 +97,8 @@ class _FilterCardState extends State<FilterCard> {
                     flex: 5,
                     child: Text(
                       "Tipo de Carta",
-                      style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -99,7 +127,8 @@ class _FilterCardState extends State<FilterCard> {
                     flex: 5,
                     child: Text(
                       "Atributo",
-                      style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   )
@@ -114,14 +143,44 @@ class _FilterCardState extends State<FilterCard> {
                   ),
                   value: tagsAttribute,
                   wrapped: true,
-                  choiceActiveStyle:
-                      const C2ChoiceStyle(color: Color.fromARGB(255, 0, 60, 255)),
+                  choiceActiveStyle: const C2ChoiceStyle(
+                      color: Color.fromARGB(255, 0, 60, 255)),
                   onChanged: (vau) => setState((() {
                     tagsAttribute = vau;
                     print("${tagsAttribute}");
                   })),
                 ),
-              )
+              ),
+              Row(
+                children: const [
+                  Expanded(
+                    flex: 5,
+                    child: Text(
+                      "Tipo",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                child: ChipsChoice<String>.multiple(
+                  choiceItems: C2Choice.listFrom<String, Map<String, dynamic>>(
+                    source: RaceCard,
+                    value: (index, item) => item['value'],
+                    label: (index, item) => item['title'],
+                  ),
+                  value: tagsRace,
+                  wrapped: true,
+                  choiceActiveStyle: const C2ChoiceStyle(
+                      color: Color.fromARGB(255, 0, 60, 255)),
+                  onChanged: (vau) => setState((() {
+                    tagsRace = vau;
+                    print("${tagsRace}");
+                  })),
+                ),
+              ),
             ],
           )),
       Image.network(
@@ -146,6 +205,7 @@ class _FilterCardState extends State<FilterCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 3, 107, 244),
       appBar: AppBar(actions: [
         TextButton(
             onPressed: () {

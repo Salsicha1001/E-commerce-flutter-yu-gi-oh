@@ -45,9 +45,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             value: themeAppConfig.getTheme,
                             onChanged: (value) {
                               setState(() {
-                                Provider.of<ThemeAppConfig>(context,
-                                        listen: false)
-                                    .setThemeAppConfig = value;
+                              themeAppConfig.setThemeAppConfig = value;
                               });
                             })),
                   ],
