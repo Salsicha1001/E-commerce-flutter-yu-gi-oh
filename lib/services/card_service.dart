@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/helpers/language.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:flutter_ecommerce/model/card/cards_list.dart';
+import 'package:flutter_ecommerce/model/card/filter_request_card.dart';
 import 'package:http/http.dart' as http;
 
 class CardService {
@@ -79,6 +80,35 @@ class CardService {
       LoadCustom().closeLoad();
       DialogsCustom().showDialogAlert(
           context, 'Erro  ${response.statusCode}', ' ${msg['msg']}');
+    }
+  }
+
+  Future<List<CardList>> getCardByFilter(
+      context, FilterCardRequest request, page) async {
+    LoadCustom().openLoadMsg("Buscando...");
+    final response = await http.get(
+      Uri.parse(url +
+          '/search?' +
+          "&language=${getLanguge(context)}" +
+          "&type=${request.type}" +
+          "&race=${request.race}" +
+          "&linesPerPage=20&page=${page}"),
+      headers: <String, String>{
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    );
+    var msg = json.decode(utf8.decode(response.bodyBytes));
+    if (response.statusCode == 200) {
+      var listMap = (msg['data'] as List);
+      List<CardList> listCard =
+          listMap.map<CardList>((json) => CardList.fromJson(json)).toList();
+      LoadCustom().closeLoad();
+      return listCard;
+    } else {
+      LoadCustom().closeLoad();
+      DialogsCustom().showDialogAlert(
+          context, 'Erro  ${response.statusCode}', ' ${msg['msg']}');
+      return null;
     }
   }
 }

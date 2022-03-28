@@ -3,19 +3,20 @@ import 'dart:developer';
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
+import 'package:flutter_ecommerce/model/card/filter_request_card.dart';
 import 'package:provider/provider.dart';
 import 'package:tab_container/tab_container.dart';
 
 class FilterCard extends StatefulWidget {
-  final String initialWeight;
+  final FilterCardRequest initialWeight;
 
   FilterCard.add(this.initialWeight);
   @override
   _FilterCardState createState() {
     if (initialWeight != null) {
-      return new _FilterCardState('weighEntryToEdit.dateTime,');
+      return new _FilterCardState(this.initialWeight);
     } else {
-      return new _FilterCardState('new DateTime.now(), initialWeight, null');
+      return new _FilterCardState(null);
     }
   }
 }
@@ -24,11 +25,13 @@ class _FilterCardState extends State<FilterCard> {
   TabContainerController _controller;
   List<String> tagsType = [];
   List<String> tagsAttribute = [];
+  List<String> tagsRaceMagic = [];
+  List<String> tagsRaceTrap = [];
 
   List<String> tagsRace = [];
 
-  String teste;
-  _FilterCardState(this.teste);
+  FilterCardRequest request;
+  _FilterCardState(this.request);
   List<Map<String, String>> TypeCardsMonster = [
     {'value': 'Effect Monster', 'title': 'Efeito'},
     {'value': 'Normal Monster', 'title': 'Normal'},
@@ -38,11 +41,12 @@ class _FilterCardState extends State<FilterCard> {
     {'value': 'Pendulum Normal Monster', 'title': 'Pêndulo'},
     {'value': 'XYZ Monster', 'title': 'XYZ'},
     {'value': 'Synchro Monster', 'title': 'Sincro'},
+    {'value': 'Skill Card', 'title': 'Carta Habilidade'},
   ];
   List<Map<String, String>> RaceCard = [
     {'value': 'Aqua', 'title': 'Água'},
     {'value': 'Beast', 'title': 'Fera'},
-    {'value': 'Beast-Warrior"', 'title': 'Besta-Guerreira'},
+    {'value': 'Beast-Warrior', 'title': 'Besta-Guerreira'},
     {'value': 'Creator-God', 'title': 'Deus-Criador'},
     {'value': 'Cyberse', 'title': 'Cyberso'},
     {'value': 'Dinosaur', 'title': 'Dinossauro'},
@@ -73,9 +77,38 @@ class _FilterCardState extends State<FilterCard> {
     {'value': 'WIND', 'title': 'Fada'},
     {'value': 'DIVINE', 'title': 'Divino'},
   ];
+
+  List<Map<String, String>> raceMagic = [
+    {'value': 'Normal', 'title': 'Magia Normal'},
+    {'value': 'Field', 'title': 'Magia Campo'},
+    {'value': 'Equip', 'title': 'Magia Equipamento'},
+    {'value': 'Continuous', 'title': 'Magia Contínuo'},
+    {'value': 'Quick-Play', 'title': 'Magia Rápida'},
+    {'value': 'Ritual', 'title': 'Magia Ritual'},
+  ];
+  List<Map<String, String>> raceTrap = [
+    {'value': 'Normal', 'title': 'Armadilha Normal'},
+    {'value': 'Counter', 'title': 'Armadilha de Resposta'},
+    {'value': 'Continuous', 'title': 'Armadilha Contínuo'},
+  ];
+
   @override
   void initState() {
-    _controller = TabContainerController(length: 3);
+    _controller = TabContainerController(length: 2);
+    if (request != null) {
+      if (request.type != '') tagsType.addAll(request.type.split(','));
+      if (request.attribute != '')
+        tagsAttribute.addAll(request.attribute.split(','));
+      if (request.race != '') {
+        if (request.type == 'Spell Card') {
+          tagsRaceMagic.addAll(request.race.split(','));
+        } else if (request.type == 'Trap Card') {
+          tagsRaceTrap.addAll(request.race.split(','));
+        } else {
+          tagsRace.addAll(request.race.split(','));
+        }
+      }
+    }
     super.initState();
   }
 
@@ -117,7 +150,8 @@ class _FilterCardState extends State<FilterCard> {
                       C2ChoiceStyle(color: Color.fromARGB(255, 0, 60, 255)),
                   onChanged: (vau) => setState((() {
                     tagsType = vau;
-                    print("${tagsType}");
+                    tagsRaceMagic.clear();
+                    tagsRaceTrap.clear();
                   })),
                 ),
               ),
@@ -147,7 +181,8 @@ class _FilterCardState extends State<FilterCard> {
                       color: Color.fromARGB(255, 0, 60, 255)),
                   onChanged: (vau) => setState((() {
                     tagsAttribute = vau;
-                    print("${tagsAttribute}");
+                    tagsRaceMagic.clear();
+                    tagsRaceTrap.clear();
                   })),
                 ),
               ),
@@ -177,29 +212,121 @@ class _FilterCardState extends State<FilterCard> {
                       color: Color.fromARGB(255, 0, 60, 255)),
                   onChanged: (vau) => setState((() {
                     tagsRace = vau;
-                    print("${tagsRace}");
+                    tagsRaceMagic.clear();
+                    tagsRaceTrap.clear();
                   })),
                 ),
               ),
             ],
           )),
-      Image.network(
-          "https://storage.googleapis.com/ygoprodeck.com/pics/23771716.jpg"),
-      Image.network(
-          "https://storage.googleapis.com/ygoprodeck.com/pics/23771716.jpg"),
+      Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(children: [
+          Row(
+            children: const [
+              Expanded(
+                flex: 5,
+                child: Text(
+                  "Cartas Mágica",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
+          Container(
+            child: ChipsChoice<String>.multiple(
+              choiceItems: C2Choice.listFrom<String, Map<String, dynamic>>(
+                source: raceMagic,
+                value: (index, item) => item['value'],
+                label: (index, item) => item['title'],
+              ),
+              value: tagsRaceMagic,
+              wrapped: true,
+              choiceActiveStyle:
+                  C2ChoiceStyle(color: Color.fromARGB(255, 0, 60, 255)),
+              onChanged: (vau) => setState((() {
+                if (tagsRaceTrap.isNotEmpty) {
+                  tagsRaceTrap.clear();
+                }
+                tagsAttribute.clear();
+                tagsRace.clear();
+                tagsType.clear();
+                tagsRaceMagic = vau;
+              })),
+            ),
+          ),
+          Row(
+            children: const [
+              Expanded(
+                flex: 5,
+                child: Text(
+                  "Cartas Armadilhas",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
+          Container(
+            child: ChipsChoice<String>.multiple(
+              choiceItems: C2Choice.listFrom<String, Map<String, dynamic>>(
+                source: raceTrap,
+                value: (index, item) => item['value'],
+                label: (index, item) => item['title'],
+              ),
+              value: tagsRaceTrap,
+              wrapped: true,
+              choiceActiveStyle:
+                  C2ChoiceStyle(color: Color.fromARGB(255, 0, 60, 255)),
+              onChanged: (vau) => setState((() {
+                if (tagsRaceMagic.isNotEmpty) {
+                  tagsRaceMagic.clear();
+                }
+                tagsAttribute.clear();
+                tagsRace.clear();
+                tagsType.clear();
+                tagsRaceTrap = vau;
+              })),
+            ),
+          ),
+        ]),
+      )
     ];
   }
 
   List<String> _getTabs2() {
-    return <String>['Monstros', 'Image 2', 'Image 3'];
+    return <String>['Monstros', 'Magias e Armadilhas'];
   }
 
   List<Color> _getColors() {
     return [
       Color.fromARGB(255, 147, 194, 241),
       Color.fromARGB(255, 147, 194, 241),
-      Color.fromARGB(255, 147, 194, 241),
     ];
+  }
+
+  _getSearchRequest() {
+    String type = '';
+    String race = '';
+    String attribute = '';
+    String raceMagic = '';
+    String raceTrap = '';
+    if (tagsRaceMagic.isNotEmpty || tagsRaceTrap.isNotEmpty) {
+      if (tagsRaceMagic.isNotEmpty) {
+        type = 'Spell Card';
+        race = this.tagsRaceMagic.join(',');
+      } else {
+        type = 'Trap Card';
+        race = this.tagsRaceTrap.join(',');
+      }
+    } else {
+      type = this.tagsType.join(',');
+      race = this.tagsRace.join(',');
+      attribute = this.tagsAttribute.join(',');
+    }
+    Navigator.of(context)
+        .pop(FilterCardRequest(type: type, attribute: attribute, race: race));
   }
 
   @override
@@ -209,8 +336,7 @@ class _FilterCardState extends State<FilterCard> {
       appBar: AppBar(actions: [
         TextButton(
             onPressed: () {
-              Navigator.of(context)
-                  .pop("new WeightEntry(_dateTime, _weight, _note)");
+              _getSearchRequest();
             },
             child: Text(
               "Buscar",
@@ -226,6 +352,7 @@ class _FilterCardState extends State<FilterCard> {
             child: AspectRatio(
               aspectRatio: 10 / 8,
               child: TabContainer(
+                controller: _controller,
                 radius: 25,
                 tabEdge: TabEdge.top,
                 tabCurve: Curves.easeInSine,
@@ -258,6 +385,12 @@ class _FilterCardState extends State<FilterCard> {
           ),
         ]),
       )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _getSearchRequest();
+        },
+        child: const Icon(Icons.search),
+      ),
     );
   }
 }
