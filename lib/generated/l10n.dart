@@ -165,10 +165,10 @@ class LocaleProvider {
     );
   }
 
-  /// `Log in`
+  /// `Login`
   String get Login {
     return Intl.message(
-      'Log in',
+      'Login',
       name: 'Login',
       desc: '',
       args: [],
@@ -290,6 +290,572 @@ class LocaleProvider {
     return Intl.message(
       'Register',
       name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Effect`
+  String get Effect {
+    return Intl.message(
+      'Effect',
+      name: 'Effect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fusion`
+  String get Fusion {
+    return Intl.message(
+      'Fusion',
+      name: 'Fusion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pendulum`
+  String get Pendulum {
+    return Intl.message(
+      'Pendulum',
+      name: 'Pendulum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Synchro`
+  String get Synchro {
+    return Intl.message(
+      'Synchro',
+      name: 'Synchro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skill Card`
+  String get Skill {
+    return Intl.message(
+      'Skill Card',
+      name: 'Skill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aqua`
+  String get Aqua {
+    return Intl.message(
+      'Aqua',
+      name: 'Aqua',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Beast`
+  String get Beast {
+    return Intl.message(
+      'Beast',
+      name: 'Beast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Beast-Warrior' key
+
+  // skipped getter for the 'Creator-God' key
+
+  /// `Cyberso`
+  String get Cyberse {
+    return Intl.message(
+      'Cyberso',
+      name: 'Cyberse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dinosaur`
+  String get Dinosaur {
+    return Intl.message(
+      'Dinosaur',
+      name: 'Dinosaur',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fairy`
+  String get Fairy {
+    return Intl.message(
+      'Fairy',
+      name: 'Fairy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Divine-Beast' key
+
+  /// `Dragon`
+  String get Dragon {
+    return Intl.message(
+      'Dragon',
+      name: 'Dragon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fiend`
+  String get Fiend {
+    return Intl.message(
+      'Fiend',
+      name: 'Fiend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fish`
+  String get Fish {
+    return Intl.message(
+      'Fish',
+      name: 'Fish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insect`
+  String get Insect {
+    return Intl.message(
+      'Insect',
+      name: 'Insect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Máquina`
+  String get Machine {
+    return Intl.message(
+      'Máquina',
+      name: 'Machine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plant`
+  String get Plant {
+    return Intl.message(
+      'Plant',
+      name: 'Plant',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Psychic`
+  String get Psychic {
+    return Intl.message(
+      'Psychic',
+      name: 'Psychic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pyro`
+  String get Pyro {
+    return Intl.message(
+      'Pyro',
+      name: 'Pyro',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reptile`
+  String get Reptile {
+    return Intl.message(
+      'Reptile',
+      name: 'Reptile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rock`
+  String get Rock {
+    return Intl.message(
+      'Rock',
+      name: 'Rock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sea Serpent`
+  String get Sea_Serpent {
+    return Intl.message(
+      'Sea Serpent',
+      name: 'Sea_Serpent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spellcaster`
+  String get Spellcaster {
+    return Intl.message(
+      'Spellcaster',
+      name: 'Spellcaster',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thunder`
+  String get Thunder {
+    return Intl.message(
+      'Thunder',
+      name: 'Thunder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warrior`
+  String get Warrior {
+    return Intl.message(
+      'Warrior',
+      name: 'Warrior',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Winged Beast`
+  String get Winged_Beast {
+    return Intl.message(
+      'Winged Beast',
+      name: 'Winged_Beast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DARK`
+  String get DARK {
+    return Intl.message(
+      'DARK',
+      name: 'DARK',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EARTH`
+  String get EARTH {
+    return Intl.message(
+      'EARTH',
+      name: 'EARTH',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FIRE`
+  String get FIRE {
+    return Intl.message(
+      'FIRE',
+      name: 'FIRE',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LIGHT`
+  String get LIGHT {
+    return Intl.message(
+      'LIGHT',
+      name: 'LIGHT',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WATER`
+  String get WATER {
+    return Intl.message(
+      'WATER',
+      name: 'WATER',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `WIND`
+  String get WIND {
+    return Intl.message(
+      'WIND',
+      name: 'WIND',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DIVINE`
+  String get DIVINE {
+    return Intl.message(
+      'DIVINE',
+      name: 'DIVINE',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal Magic`
+  String get Magic_Normal {
+    return Intl.message(
+      'Normal Magic',
+      name: 'Magic_Normal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Field Magic`
+  String get Magic_Field {
+    return Intl.message(
+      'Field Magic',
+      name: 'Magic_Field',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Equip Magic`
+  String get Magic_Equip {
+    return Intl.message(
+      'Equip Magic',
+      name: 'Magic_Equip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continuous Magic`
+  String get Magic_Continuous {
+    return Intl.message(
+      'Continuous Magic',
+      name: 'Magic_Continuous',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quick-Play`
+  String get Quick_Play {
+    return Intl.message(
+      'Quick-Play',
+      name: 'Quick_Play',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ritual Magic`
+  String get Magic_Ritual {
+    return Intl.message(
+      'Ritual Magic',
+      name: 'Magic_Ritual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal Trap`
+  String get Trap_Normal {
+    return Intl.message(
+      'Normal Trap',
+      name: 'Trap_Normal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trap Counter `
+  String get Trap_counter {
+    return Intl.message(
+      'Trap Counter ',
+      name: 'Trap_counter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continuous Trap`
+  String get Trap_Continuous {
+    return Intl.message(
+      'Continuous Trap',
+      name: 'Trap_Continuous',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type Card`
+  String get type_card {
+    return Intl.message(
+      'Type Card',
+      name: 'type_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attribute`
+  String get attribute {
+    return Intl.message(
+      'Attribute',
+      name: 'attribute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type`
+  String get type {
+    return Intl.message(
+      'Type',
+      name: 'type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Magic Card`
+  String get card_magic {
+    return Intl.message(
+      'Magic Card',
+      name: 'card_magic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trap Card`
+  String get card_trap {
+    return Intl.message(
+      'Trap Card',
+      name: 'card_trap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monster`
+  String get monster {
+    return Intl.message(
+      'Monster',
+      name: 'monster',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `and`
+  String get and {
+    return Intl.message(
+      'and',
+      name: 'and',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shit`
+  String get shit {
+    return Intl.message(
+      'Shit',
+      name: 'shit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Could not find these cards`
+  String get Could_not_find_these_cards {
+    return Intl.message(
+      'Could not find these cards',
+      name: 'Could_not_find_these_cards',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prices`
+  String get prices {
+    return Intl.message(
+      'Prices',
+      name: 'prices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Related Letter`
+  String get carrelated_letterds {
+    return Intl.message(
+      'Related Letter',
+      name: 'carrelated_letterds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attack`
+  String get attack {
+    return Intl.message(
+      'Attack',
+      name: 'attack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Defense`
+  String get defense {
+    return Intl.message(
+      'Defense',
+      name: 'defense',
       desc: '',
       args: [],
     );

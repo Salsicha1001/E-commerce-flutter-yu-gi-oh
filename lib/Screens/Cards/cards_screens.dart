@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
+import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/Screens/Cards/Filter/filter_card.dart';
 import 'package:flutter_ecommerce/Screens/Cards/card_content.dart';
@@ -19,19 +20,25 @@ class CardsScreen extends StatefulWidget {
 class _CardsScreenState extends State<CardsScreen> {
   get hei => MediaQuery.of(context).size.height;
   List<CardList> cards = [];
-  FilterCardRequest request;
+  FilterCardRequest request =
+      FilterCardRequest(fname: '', attribute: '', race: '', type: '');
   bool filter = false;
+  String _searchText = "";
+  Icon _searchIcon = const Icon(Icons.search);
+  Widget _appBarTitle;
+  final TextEditingController _filter = TextEditingController();
   int page = 0;
   final RefreshController refreshController = RefreshController();
+
   @override
-  void initState() {
+  void didChangeDependencies()  {
+    super.didChangeDependencies();
     getCards();
-    super.initState();
   }
 
   Future<bool> getCards({bool isRefresh = false}) async {
     if (!filter) {
-      if (isRefresh) {
+      if (isRefresh || page < 20) {
         page = 0;
       }
       List<CardList> card =
@@ -53,49 +60,107 @@ class _CardsScreenState extends State<CardsScreen> {
       if (isRefresh) {
         page = 0;
       }
-      List<CardList> card =
+
+      List<CardList> cd =
           await CardService().getCardByFilter(context, request, page);
-      setState(() {
-        if (card != null) {
+      if (cd != null) {
+        setState(() {
           if (isRefresh) {
-            cards = card;
+            cards = cd;
           } else {
-            cards.addAll(card);
+            cards.addAll(cd);
           }
           page = page + 20;
           Timer(const Duration(seconds: 1), () {
             LoadCustom().closeLoad();
             refreshController.loadComplete();
           });
-          return true;
-        } else {
-          return false;
-        }
-      });
+        });
+        return true;
+      } else {
+        DialogsCustom().showDialogAlert(
+            LocaleProvider.of(context).shit,
+            context,
+            LocaleProvider.of(context).Could_not_find_these_cards);
+        return false;
+      }
     }
   }
 
   Future openDialog() async {
     String open = await Navigator.of(context)
-        .push(new MaterialPageRoute<FilterCardRequest>(
+        .push(MaterialPageRoute<FilterCardRequest>(
             builder: (BuildContext context) {
-              return new FilterCard.add(request);
+              return FilterCard.add(request);
             },
             fullscreenDialog: true))
+        // ignore: missing_return
         .then((value) {
-      request = value;
-      if (request.attribute != "" || request.race != "" || request.type != "") {
-        filter = true;
+      if (value != null) {
+        request = value;
+        if (request.attribute != "" ||
+            request.race != "" ||
+            request.type != "") {
+          filter = true;
+        }
       }
-      getCards(isRefresh: true);
+      getCards(
+        isRefresh: true,
+      );
+    });
+  }
+
+  void _searchPressed() {
+    setState(() {
+      if (this._searchIcon.icon == Icons.search) {
+        this._searchIcon = const Icon(Icons.close);
+        this._appBarTitle = TextField(
+          controller: _filter,
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Icons.search, color: Colors.white),
+            hintText: "Search...",
+            hintStyle: TextStyle(color: Colors.white),
+          ),
+          style: const TextStyle(color: Colors.white),
+          onSubmitted: (getByCard) {
+            setState(() {
+              if (getByCard.isNotEmpty) {
+                request = FilterCardRequest(
+                    fname: getByCard,
+                    attribute: request.attribute != '' ? request.attribute : '',
+                    race: request.race != '' ? request.race : '',
+                    type: request.type != '' ? request.type : '');
+                filter = true;
+                getCards(
+                  isRefresh: true,
+                );
+              } else {
+                request = FilterCardRequest();
+                filter = false;
+                getCards();
+              }
+            });
+          },
+        );
+      } else {
+        this._searchIcon = const Icon(Icons.search);
+        this._appBarTitle = Text(LocaleProvider.of(context).cards);
+        _filter.clear();
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         drawer: CustomDrawer(),
-        appBar: AppBar(title: Text(LocaleProvider.of(context).cards)),
+        appBar: AppBar(title: _appBarTitle, actions: [
+          IconButton(
+            icon: _searchIcon,
+            onPressed: _searchPressed,
+          ),
+        ]),
         body: Card(
           margin: const EdgeInsets.all(8.0),
           child: SmartRefresher(
@@ -106,6 +171,7 @@ class _CardsScreenState extends State<CardsScreen> {
               if (res) {
                 refreshController.refreshCompleted();
               } else {
+                page = cards.length;
                 refreshController.refreshFailed();
               }
             },
@@ -114,7 +180,8 @@ class _CardsScreenState extends State<CardsScreen> {
               if (res) {
                 refreshController.refreshCompleted();
               } else {
-                refreshController.refreshFailed();
+                page = cards.length;
+                refreshController.loadFailed();
               }
             },
             child: ListView(
@@ -146,7 +213,7 @@ class _CardsScreenState extends State<CardsScreen> {
           },
           elevation: 10.0,
           child: const Icon(Icons.filter_alt_outlined),
-          backgroundColor: Color.fromARGB(255, 0, 36, 155),
+          backgroundColor: const Color.fromARGB(255, 0, 36, 155),
         ));
   }
 }

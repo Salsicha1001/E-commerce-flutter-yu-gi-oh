@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
+import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
 import 'package:flutter_ecommerce/Screens/Cards/cards_screens.dart';
 import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
 import 'package:flutter_ecommerce/model/page_manager.dart';
@@ -30,20 +31,19 @@ class _BaseScreenState extends State<BaseScreen> {
                 ),
               ),
               CardsScreen(),
+                 Scaffold(
+                drawer: CustomDrawer(),
+                appBar: AppBar(
+                  title: const Text('Home3'),
+                ),
+              ),
               Scaffold(
                 drawer: CustomDrawer(),
                 appBar: AppBar(
                   title: const Text('Home3'),
                 ),
               ),
-                Scaffold(
-                drawer: CustomDrawer(),
-                appBar: AppBar(
-                  title: const Text('Home3'),
-                ),
-              ),
-             ConfigScreen()
-
+              ConfigScreen()
             ],
           );
         }));

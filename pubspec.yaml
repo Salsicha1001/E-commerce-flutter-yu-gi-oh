@@ -34,10 +34,7 @@ dependencies:
   tab_container: ^1.2.2
   chips_choice: ^2.0.1
   pull_to_refresh: ^2.0.0
-
-
-
-
+  video_player: ^2.3.0
   flutter_localizations: 
     sdk: flutter
   

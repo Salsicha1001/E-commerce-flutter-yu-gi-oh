@@ -1,10 +1,11 @@
-import 'dart:developer';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
 import 'package:flutter_ecommerce/Screens/Cards/card_content.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_image.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_price.dart';
+import 'package:flutter_ecommerce/Utils/validate_animations.dart';
+import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_ecommerce/model/card/cards_list.dart';
@@ -26,6 +27,7 @@ class _CardDetailState extends State<CardDetail> {
   @override
   void initState() {
     super.initState();
+    print(widget.card.name);
     _createCarousel();
   }
 
@@ -35,7 +37,7 @@ class _CardDetailState extends State<CardDetail> {
         images.add(image.image_url);
       }
     }
-    if (widget.list_cards!=null) {
+    if (widget.list_cards != null) {
       final card =
           widget.list_cards.indexWhere((card) => card.id == widget.card.id);
       if (card != -1) {
@@ -46,10 +48,28 @@ class _CardDetailState extends State<CardDetail> {
 
   List<String> _getTabs2() {
     if (widget.card.archetype != null) {
-      return <String>['Descrição', 'Preços', 'Cartas Relacionadas'];
+      return <String>[
+        LocaleProvider.of(context).description,
+        LocaleProvider.of(context).prices,
+        LocaleProvider.of(context).carrelated_letterds
+      ];
     } else {
-      return <String>['Descrição', 'Preços'];
+      return <String>[
+        LocaleProvider.of(context).description,
+        LocaleProvider.of(context).prices
+      ];
     }
+  }
+
+  Future openDialog() async {
+    String open = await Navigator.of(context)
+        .push(MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return AnimationCard(
+                  video: getAnimation(widget.card.name, context));
+            },
+            fullscreenDialog: true))
+        .then((value) {});
   }
 
   List<Widget> _getChildren2() {
@@ -65,35 +85,37 @@ class _CardDetailState extends State<CardDetail> {
                 for (int i = 0; i < widget.card.level; i++)
                   Image.asset(
                     'images/img_star.png',
-                    height: 25,
+                    height: 23,
                   )
               ]),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
               child: Row(children: [
                 Expanded(
                     flex: 2,
                     child: Wrap(children: [
-                      Text("Tipo de Card:", style: TextStyle(fontSize: 20)),
+                      Text(LocaleProvider.of(context).type_card + ':',
+                          style: const TextStyle(fontSize: 20)),
                     ])),
                 Expanded(
                     flex: 2,
                     child: Wrap(
                       children: [
-                        Text("Tipo:", style: TextStyle(fontSize: 20)),
+                        Text(LocaleProvider.of(context).type + ':',
+                            style: const TextStyle(fontSize: 20)),
                       ],
                     )),
               ]),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
               child: Row(children: [
                 Expanded(
                     flex: 2,
                     child: Wrap(children: [
                       Text("${widget.card.type}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
                     ])),
                 Expanded(
@@ -101,7 +123,7 @@ class _CardDetailState extends State<CardDetail> {
                     child: Wrap(
                       children: [
                         Text("${widget.card.race}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ],
                     )),
@@ -110,18 +132,20 @@ class _CardDetailState extends State<CardDetail> {
             if (widget.card.type.contains("Monstro") ||
                 widget.card.type.contains("Monster"))
               Container(
-                padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
                 child: Row(children: [
                   Expanded(
                       flex: 1,
                       child: Wrap(children: [
-                        Text("Ataque:", style: TextStyle(fontSize: 20)),
+                        Text(LocaleProvider.of(context).attack + ':',
+                            style: const TextStyle(fontSize: 20)),
                       ])),
                   Expanded(
                       flex: 1,
                       child: Wrap(
                         children: [
-                          Text("Defesa:", style: TextStyle(fontSize: 20)),
+                          Text(LocaleProvider.of(context).defense + ':',
+                              style: const TextStyle(fontSize: 20)),
                         ],
                       )),
                   if (widget.card.attribute != null)
@@ -129,7 +153,8 @@ class _CardDetailState extends State<CardDetail> {
                         flex: 1,
                         child: Wrap(
                           children: [
-                            Text("Atributo:", style: TextStyle(fontSize: 20)),
+                            Text(LocaleProvider.of(context).attribute + ':',
+                                style: const TextStyle(fontSize: 20)),
                           ],
                         )),
                 ]),
@@ -137,13 +162,13 @@ class _CardDetailState extends State<CardDetail> {
             if (widget.card.type.contains("Monstro") ||
                 widget.card.type.contains("Monster"))
               Container(
-                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                 child: Row(children: [
                   Expanded(
                       flex: 1,
                       child: Wrap(children: [
                         Text("${widget.card.atk}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ])),
                   Expanded(
@@ -151,7 +176,7 @@ class _CardDetailState extends State<CardDetail> {
                       child: Wrap(
                         children: [
                           Text("${widget.card.def}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold)),
                         ],
                       )),
@@ -161,7 +186,7 @@ class _CardDetailState extends State<CardDetail> {
                         child: Wrap(
                           children: [
                             Text("${widget.card.attribute}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                           ],
                         )),
@@ -169,18 +194,19 @@ class _CardDetailState extends State<CardDetail> {
               ),
             const SizedBox(height: 20),
             Text(
-              "Descrição:",
-              style: TextStyle(
+              LocaleProvider.of(context).description + ':',
+              style: const TextStyle(
                 fontSize: 20,
               ),
               textAlign: TextAlign.center,
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
               child: Wrap(children: [
                 Text(
                   "${widget.card.desc}",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 )
               ]),
             ),
@@ -193,42 +219,44 @@ class _CardDetailState extends State<CardDetail> {
         ListView(
           children: [
             Container(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(children: [
                 if (widget.card.level > 0)
-                  Text("Level:", style: TextStyle(fontSize: 20)),
+                  const Text("Level:", style: const TextStyle(fontSize: 20)),
                 for (int i = 0; i < widget.card.level; i++)
                   Image.asset(
                     'images/img_star.png',
-                    height: 25,
+                    height: 23,
                   )
               ]),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
               child: Row(children: [
                 Expanded(
                     flex: 2,
                     child: Wrap(children: [
-                      Text("Tipo de Card:", style: TextStyle(fontSize: 20)),
+                      Text(LocaleProvider.of(context).type_card + ':',
+                          style: TextStyle(fontSize: 20)),
                     ])),
                 Expanded(
                     flex: 2,
                     child: Wrap(
                       children: [
-                        Text("Tipo:", style: TextStyle(fontSize: 20)),
+                        Text(LocaleProvider.of(context).type + ':',
+                            style: const TextStyle(fontSize: 20)),
                       ],
                     )),
               ]),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
               child: Row(children: [
                 Expanded(
                     flex: 2,
                     child: Wrap(children: [
                       Text("${widget.card.type}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold)),
                     ])),
                 Expanded(
@@ -236,7 +264,7 @@ class _CardDetailState extends State<CardDetail> {
                     child: Wrap(
                       children: [
                         Text("${widget.card.race}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ],
                     )),
@@ -245,18 +273,20 @@ class _CardDetailState extends State<CardDetail> {
             if (widget.card.type.contains("Monstro") ||
                 widget.card.type.contains("Monster"))
               Container(
-                padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
                 child: Row(children: [
                   Expanded(
                       flex: 1,
                       child: Wrap(children: [
-                        Text("Ataque:", style: TextStyle(fontSize: 20)),
+                        Text(LocaleProvider.of(context).attack + ':',
+                            style: TextStyle(fontSize: 20)),
                       ])),
                   Expanded(
                       flex: 1,
                       child: Wrap(
                         children: [
-                          Text("Defesa:", style: TextStyle(fontSize: 20)),
+                          Text(LocaleProvider.of(context).defense + ':',
+                              style: const TextStyle(fontSize: 20)),
                         ],
                       )),
                   if (widget.card.attribute != null)
@@ -264,7 +294,8 @@ class _CardDetailState extends State<CardDetail> {
                         flex: 1,
                         child: Wrap(
                           children: [
-                            Text("Atributo:", style: TextStyle(fontSize: 20)),
+                            Text(LocaleProvider.of(context).attribute + ':',
+                                style: const TextStyle(fontSize: 20)),
                           ],
                         )),
                 ]),
@@ -272,13 +303,13 @@ class _CardDetailState extends State<CardDetail> {
             if (widget.card.type.contains("Monstro") ||
                 widget.card.type.contains("Monster"))
               Container(
-                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                 child: Row(children: [
                   Expanded(
                       flex: 1,
                       child: Wrap(children: [
                         Text("${widget.card.atk}",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                       ])),
                   Expanded(
@@ -286,7 +317,7 @@ class _CardDetailState extends State<CardDetail> {
                       child: Wrap(
                         children: [
                           Text("${widget.card.def}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold)),
                         ],
                       )),
@@ -296,7 +327,7 @@ class _CardDetailState extends State<CardDetail> {
                         child: Wrap(
                           children: [
                             Text("${widget.card.attribute}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold)),
                           ],
                         )),
@@ -304,18 +335,19 @@ class _CardDetailState extends State<CardDetail> {
               ),
             const SizedBox(height: 20),
             Text(
-              "Descrição:",
+              LocaleProvider.of(context).description,
               style: TextStyle(
                 fontSize: 20,
               ),
               textAlign: TextAlign.center,
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
               child: Wrap(children: [
                 Text(
                   "${widget.card.desc}",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 )
               ]),
             ),
@@ -331,7 +363,7 @@ class _CardDetailState extends State<CardDetail> {
                 mainAxisExtent: 140),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             itemCount: widget.list_cards.length,
             itemBuilder: (context, index) => CardContent(
               cardList: widget.list_cards[index],
@@ -355,6 +387,15 @@ class _CardDetailState extends State<CardDetail> {
                 animatedTexts: [TyperAnimatedText('${widget.card.name}')],
                 repeatForever: true,
               )),
+          actions: [
+            if (getAnimation(widget.card.name, context) != null)
+              IconButton(
+                icon: const Icon(Icons.man_rounded),
+                onPressed: () {
+                  openDialog();
+                },
+              )
+          ],
         ),
         body: Card(
             child: Container(
@@ -373,7 +414,7 @@ class _CardDetailState extends State<CardDetail> {
                 autoplay: true,
                 autoplayDisableOnInteraction: true,
                 duration: 1500,
-                physics: ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 onTap: (img) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return DetailScreen(images[img]);
@@ -421,23 +462,17 @@ class _CardDetailState extends State<CardDetail> {
               ),
             ],
           ))
-        ]
-        )
-        )
-        ),
-     floatingActionButton: Visibility(
-       visible: Provider.of<UserManager>(context,
-                                        listen: false)
-                                    .isLoggedIn ,
-       child: FloatingActionButton(
+        ]))),
+        floatingActionButton: Visibility(
+          visible: Provider.of<UserManager>(context, listen: false).isLoggedIn,
+          child: FloatingActionButton(
             onPressed: () {
               // openDialog();
             },
             elevation: 10.0,
-             child: const Icon(Icons.star_outline_outlined),
-            backgroundColor: Color.fromARGB(255, 4, 149, 233),
+            child: const Icon(Icons.star_outline_outlined),
+            backgroundColor: const Color.fromARGB(255, 4, 149, 233),
           ),
-     )
-        );
+        ));
   }
 }

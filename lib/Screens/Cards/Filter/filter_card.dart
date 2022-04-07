@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
+import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/model/card/filter_request_card.dart';
-import 'package:provider/provider.dart';
 import 'package:tab_container/tab_container.dart';
 
 class FilterCard extends StatefulWidget {
@@ -14,9 +11,9 @@ class FilterCard extends StatefulWidget {
   @override
   _FilterCardState createState() {
     if (initialWeight != null) {
-      return new _FilterCardState(this.initialWeight);
+      return _FilterCardState(this.initialWeight);
     } else {
-      return new _FilterCardState(null);
+      return _FilterCardState(null);
     }
   }
 }
@@ -122,14 +119,15 @@ class _FilterCardState extends State<FilterCard> {
     return <Widget>[
       Container(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
+          child: ListView(
+            padding: const EdgeInsets.all(20.0),
             children: [
               Row(
-                children: const [
+                children: [
                   Expanded(
                     flex: 5,
                     child: Text(
-                      "Tipo de Carta",
+                      LocaleProvider.of(context).type_card,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -156,11 +154,11 @@ class _FilterCardState extends State<FilterCard> {
                 ),
               ),
               Row(
-                children: const [
+                children: [
                   Expanded(
                     flex: 5,
                     child: Text(
-                      "Atributo",
+                      LocaleProvider.of(context).attribute,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -187,11 +185,11 @@ class _FilterCardState extends State<FilterCard> {
                 ),
               ),
               Row(
-                children: const [
+                children: [
                   Expanded(
                     flex: 5,
                     child: Text(
-                      "Tipo",
+                      LocaleProvider.of(context).type,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -223,11 +221,11 @@ class _FilterCardState extends State<FilterCard> {
         padding: const EdgeInsets.all(10.0),
         child: Column(children: [
           Row(
-            children: const [
+            children: [
               Expanded(
                 flex: 5,
                 child: Text(
-                  "Cartas Mágica",
+                  LocaleProvider.of(context).card_magic,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -257,11 +255,11 @@ class _FilterCardState extends State<FilterCard> {
             ),
           ),
           Row(
-            children: const [
+            children: [
               Expanded(
                 flex: 5,
                 child: Text(
-                  "Cartas Armadilhas",
+                  LocaleProvider.of(context).card_trap,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -296,7 +294,12 @@ class _FilterCardState extends State<FilterCard> {
   }
 
   List<String> _getTabs2() {
-    return <String>['Monstros', 'Magias e Armadilhas'];
+    return <String>[
+      LocaleProvider.of(context).monster,
+      LocaleProvider.of(context).card_magic +
+          LocaleProvider.of(context).and +
+          LocaleProvider.of(context).card_trap
+    ];
   }
 
   List<Color> _getColors() {
@@ -325,22 +328,25 @@ class _FilterCardState extends State<FilterCard> {
       race = this.tagsRace.join(',');
       attribute = this.tagsAttribute.join(',');
     }
-    Navigator.of(context)
-        .pop(FilterCardRequest(type: type, attribute: attribute, race: race));
+    Navigator.of(context).pop(FilterCardRequest(
+        type: type,
+        attribute: attribute,
+        race: race,
+        fname: request.fname != '' ? request.fname : ''));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 3, 107, 244),
+      backgroundColor:const Color.fromARGB(255, 3, 107, 244),
       appBar: AppBar(actions: [
         TextButton(
             onPressed: () {
               _getSearchRequest();
             },
             child: Text(
-              "Buscar",
-              style: TextStyle(color: Colors.white),
+              LocaleProvider.of(context).search,
+              style: const TextStyle(color: Colors.white),
             ))
       ]),
       body: SingleChildScrollView(
@@ -373,11 +379,11 @@ class _FilterCardState extends State<FilterCard> {
                 colors: _getColors(),
                 children: _getChildren2(),
                 tabs: _getTabs2(),
-                selectedTextStyle: TextStyle(
+                selectedTextStyle: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-                unselectedTextStyle: TextStyle(
+                unselectedTextStyle:const TextStyle(
                   fontSize: 18,
                 ),
               ),
