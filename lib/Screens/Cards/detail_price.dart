@@ -21,7 +21,6 @@ class _PriceDetailState extends State<PriceDetail> {
         double.parse(widget.price.ebay_price) +
         double.parse(widget.price.tcgplayer_price));
     myPrice = myPrice / 4;
-    myPrice = myPrice / 9;
     priceTotal = myPrice.toStringAsFixed(2);
     super.initState();
   }

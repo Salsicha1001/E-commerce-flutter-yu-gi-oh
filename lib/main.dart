@@ -7,23 +7,22 @@ import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/register_user.dart';
 import 'package:flutter_ecommerce/Utils/pallete_color.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
-import 'package:flutter_ecommerce/model/Manager/card_manager.dart';
+import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
 import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:flutter_ecommerce/model/card/cards_list.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   configLoading();
+  await GetStorage.init();
+
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (context) => CardManager(),
-        lazy: false,
-      ),
       ChangeNotifierProvider(
         create: (context) => UserManager(),
         lazy: false,
@@ -32,8 +31,16 @@ void main() async {
         create: (context) => ThemeAppConfig(),
         lazy: false,
       ),
+      ChangeNotifierProvider(
+        create: (context) => CartShoppManager(),
+        lazy: false,
+      ),
       Provider(
         create: (_) => UserService(),
+        lazy: false,
+      ),
+      Provider(
+        create: (_) => BaseScreen(),
         lazy: false,
       ),
     ],
@@ -57,7 +64,24 @@ void configLoading() {
     ..dismissOnTap = false;
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Future<User> getUser() async {
+    final box = GetStorage();
+    if (box.read('jwt') != null) {
+      User u = User(
+          id_user: box.read('id'),
+          email: box.read('email'),
+          name: box.read('name'),
+          token: box.read('jwt'));
+      return u;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeAppConfig>(builder: (_, themeAppConfig, __) {
@@ -92,7 +116,8 @@ class MyApp extends StatelessWidget {
             case '/detail-card':
               List<dynamic> args = settings.arguments;
               return MaterialPageRoute(
-                builder: (_) => CardDetail(args[0] as CardDetailDto,args[1] as List<CardList>),
+                builder: (_) => CardDetail(
+                    args[0] as CardDetailDto, args[1] as List<CardList>),
               );
             case '/':
             default:

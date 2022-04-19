@@ -21,8 +21,8 @@ class CustomDrawer extends StatelessWidget {
               title: LocaleProvider.of(context).my_ordes,
               page: 2),
           DrawerTitle(
-              iconData: Icons.favorite,
-              title: LocaleProvider.of(context).my_favorites_cards,
+              iconData: Icons.shopping_cart_outlined,
+              title: LocaleProvider.of(context).my_cart,
               page: 3),
           DrawerTitle(
               iconData: Icons.settings,

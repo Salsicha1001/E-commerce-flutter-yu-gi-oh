@@ -91,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                     }
                   },
                   child: Text(
-                    LocaleProvider.of(context).Login,
+                    LocaleProvider.of(context).log_in,
                     style: TextStyle(fontSize: 18),
                   ),
                   color: Color(0xFF000080),

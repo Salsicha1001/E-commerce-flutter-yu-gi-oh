@@ -31,13 +31,12 @@ class _AnimationCardState extends State<AnimationCard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Video Demo',
       home: Scaffold(
         body: Container(
             child: Container(
                 child: _controller.value.isInitialized
                     ? VideoPlayer(_controller)
-                    : Text("Teste"))),
+                    : Container(color: Colors.black,))),
       ),
     );
   }

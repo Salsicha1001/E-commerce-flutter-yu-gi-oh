@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class User {
   User({
@@ -34,11 +35,11 @@ class User {
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
 }
 
-class UserManager extends ChangeNotifier {
+class UserManager with ChangeNotifier {
   var _user = User();
   User get user => _user;
 
-  bool get isLoggedIn => user.id_user != null;
+  bool get isLoggedIn => _user.id_user != null;
   set user(User user) {
     _user = user;
     notifyListeners();
@@ -46,6 +47,8 @@ class UserManager extends ChangeNotifier {
 
   logout() {
     _user = new User();
+    final box = GetStorage();
+    box.erase();
     notifyListeners();
   }
 

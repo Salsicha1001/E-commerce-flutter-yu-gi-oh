@@ -125,11 +125,11 @@ class LocaleProvider {
     );
   }
 
-  /// `My Favorite Cards`
-  String get my_favorites_cards {
+  /// `My Cart`
+  String get my_cart {
     return Intl.message(
-      'My Favorite Cards',
-      name: 'my_favorites_cards',
+      'My Cart',
+      name: 'my_cart',
       desc: '',
       args: [],
     );
@@ -166,10 +166,10 @@ class LocaleProvider {
   }
 
   /// `Login`
-  String get Login {
+  String get log_in {
     return Intl.message(
       'Login',
-      name: 'Login',
+      name: 'log_in',
       desc: '',
       args: [],
     );
@@ -365,9 +365,15 @@ class LocaleProvider {
     );
   }
 
-  // skipped getter for the 'Beast-Warrior' key
-
-  // skipped getter for the 'Creator-God' key
+  /// `Creator-God`
+  String get Creator_God {
+    return Intl.message(
+      'Creator-God',
+      name: 'Creator_God',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Cyberso`
   String get Cyberse {
@@ -399,7 +405,25 @@ class LocaleProvider {
     );
   }
 
-  // skipped getter for the 'Divine-Beast' key
+  /// `Beast-Warrior`
+  String get Beast_Warrior {
+    return Intl.message(
+      'Beast-Warrior',
+      name: 'Beast_Warrior',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Divine-Beast`
+  String get Divine_Beast {
+    return Intl.message(
+      'Divine-Beast',
+      name: 'Divine_Beast',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Dragon`
   String get Dragon {

@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
 import 'package:flutter_ecommerce/Screens/Cards/card_content.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_image.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_price.dart';
+import 'package:flutter_ecommerce/Screens/Cards/shopp_card_imgs.dart';
 import 'package:flutter_ecommerce/Utils/validate_animations.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
@@ -27,9 +28,9 @@ class _CardDetailState extends State<CardDetail> {
   @override
   void initState() {
     super.initState();
-    print(widget.card.name);
     _createCarousel();
   }
+  
 
   _createCarousel() {
     if (widget.card.card_images.isNotEmpty) {
@@ -67,6 +68,17 @@ class _CardDetailState extends State<CardDetail> {
             builder: (BuildContext context) {
               return AnimationCard(
                   video: getAnimation(widget.card.name, context));
+            },
+            fullscreenDialog: true))
+        .then((value) {});
+  }
+
+ Future openDialogShoop() async{
+     String open = await Navigator.of(context)
+        .push(MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return DialogCardSelect(
+                  images:images,cardDto: widget.card,);
             },
             fullscreenDialog: true))
         .then((value) {});
@@ -279,7 +291,7 @@ class _CardDetailState extends State<CardDetail> {
                       flex: 1,
                       child: Wrap(children: [
                         Text(LocaleProvider.of(context).attack + ':',
-                            style: TextStyle(fontSize: 20)),
+                            style: const TextStyle(fontSize: 20)),
                       ])),
                   Expanded(
                       flex: 1,
@@ -336,7 +348,7 @@ class _CardDetailState extends State<CardDetail> {
             const SizedBox(height: 20),
             Text(
               LocaleProvider.of(context).description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
               ),
               textAlign: TextAlign.center,
@@ -467,10 +479,10 @@ class _CardDetailState extends State<CardDetail> {
           visible: Provider.of<UserManager>(context, listen: false).isLoggedIn,
           child: FloatingActionButton(
             onPressed: () {
-              // openDialog();
+              openDialogShoop();
             },
             elevation: 10.0,
-            child: const Icon(Icons.star_outline_outlined),
+            child: const Icon(Icons.shopping_cart_outlined),
             backgroundColor: const Color.fromARGB(255, 4, 149, 233),
           ),
         ));
