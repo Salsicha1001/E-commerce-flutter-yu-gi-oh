@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_ecommerce/Screens/Base/base_screen.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_card.dart';
 import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/register_user.dart';
 import 'package:flutter_ecommerce/Utils/pallete_color.dart';
@@ -35,6 +36,10 @@ void main() async {
         create: (context) => CartShoppManager(),
         lazy: false,
       ),
+      ChangeNotifierProxyProvider<UserManager, CartShoppManager>(
+          create: (_) => CartShoppManager(),
+          lazy: false,
+          update: (_, userManager, cartManager) => cartManager),
       Provider(
         create: (_) => UserService(),
         lazy: false,
@@ -113,6 +118,8 @@ class _MyAppState extends State<MyApp> {
               return MaterialPageRoute(builder: (_) => LoginScreen());
             case '/settings':
               return MaterialPageRoute(builder: (_) => ConfigScreen());
+            case '/cart':
+              return MaterialPageRoute(builder: (_) => CartShoopScreen());
             case '/detail-card':
               List<dynamic> args = settings.arguments;
               return MaterialPageRoute(
@@ -121,7 +128,7 @@ class _MyAppState extends State<MyApp> {
               );
             case '/':
             default:
-              return MaterialPageRoute(builder: (_) => BaseScreen());
+                return MaterialPageRoute(builder: (_) => BaseScreen());
           }
         },
       );

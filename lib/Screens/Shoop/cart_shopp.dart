@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/empty_cart.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/price_cart.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/cart_tile.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
@@ -10,9 +11,11 @@ import 'package:provider/provider.dart';
 class CartShoopScreen extends StatefulWidget {
   @override
   State<CartShoopScreen> createState() => _CartShoopScreenState();
+  
 }
 
 class _CartShoopScreenState extends State<CartShoopScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +41,13 @@ class _CartShoopScreenState extends State<CartShoopScreen> {
                 children: cartManager.list.map(
                         (cartProduct) => CartTile(cart: cartProduct)
                 ).toList(),
-              )
+              ),
+                PriceCard(
+                buttonText: 'Continuar para Entrega',
+                onPressed: (){
+                  Navigator.of(context).pushNamed('/address');
+                } ,
+              ),
             ]);
         }
       }),

@@ -93,7 +93,7 @@ class _CartTileState extends State<CartTile> {
                             widget.cart.qty = qty;
                             updateValue();
                           });
-                          Provider.of<CartShoppManager>(context,listen: false)
+                          Provider.of<CartShoppManager>(context, listen: false)
                               .addItemCart(widget.cart);
                         },
                         iconSize: 50,
@@ -105,20 +105,14 @@ class _CartTileState extends State<CartTile> {
                     ),
                     IconButton(
                         onPressed: () {
-                          if (qty != 1) {
                             setState(() {
                               qty--;
                               widget.cart.qty = qty;
                               updateValue();
                             });
-                            Provider.of<CartShoppManager>(context,listen: false)
-                                .addItemCart(widget.cart);
-                          } else {
-                            setState(() {
-                              Provider.of<CartShoppManager>(context,listen: false)
+                         Provider.of<CartShoppManager>(context,
+                                      listen: false)
                                   .removeItemCart(widget.cart);
-                            });
-                          }
                         },
                         iconSize: 50,
                         icon: const Icon(Icons.remove),

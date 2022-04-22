@@ -1,5 +1,9 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
+import 'package:flutter_ecommerce/model/page_manager.dart';
+import 'package:provider/provider.dart';
 
 class DialogsCustom {
   showDialogAlert(context, titleMsg, descMsg) {
@@ -10,7 +14,8 @@ class DialogsCustom {
       text: descMsg,
     );
   }
-    showDialogError(context, titleMsg, descMsg) {
+
+  showDialogError(context, titleMsg, descMsg) {
     CoolAlert.show(
       context: context,
       type: CoolAlertType.error,
@@ -18,8 +23,6 @@ class DialogsCustom {
       text: descMsg,
     );
   }
-
-
 
   showAlertErro(context, errMsg) {
     CoolAlert.show(
@@ -39,6 +42,21 @@ class DialogsCustom {
         confirmBtnText: "OK",
         onConfirmBtnTap: () {
           Navigator.of(context).pushNamed('/');
+        });
+  }
+
+  showAlertSucessCart(context) {
+    CoolAlert.show(
+        context: context,
+        title: 'Aonde deseja ir?',
+        type: CoolAlertType.confirm,
+        confirmBtnText: "Home",
+        onConfirmBtnTap: () {
+          Navigator.of(context).popAndPushNamed('/');
+        },
+        cancelBtnText: 'Voltar',
+        onCancelBtnTap: () {
+          Navigator.of(context).pop();
         });
   }
 }

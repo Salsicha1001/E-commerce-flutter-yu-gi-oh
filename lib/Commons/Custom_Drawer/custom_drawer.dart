@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/Custom_Drawer_Header.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/drawer_title.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
+import 'package:flutter_ecommerce/model/user_model.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        // ignore: prefer_const_literals_to_create_immutables
         children: [
           CustomDrawerHeader(),
           const DrawerTitle(iconData: Icons.home, title: "Home", page: 0),
@@ -20,6 +21,7 @@ class CustomDrawer extends StatelessWidget {
               iconData: Icons.playlist_add_check,
               title: LocaleProvider.of(context).my_ordes,
               page: 2),
+              if(Provider.of<UserManager>(context).isLoggedIn)
           DrawerTitle(
               iconData: Icons.shopping_cart_outlined,
               title: LocaleProvider.of(context).my_cart,
