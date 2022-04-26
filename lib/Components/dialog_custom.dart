@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
+import 'package:flutter_ecommerce/model/page_manager.dart';
+import 'package:provider/provider.dart';
 
 class DialogsCustom {
   showDialogAlert(context, titleMsg, descMsg) {
@@ -11,14 +15,48 @@ class DialogsCustom {
     );
   }
 
-  showAlertSucess(context, sucessMsg) {
+  showDialogError(context, titleMsg, descMsg) {
     CoolAlert.show(
       context: context,
-      type: CoolAlertType.success,
-      text: sucessMsg,
-      autoCloseDuration: const Duration(seconds: 4),
+      type: CoolAlertType.error,
+      title: titleMsg,
+      text: descMsg,
     );
   }
 
+  showAlertErro(context, errMsg) {
+    CoolAlert.show(
+      context: context,
+      type: CoolAlertType.error,
+      title: 'Oops...',
+      text: errMsg,
+    );
+  }
 
+  showAlertSucessRedirectMenu(context, sucessMsg) {
+    CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        title: 'Sucesso',
+        text: sucessMsg,
+        confirmBtnText: "OK",
+        onConfirmBtnTap: () {
+          Navigator.of(context).pushNamed('/');
+        });
+  }
+
+  showAlertSucessCart(context) {
+    CoolAlert.show(
+        context: context,
+        title: 'Aonde deseja ir?',
+        type: CoolAlertType.confirm,
+        confirmBtnText: "Home",
+        onConfirmBtnTap: () {
+          Navigator.of(context).popAndPushNamed('/');
+        },
+        cancelBtnText: 'Voltar',
+        onCancelBtnTap: () {
+          Navigator.of(context).pop();
+        });
+  }
 }

@@ -1,0 +1,77 @@
+{
+    "data": [
+      {
+        "id": 46986414,
+        "name": "Mago Negro",
+        "type": "Normal Monster",
+        "desc": "''O mago definitivo em termos de ataque e defesa.''\n",
+        "race": "Spellcaster",
+        "archetype": "Dark Magician",
+        "atk": 2500,
+        "def": 2100,
+        "level": 7,
+        "attribute": "DARK",
+        "linkval": 0,
+        "linkmarkers": null,
+        "scale": 0,
+
+        "card_images": [
+          {
+            "id": 46986414,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986414.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986414.jpg"
+          },
+          {
+            "id": 46986415,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986415.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986415.jpg"
+          },
+          {
+            "id": 46986416,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986416.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986416.jpg"
+          },
+          {
+            "id": 46986417,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986417.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986417.jpg"
+          },
+          {
+            "id": 46986418,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986418.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986418.jpg"
+          },
+          {
+            "id": 46986419,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986419.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986419.jpg"
+          },
+          {
+            "id": 36996508,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/36996508.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/36996508.jpg"
+          },
+          {
+            "id": 46986420,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986420.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986420.jpg"
+          },
+          {
+            "id": 46986421,
+            "image_url": "https://storage.googleapis.com/ygoprodeck.com/pics/46986421.jpg",
+            "image_url_small": "https://storage.googleapis.com/ygoprodeck.com/pics_small/46986421.jpg"
+          }
+        ],
+        "card_prices": [
+          {
+            "cardmarket_price": "0.11",
+            "tcgplayer_price": "0.55",
+            "ebay_price": "10.95",
+            "amazon_price": "0.64",
+            "coolstuffinc_price": "5.99"
+          }
+        ]
+      }
+    ],
+    "meta": null
+  }

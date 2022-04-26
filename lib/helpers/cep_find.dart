@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter_ecommerce/model/address.dart';
 import 'package:http/http.dart' as http;
 
 class ViaCepService {
-  static Future fetchCep({required String cep}) async {
+  static Future fetchCep({String cep}) async {
     final response =
         await http.get(Uri.parse('https://viacep.com.br/ws/$cep/json/'));
     if (response.statusCode == 200) {
@@ -19,4 +17,5 @@ class ViaCepService {
       throw 'Error';
     }
   }
+
 }

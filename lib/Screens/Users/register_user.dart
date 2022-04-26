@@ -1,19 +1,16 @@
-// ignore_for_file: deprecated_member_use
-
+import 'dart:async';
 import 'dart:developer';
-
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/helpers/cep_find.dart';
 import 'package:flutter_ecommerce/helpers/validators.dart';
 import 'package:flutter_ecommerce/model/address.dart';
 import 'package:flutter_ecommerce/model/register_user.dart';
+import 'package:flutter_ecommerce/model/user_login.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
-import 'package:http/http.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class RegisterUser extends StatefulWidget {
@@ -57,7 +54,15 @@ class _RegisterUserState extends State<RegisterUser> {
     FocusManager.instance.primaryFocus?.unfocus();
     DialogsCustom().showDialogAlert(
         context, "Erro na Busca de CEP", "O CEP digitado não e valido");
-    return;
+    setState(() {
+      address.control('cep').updateValue('');
+      address.control('city').updateValue('');
+      address.control('district').updateValue('');
+      address.control('state').updateValue('');
+      address.control('street').updateValue('');
+      LoadCustom().closeLoad();
+      return;
+    });
   }
 
   Future<void> _saveUser() async {
@@ -80,32 +85,31 @@ class _RegisterUserState extends State<RegisterUser> {
       }
 
       Address userAddress = Address(
-          street: address.findControl('street')!.value,
-          district: address.findControl('district')!.value,
-          city: address.findControl('city')!.value,
-          state: address.findControl('state')!.value,
-          number_address: address.findControl('number_address')!.value,
-          cep: address.findControl('cep')!.value);
+          street: address.findControl('street').value,
+          district: address.findControl('district').value,
+          city: address.findControl('city').value,
+          state: address.findControl('state').value,
+          number_address: address.findControl('number_address').value,
+          cep: address.findControl('cep').value);
       List<Address> address_user = [];
       address_user.add(userAddress);
       UserRegister user = UserRegister(
-        name: formUser.findControl('name')!.value,
-        email: formUser.findControl('email')!.value,
-        phone: formUser.findControl('phone')!.value,
-        password: formUser.findControl('password')!.value,
-        cpf: formUser.findControl('cpf')!.value,
+        name: formUser.findControl('name').value,
+        email: formUser.findControl('email').value,
+        phone: formUser.findControl('phone').value,
+        password: formUser.findControl('password').value,
+        cpf: formUser.findControl('cpf').value,
         address_user: address_user,
       );
       var response = await UserService().registerUserAdd(user, context);
-      debugger();
       LoadCustom().closeLoad();
       if (response.contains('CPF')) {
         formUser.control('cpf').updateValue('');
-        formUser.control('cpf').markAsTouched();
+        formUser.control('cpf').markAsTouched();  
         return;
       }
-
-      DialogsCustom().showAlertSucess(context, response);
+      UserLogin login = UserLogin(user.email, user.password);
+      UserService().loginUser(login, context);
     }
   }
 

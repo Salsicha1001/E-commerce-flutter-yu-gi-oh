@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:flutter_ecommerce/model/address.dart';
 
 class UserRegister {
-  String? name;
-  String? email;
-  String? password;
-  String? phone;
-  String? cpf;
-  int? typeUser = 1;
-  List<Address>? address_user;
+  String name;
+  String email;
+  String password;
+  String phone;
+  String cpf;
+  int typeUser = 1;
+  List<Address> address_user;
 
   UserRegister(
       {this.name,

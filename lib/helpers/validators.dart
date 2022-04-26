@@ -16,13 +16,13 @@ bool isEmail(String string) {
   return true;
 }
 
-Map<String, dynamic>? requiredCPF(AbstractControl<dynamic> control) {
+Map<String, dynamic> requiredCPF(AbstractControl<dynamic> control) {
   return GetUtils.isCpf(control.value.toString())
       ? null
       : {'CPF inválido': true};
 }
 
-Map<String, dynamic>? requiredPhone(AbstractControl<dynamic> control) {
+Map<String, dynamic> requiredPhone(AbstractControl<dynamic> control) {
   return GetUtils.isPhoneNumber(control.value.toString())
       ? null
       : {'Número inválido': true};

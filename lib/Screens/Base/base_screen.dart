@@ -1,30 +1,56 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/Commons/Custom_Drawe/custom_drawer.dart';
-import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
+import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
+import 'package:flutter_ecommerce/Screens/Base/home_screen.dart';
+import 'package:flutter_ecommerce/Screens/Cards/cards_screens.dart';
+import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
 import 'package:flutter_ecommerce/model/page_manager.dart';
+import 'package:flutter_ecommerce/model/user_model.dart';
+import 'package:flutter_ecommerce/services/authtenticador-service.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
-class BaseScreen extends StatelessWidget {
+class BaseScreen extends StatefulWidget {
+  @override
+  State<BaseScreen> createState() => _BaseScreenState();
+}
 
+class _BaseScreenState extends State<BaseScreen> {
   final PageController pageController = PageController();
+  final box = GetStorage();
+
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      UserService().getUserLoged(context);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (_)=>PageManager(pageController),
-      child: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          LoginScreen(),
-          Scaffold(
-            drawer: CustomDrawer(),
-            appBar: AppBar(
-              title: const Text('Home'),
-            ),
-          ),
-        ],
-      ),
-    );
+        create: (_) => PageManager(pageController),
+        child: Consumer<UserManager>(builder: (_, userMaager, __) {
+          return PageView(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+             HomeScreen(),
+              CardsScreen(),
+              Scaffold(
+                drawer: CustomDrawer(),
+                appBar: AppBar(
+                  title: const Text('Home3'),
+                ),
+              ),
+            CartShoopScreen(),
+              ConfigScreen()
+            ],
+          );
+        }));
   }
 }

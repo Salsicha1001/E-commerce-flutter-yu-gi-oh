@@ -13,4 +13,5 @@ class PageManager {
     page = value;
     _pageController.jumpToPage(value);
   }
+
 }
