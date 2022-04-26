@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class OrderPayament{
-  var url = ("http://192.168.100.15:8080");
   AddCartCred(CredCart card, context) async {
     Map data = {
       'cvv': card.cvv,

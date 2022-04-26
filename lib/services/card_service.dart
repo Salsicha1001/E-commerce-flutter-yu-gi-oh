@@ -10,7 +10,6 @@ import 'package:flutter_ecommerce/model/card/filter_request_card.dart';
 import 'package:http/http.dart' as http;
 
 class CardService {
-  var url = ("http://192.168.100.15:8080/cards");
 
   Future<List<CardList>> getCardPagination(context, page) async {
     LoadCustom().openLoadMsg(LocaleProvider.of(context).search + '....');
