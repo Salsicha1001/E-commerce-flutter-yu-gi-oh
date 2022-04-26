@@ -53,6 +53,11 @@ flutter:
   assets:
     - images/img_star.png
     - images/load.gif
+    - images/mastercard.png
+    - images/card_bg.png
+    - images/visa.png
+
+
   generate: true
 
 dependency_overrides:

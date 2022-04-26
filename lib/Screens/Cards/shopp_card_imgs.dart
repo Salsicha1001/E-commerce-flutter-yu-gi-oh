@@ -26,7 +26,7 @@ class _DialogCardSelectState extends State<DialogCardSelect> {
         double.parse(widget.cardDto.card_prices[0].cardmarket_price) +
         double.parse(widget.cardDto.card_prices[0].ebay_price) +
         double.parse(widget.cardDto.card_prices[0].tcgplayer_price));
-    myPrice = myPrice / 4;
+    myPrice = myPrice / 10;
     myPrice = double.parse(myPrice.toStringAsFixed(2));
     CartShopp card = CartShopp(
         id_card: widget.cardDto.id.toString(),
@@ -36,8 +36,7 @@ class _DialogCardSelectState extends State<DialogCardSelect> {
         qty: qty,
         arcthype: widget.cardDto.archetype);
     Provider.of<CartShoppManager>(context, listen: false).addItemCart(card);
-    DialogsCustom().showAlertSucessCart(context);
-    // Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
   showDialog() {}

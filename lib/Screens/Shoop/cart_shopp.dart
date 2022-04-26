@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/empty_cart.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/cred_card.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/price_cart.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/cart_tile.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
@@ -11,11 +12,9 @@ import 'package:provider/provider.dart';
 class CartShoopScreen extends StatefulWidget {
   @override
   State<CartShoopScreen> createState() => _CartShoopScreenState();
-  
 }
 
 class _CartShoopScreenState extends State<CartShoopScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,25 +29,31 @@ class _CartShoopScreenState extends State<CartShoopScreen> {
         }
 
         if (cartManager.list.isEmpty) {
-          return  const EmptyCard(
+          return const EmptyCard(
             iconData: Icons.remove_shopping_cart,
             title: 'Nenhum produto no carrinho!',
           );
-        }else{
-            return ListView(
-            children: <Widget>[
-              Column(
-                children: cartManager.list.map(
-                        (cartProduct) => CartTile(cart: cartProduct)
-                ).toList(),
-              ),
-                PriceCard(
-                buttonText: 'Continuar para Entrega',
-                onPressed: (){
-                  Navigator.of(context).pushNamed('/address');
-                } ,
-              ),
-            ]);
+        } else {
+          return ListView(children: <Widget>[
+            Column(
+              children: cartManager.list
+                  .map((cartProduct) => CartTile(cart: cartProduct))
+                  .toList(),
+            ),
+            PriceCard(
+              buttonText: 'Continuar para Entrega',
+              onPressed: () async {
+                String open = await Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return CredCardScreen();
+                        },
+                        fullscreenDialog: true))
+                    // ignore: missing_return
+                    .then((value) {});
+              },
+            ),
+          ]);
         }
       }),
     );

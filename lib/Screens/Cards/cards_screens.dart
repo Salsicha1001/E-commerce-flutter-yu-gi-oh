@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
@@ -31,12 +32,16 @@ class _CardsScreenState extends State<CardsScreen> {
   final RefreshController refreshController = RefreshController();
 
   @override
-  void didChangeDependencies()  {
+  void didChangeDependencies() {
     super.didChangeDependencies();
     getCards();
   }
 
   Future<bool> getCards({bool isRefresh = false}) async {
+    if (page > 20 && cards.length % 2 != 0) {
+      refreshController.refreshFailed();
+      return false;
+    }
     if (!filter) {
       if (isRefresh || page < 20) {
         page = 0;
@@ -78,10 +83,8 @@ class _CardsScreenState extends State<CardsScreen> {
         });
         return true;
       } else {
-        DialogsCustom().showDialogAlert(
-            LocaleProvider.of(context).shit,
-            context,
-            LocaleProvider.of(context).Could_not_find_these_cards);
+        DialogsCustom().showDialogAlert(LocaleProvider.of(context).shit,
+            context, LocaleProvider.of(context).Could_not_find_these_cards);
         return false;
       }
     }

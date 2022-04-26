@@ -37,7 +37,6 @@ class CardService {
   }
 
   Future<CardDetailDto> getCardByName(context, name) async {
-    // name = "Dragão Branco de Olhos Azuis";
     LoadCustom().openLoadMsg(LocaleProvider.of(context).search + '....');
     final response = await http.get(
       Uri.parse(
@@ -113,5 +112,25 @@ class CardService {
     }
   }
 
-
+  Future<List<CardList>> getCardRecomend(context) async {
+    LoadCustom().openLoadMsg('Buscando as cartas recomendadas...');
+    final response = await http.get(
+      Uri.parse(url + '/random?language=${getLanguge(context)}'),
+      headers: <String, String>{
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    );
+    var msg = json.decode(utf8.decode(response.bodyBytes));
+    if (response.statusCode == 200) {
+      var listMap = (msg as List);
+      List<CardList> listCard =
+          listMap.map<CardList>((json) => CardList.fromJson(json)).toList();
+      LoadCustom().closeLoad();
+      return listCard;
+    } else {
+      LoadCustom().closeLoad();
+      DialogsCustom().showDialogAlert(
+          context, 'Erro  ${response.statusCode}', ' ${msg['msg']}');
+    }
+  }
 }
