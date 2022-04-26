@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
@@ -30,7 +32,6 @@ class _CardDetailState extends State<CardDetail> {
     super.initState();
     _createCarousel();
   }
-  
 
   _createCarousel() {
     if (widget.card.card_images.isNotEmpty) {
@@ -62,23 +63,27 @@ class _CardDetailState extends State<CardDetail> {
     }
   }
 
-  Future openDialog() async {
+  Future openDialog(element) async {
     String open = await Navigator.of(context)
         .push(MaterialPageRoute<void>(
             builder: (BuildContext context) {
+
               return AnimationCard(
-                  video: getAnimation(widget.card.name, context));
+                  video: getAnimation(
+                      element != '' ? element : widget.card.name, context));
             },
             fullscreenDialog: true))
         .then((value) {});
   }
 
- Future openDialogShoop() async{
-     String open = await Navigator.of(context)
+  Future openDialogShoop() async {
+    String open = await Navigator.of(context)
         .push(MaterialPageRoute<void>(
             builder: (BuildContext context) {
               return DialogCardSelect(
-                  images:images,cardDto: widget.card,);
+                images: images,
+                cardDto: widget.card,
+              );
             },
             fullscreenDialog: true))
         .then((value) {});
@@ -404,7 +409,14 @@ class _CardDetailState extends State<CardDetail> {
               IconButton(
                 icon: const Icon(Icons.man_rounded),
                 onPressed: () {
-                  openDialog();
+                  openDialog('');
+                },
+              ),
+            if (validateExodia(context)&& widget.card.name=='Exodia, "O Proibido"')
+              IconButton(
+                icon: const Icon(Icons.man_rounded),
+                onPressed: () {
+                  openDialog("exodia");
                 },
               )
           ],

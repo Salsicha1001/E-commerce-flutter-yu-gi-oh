@@ -101,7 +101,7 @@ class _CredCardScreenState extends State<CredCardScreen> {
                         themeColor: Colors.blue,
                         textColor: Colors.white,
                         cardNumberDecoration: InputDecoration(
-                          labelText: 'Number',
+                          labelText: 'Número do Cartão',
                           hintText: 'XXXX XXXX XXXX XXXX',
                           hintStyle: const TextStyle(color: Colors.white),
                           labelStyle: const TextStyle(color: Colors.white),
@@ -113,7 +113,7 @@ class _CredCardScreenState extends State<CredCardScreen> {
                           labelStyle: const TextStyle(color: Colors.white),
                           focusedBorder: border,
                           enabledBorder: border,
-                          labelText: 'Expired Date',
+                          labelText: 'Data de Expiração',
                           hintText: 'XX/XX',
                         ),
                         cvvCodeDecoration: InputDecoration(
@@ -129,7 +129,7 @@ class _CredCardScreenState extends State<CredCardScreen> {
                           labelStyle: const TextStyle(color: Colors.white),
                           focusedBorder: border,
                           enabledBorder: border,
-                          labelText: 'Card Holder',
+                          labelText: 'Nome do Cartão',
                         ),
                         onCreditCardModelChange: onCreditCardModelChange,
                       ),
@@ -146,7 +146,7 @@ class _CredCardScreenState extends State<CredCardScreen> {
                         child: Container(
                           margin: const EdgeInsets.all(12),
                           child: const Text(
-                            'Validate',
+                            'Cadastrar Cartão',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'halter',

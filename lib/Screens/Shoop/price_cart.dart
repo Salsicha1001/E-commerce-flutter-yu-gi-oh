@@ -92,7 +92,7 @@ class _PriceCardState extends State<PriceCard> {
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                 ),
                 Text(
-                  'R\$${totalPrice}',
+                  'R\$${totalPrice.toStringAsFixed(2).replaceAll('.', ',')}',
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 20,

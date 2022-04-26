@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:http/http.dart' as http;

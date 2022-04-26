@@ -13,14 +13,14 @@ class _AnimationCardState extends State<AnimationCard> {
   VideoPlayerController _controller;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _controller = VideoPlayerController.network(widget.video)
       ..initialize().then(
         (_) {
           setState(() {
             _controller.play();
-            Timer(Duration(seconds: _controller.value.duration.inSeconds), () {
+            Timer(Duration(seconds: _controller.value.duration.inSeconds+1), () {
               Navigator.of(context).pop();
             });
           });
@@ -33,10 +33,11 @@ class _AnimationCardState extends State<AnimationCard> {
     return MaterialApp(
       home: Scaffold(
         body: Container(
-            child: Container(
-                child: _controller.value.isInitialized
-                    ? VideoPlayer(_controller)
-                    : Container(color: Colors.black,))),
+            child: _controller.value.isInitialized
+                ? VideoPlayer(_controller)
+                : Container(
+                    color: Colors.black,
+                  )),
       ),
     );
   }

@@ -8,7 +8,7 @@ class CartShoppManager extends ChangeNotifier {
   num productsPrice = 0.0;
   String deliveryPrice = 'Gratis';
 
-  String get totalPrice => productsPrice.toString().replaceAll('.', ',');
+  num get totalPrice => productsPrice;
 
   List<CartShopp> get getCarsShopps => list;
 
@@ -31,7 +31,7 @@ class CartShoppManager extends ChangeNotifier {
   resultTotalCart() {
     num value = 0.0;
     list.forEach((element) {
-      value = element.price * element.qty;
+      value += element.price * element.qty;
     });
     productsPrice = value;
   }
