@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_ecommerce/Components/dialog_custom.dart';
+import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
+import 'package:flutter_ecommerce/services/payament_service.dart';
 
 class CredCardScreen extends StatefulWidget {
   @override
@@ -28,8 +33,19 @@ class _CredCardScreenState extends State<CredCardScreen> {
     super.initState();
   }
 
+  Future addCard() async {
+    CredCart card = CredCart(
+        cvv: cvvCode,
+        expired: expiryDate,
+        name_card: cardHolderName,
+        number_card: cardNumber);
+    await OrderPayament().AddCartCred(card, context);
+    Navigator.of(context).pop();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: Container(
@@ -73,7 +89,7 @@ class _CredCardScreenState extends State<CredCardScreen> {
                       width: 48,
                     ),
                   ),
-                   CustomCardTypeIcon(
+                  CustomCardTypeIcon(
                     cardType: CardType.visa,
                     cardImage: Image.asset(
                       'images/visa.png',
@@ -156,9 +172,10 @@ class _CredCardScreenState extends State<CredCardScreen> {
                         ),
                         onPressed: () {
                           if (formKey.currentState.validate()) {
-                            print('valid!');
+                            addCard();
                           } else {
-                            print('invalid!');
+                            DialogsCustom()
+                                .showAlertErro(context, "Cartão Invalido");
                           }
                         },
                       ),

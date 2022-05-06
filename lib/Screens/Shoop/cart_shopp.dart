@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/empty_cart.dart';
+import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/cred_card.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/price_cart.dart';
@@ -10,7 +11,9 @@ import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Utils/validate_animations.dart';
 import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
 import 'package:flutter_ecommerce/model/cart_shopp.dart';
+import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
+import 'package:flutter_ecommerce/services/payament_service.dart';
 import 'package:provider/provider.dart';
 
 class CartShoopScreen extends StatefulWidget {
@@ -19,56 +22,16 @@ class CartShoopScreen extends StatefulWidget {
 }
 
 class _CartShoopScreenState extends State<CartShoopScreen> {
-  bool bracoDireito = true;
-  bool bracoEsquedo = true;
-  bool pernaDireita = true;
-  bool pernaEsquerda = true;
-  bool cabeca = true;
-
-
-@override
-void initState() {
-  super.initState();
-}
   @override
-  void didChangeDependencies() async {
-    super.didChangeDependencies();
-      List<CartShopp> list =
-          Provider.of<CartShoppManager>(context).getCarsShopps;
-      if (list.isEmpty) {
-        // for (var element in list) {
-        //   if (element.name_card == 'Braço Direito de "O Proibido"') {
-        //     bracoDireito = true;
-        //   }
-        //   if (element.name_card == 'Braço Esquerdo de "O Proibido"') {
-        //     bracoEsquedo = true;
-        //   }
-        //   if (element.name_card == 'Perna Direita de "O Proibido"') {
-        //     pernaDireita = true;
-        //   }
-        //   if (element.name_card == 'Perna Esquerda de "O Proibido"') {
-        //     pernaEsquerda = true;
-        //   }
-        //   if (element.name_card == 'Exodia, "O Proibido"') {
-        //     cabeca = true;
-        //   }
-        // }
-        if (bracoDireito &&
-            pernaEsquerda &&
-            bracoEsquedo &&
-            pernaDireita &&
-            cabeca) {
-          openExodia();
-        }
-      }
+  void initState() {
+    super.initState();
   }
 
-  Future openExodia() async {
-    String open = await Navigator.of(context).push(MaterialPageRoute(
-      builder: (BuildContext context) {
-        return AnimationCard(video: getAnimation('exodia', context));
-      },
-    ));
+  Future getCredCards() async {
+    LoadCustom().openLoadMsg("Prosseguindo..");
+    List<CredCart> list = await OrderPayament().getCredCards(context);
+    LoadCustom().closeLoad();
+    Navigator.of(context).pushNamed('/list_creds', arguments: list);
   }
 
   @override
@@ -99,14 +62,15 @@ void initState() {
             PriceCard(
               buttonText: 'Continuar para Entrega',
               onPressed: () async {
-                String open = await Navigator.of(context)
-                    .push(MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return CredCardScreen();
-                        },
-                        fullscreenDialog: true))
-                    // ignore: missing_return
-                    .then((value) {});
+                getCredCards();
+                // String open = await Navigator.of(context)
+                //     .push(MaterialPageRoute(
+                //         builder: (BuildContext context) {
+                //           return CredCardScreen();
+                //         },
+                //         fullscreenDialog: true))
+                //     // ignore: missing_return
+                //     .then((value) {});
               },
             ),
           ]);

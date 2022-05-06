@@ -67,7 +67,6 @@ class _CardDetailState extends State<CardDetail> {
     String open = await Navigator.of(context)
         .push(MaterialPageRoute<void>(
             builder: (BuildContext context) {
-
               return AnimationCard(
                   video: getAnimation(
                       element != '' ? element : widget.card.name, context));

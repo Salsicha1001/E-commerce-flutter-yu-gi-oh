@@ -12,7 +12,8 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class UserService {
-
+  var urlauth = ("http://192.168.100.15:8080/auth");
+  var url = ("http://192.168.100.15:8080");
   final box = GetStorage();
   loginUser(UserLogin userLogin, context) async {
     Map data = {

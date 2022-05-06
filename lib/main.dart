@@ -4,6 +4,7 @@ import 'package:flutter_ecommerce/Screens/Base/base_screen.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_card.dart';
 import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/list_cred_cards.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/register_user.dart';
 import 'package:flutter_ecommerce/Utils/pallete_color.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
 import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:flutter_ecommerce/model/card/cards_list.dart';
+import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -120,6 +122,8 @@ class _MyAppState extends State<MyApp> {
               return MaterialPageRoute(builder: (_) => ConfigScreen());
             case '/cart':
               return MaterialPageRoute(builder: (_) => CartShoopScreen());
+            case '/list_creds':
+              return MaterialPageRoute(builder: (_) => ListCredCards(settings.arguments as List<CredCart>));
             case '/detail-card':
               List<dynamic> args = settings.arguments;
               return MaterialPageRoute(
