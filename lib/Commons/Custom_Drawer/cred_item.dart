@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
-import 'package:provider/provider.dart';
 
 class CredItem extends StatefulWidget {
   CredCart item;
-  CredItem({this.item});
+  final VoidCallback onPressed;
+  CredItem({this.item, this.onPressed});
 
   @override
   State<CredItem> createState() => _CredItemState();
@@ -14,8 +14,9 @@ class _CredItemState extends State<CredItem> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashColor: Colors.amber,
       onTap: () async {
-        print('123');
+        widget.onPressed();
       },
       child: Card(
         shape: RoundedRectangleBorder(

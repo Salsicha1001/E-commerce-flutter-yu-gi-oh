@@ -63,14 +63,6 @@ class _CartShoopScreenState extends State<CartShoopScreen> {
               buttonText: 'Continuar para Entrega',
               onPressed: () async {
                 getCredCards();
-                // String open = await Navigator.of(context)
-                //     .push(MaterialPageRoute(
-                //         builder: (BuildContext context) {
-                //           return CredCardScreen();
-                //         },
-                //         fullscreenDialog: true))
-                //     // ignore: missing_return
-                //     .then((value) {});
               },
             ),
           ]);

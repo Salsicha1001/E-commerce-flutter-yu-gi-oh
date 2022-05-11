@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce/Screens/Cards/detail_card.dart';
 import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/list_cred_cards.dart';
+import 'package:flutter_ecommerce/Screens/Shoop/shopp_review.dart';
 import 'package:flutter_ecommerce/Screens/Users/login_screen.dart';
 import 'package:flutter_ecommerce/Screens/Users/register_user.dart';
 import 'package:flutter_ecommerce/Utils/pallete_color.dart';
@@ -123,7 +124,13 @@ class _MyAppState extends State<MyApp> {
             case '/cart':
               return MaterialPageRoute(builder: (_) => CartShoopScreen());
             case '/list_creds':
-              return MaterialPageRoute(builder: (_) => ListCredCards(settings.arguments as List<CredCart>));
+              return MaterialPageRoute(
+                  builder: (_) =>
+                      ListCredCards(settings.arguments as List<CredCart>));
+            case '/review':
+              return MaterialPageRoute(
+                  builder: (_) =>
+                      ShoppReview(settings.arguments as CredCart));
             case '/detail-card':
               List<dynamic> args = settings.arguments;
               return MaterialPageRoute(
@@ -132,7 +139,7 @@ class _MyAppState extends State<MyApp> {
               );
             case '/':
             default:
-                return MaterialPageRoute(builder: (_) => BaseScreen());
+              return MaterialPageRoute(builder: (_) => BaseScreen());
           }
         },
       );

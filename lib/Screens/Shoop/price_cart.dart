@@ -1,10 +1,11 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
 import 'package:provider/provider.dart';
 
 class PriceCard extends StatefulWidget {
-  const PriceCard({this.buttonText, this.onPressed});
+  PriceCard({this.buttonText, this.onPressed});
 
   final String buttonText;
   final VoidCallback onPressed;
@@ -59,10 +60,13 @@ class _PriceCardState extends State<PriceCard> {
               ],
             ),
             const Divider(),
+            const SizedBox(
+              height: 10,
+            ),
             if (deliveryPrice != null) ...[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
+                children: [
                   const Text(
                     'Frete',
                     style: const TextStyle(
@@ -80,10 +84,10 @@ class _PriceCardState extends State<PriceCard> {
                 ],
               ),
             ],
-            const Divider(),
             const SizedBox(
-              height: 16,
+              height: 10,
             ),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[

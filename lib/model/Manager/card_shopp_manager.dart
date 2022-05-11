@@ -46,4 +46,10 @@ class CartShoppManager extends ChangeNotifier {
     resultTotalCart();
     notifyListeners();
   }
+
+  clearCard() {
+    productsPrice = 0.0;
+    list.clear();
+    notifyListeners();
+  }
 }

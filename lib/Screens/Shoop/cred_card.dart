@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
+import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
 import 'package:flutter_ecommerce/services/payament_service.dart';
 
@@ -39,8 +40,11 @@ class _CredCardScreenState extends State<CredCardScreen> {
         expired: expiryDate,
         name_card: cardHolderName,
         number_card: cardNumber);
+    LoadCustom().openLoadMsg("Salvando..");
     await OrderPayament().AddCartCred(card, context);
-    Navigator.of(context).pop();
+    List<CredCart> list = await OrderPayament().getCredCards(context);
+    LoadCustom().closeLoad();
+    Navigator.of(context).pop(list);
   }
 
   Widget build(BuildContext context) {

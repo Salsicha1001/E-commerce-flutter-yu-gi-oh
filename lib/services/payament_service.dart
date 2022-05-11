@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'package:flutter_ecommerce/model/order_request.dart';
 import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:http/http.dart' as http;
@@ -47,6 +47,32 @@ class OrderPayament {
       } else {
         return [];
       }
+    }
+  }
+
+  removeCredCard(context, id) async {
+    final response = await http.delete(Uri.parse(url + '/cred-card/?id=${id}'),
+        headers: <String, String>{
+          "Content-Type": "application/json;charset=UTF-8"
+        });
+
+    return;
+  }
+
+  saveOrder(context, OrderRequest request) async {
+    Map data = {
+      'listOrders': request.listOrders.map((e) => e.toJson()).toList(),
+      'id_credCard': request.id_credCard,
+      'id_user': Provider.of<UserManager>(context, listen: false).user.id_user
+    };
+    final response = await http.post(Uri.parse(url + '/orders'),
+        headers: <String, String>{
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        encoding: Encoding.getByName("utf-8"),
+        body: (json.encode(data)));
+    if (response.statusCode == 200) {
+      return;
     }
   }
 }
