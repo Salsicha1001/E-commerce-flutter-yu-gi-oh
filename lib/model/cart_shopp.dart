@@ -16,7 +16,17 @@ class CartShopp {
         "price": price.toString(),
         'arcthype':arcthype
     };
+ factory CartShopp.fromJson(Map<String, dynamic> json) {
+    return CartShopp(
+      id_card: json['id_card'] as String,
+      qty: int.parse(json['qty']),
+      name_card: json['name_card'] as String,
+      price: double.parse(json['price']),
+      arcthype: json['arcthype'] as String,
+      img_card: json['img_url'] as String,
 
+    );
+  }
       
 }
 

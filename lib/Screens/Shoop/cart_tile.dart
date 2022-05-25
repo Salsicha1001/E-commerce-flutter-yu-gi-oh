@@ -7,9 +7,10 @@ import 'package:flutter_ecommerce/services/card_service.dart';
 import 'package:provider/provider.dart';
 
 class CartTile extends StatefulWidget {
-  CartTile({this.cart, this.cartProduct});
+  CartTile({this.cart, this.cartProduct, this.showDetail});
   final CartShopp cart;
   final CartShoppManager cartProduct;
+  bool showDetail = false;
 
   @override
   State<CartTile> createState() => _CartTileState();
@@ -82,41 +83,43 @@ class _CartTileState extends State<CartTile> {
                     ),
                   ),
                 ),
-                Column(
-                  children: <Widget>[
-                    IconButton(
-                        onPressed: () async {
-                          setState(() {
-                            qty++;
-                            widget.cart.qty = qty;
-                            updateValue();
-                          });
-                          Provider.of<CartShoppManager>(context, listen: false)
-                              .addItemCart(widget.cart);
-                        },
-                        iconSize: 50,
-                        icon: const Icon(Icons.add),
-                        color: Color.fromARGB(255, 71, 191, 238)),
-                    Text(
-                      '$qty',
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    IconButton(
-                        onPressed: () {
+                if (!widget.showDetail)
+                  Column(
+                    children: <Widget>[
+                      IconButton(
+                          onPressed: () async {
+                            setState(() {
+                              qty++;
+                              widget.cart.qty = qty;
+                              updateValue();
+                            });
+                            Provider.of<CartShoppManager>(context,
+                                    listen: false)
+                                .addItemCart(widget.cart);
+                          },
+                          iconSize: 50,
+                          icon: const Icon(Icons.add),
+                          color: Color.fromARGB(255, 71, 191, 238)),
+                      Text(
+                        '$qty',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      IconButton(
+                          onPressed: () {
                             setState(() {
                               qty--;
                               widget.cart.qty = qty;
                               updateValue();
                             });
-                         Provider.of<CartShoppManager>(context,
-                                      listen: false)
-                                  .removeItemCart(widget.cart);
-                        },
-                        iconSize: 50,
-                        icon: const Icon(Icons.remove),
-                        color: Color.fromARGB(255, 71, 191, 238)),
-                  ],
-                )
+                            Provider.of<CartShoppManager>(context,
+                                    listen: false)
+                                .removeItemCart(widget.cart);
+                          },
+                          iconSize: 50,
+                          icon: const Icon(Icons.remove),
+                          color: Color.fromARGB(255, 71, 191, 238)),
+                    ],
+                  )
               ],
             ),
           ),

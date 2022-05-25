@@ -12,17 +12,20 @@ class User {
     this.name,
     this.email,
     this.token,
+    this.typeUser
   }) : super();
   int id_user;
   String name;
   String email;
   String token;
+  String typeUser;
 
   Map toJson() => {
         'id_user': id_user,
         'name': name,
         'email': email,
         'token': token,
+        'typeUser':typeUser
       };
   factory User.fromMap(Map<dynamic, dynamic> map) {
     return User(
@@ -30,6 +33,8 @@ class User {
       name: map['name'],
       email: map['email'],
       token: map['token'],
+      typeUser: map['typeUser'][0],
+
     );
   }
   factory User.fromJson(String source) => User.fromMap(json.decode(source));

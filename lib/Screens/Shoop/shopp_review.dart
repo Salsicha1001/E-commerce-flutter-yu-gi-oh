@@ -26,8 +26,8 @@ class _ShoppReviewState extends State<ShoppReview> {
     await OrderPayament().saveOrder(context, request);
     LoadCustom().closeLoad();
     Provider.of<CartShoppManager>(context, listen: false).clearCard();
-   Navigator.of(context)
-    .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 
   @override
@@ -40,7 +40,7 @@ class _ShoppReviewState extends State<ShoppReview> {
           return ListView(children: [
             Column(
               children: cartManager.list
-                  .map((cartProduct) => CartTile(cart: cartProduct))
+                  .map((cartProduct) => CartTile(cart: cartProduct,showDetail: true,))
                   .toList(),
             ),
             PriceCard(

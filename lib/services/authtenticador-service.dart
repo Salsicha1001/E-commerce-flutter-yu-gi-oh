@@ -12,8 +12,8 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class UserService {
-  var urlauth = ("http://192.168.100.15:8080/auth");
-  var url = ("http://192.168.100.15:8080");
+  var urlauth = ("http://192.168.100.38:8080/auth");
+  var url = ("http://192.168.100.38:8080");
   final box = GetStorage();
   loginUser(UserLogin userLogin, context) async {
     Map data = {
@@ -52,6 +52,13 @@ class UserService {
       box.write('email', u.email);
       box.write('theme', c.theme);
       box.write('language', c.language);
+      if(u.typeUser =='ADMIN'){
+      box.write('admin', true);
+      }else{
+      box.write('admin', false);
+        
+      }
+
 
       LoadCustom().closeLoad();
       DialogsCustom().showAlertSucessRedirectMenu(context, ' ${msg['msg']}');

@@ -5,6 +5,7 @@ import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Screens/Base/home_screen.dart';
 import 'package:flutter_ecommerce/Screens/Cards/cards_screens.dart';
 import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
+import 'package:flutter_ecommerce/Screens/Orders/Orders.Screen.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
 import 'package:flutter_ecommerce/model/page_manager.dart';
 import 'package:flutter_ecommerce/model/user_model.dart';
@@ -41,14 +42,10 @@ class _BaseScreenState extends State<BaseScreen> {
             children: [
              HomeScreen(),
               CardsScreen(),
-              Scaffold(
-                drawer: CustomDrawer(),
-                appBar: AppBar(
-                  title: const Text('Home3'),
-                ),
-              ),
+             OrdesScreen(),
             CartShoopScreen(),
               ConfigScreen()
+              
             ],
           );
         }));

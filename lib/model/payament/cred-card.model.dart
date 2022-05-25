@@ -15,10 +15,10 @@ class CredCart {
 
   factory CredCart.fromJson(Map<String, dynamic> json) {
     return CredCart(
-      number_card: json['number_card'] as String,
-      expired: json['expired'] as String,
-      cvv: json['cvv'] as String,
-      name_card: json['name_card'] as String,
+      number_card: json['number_card']as String,
+      expired: json['expired']as String,
+      cvv: json['cvv']as String,
+      name_card: json['name_card']as String,
       id_card: json['id_card'] ,
 
     );
