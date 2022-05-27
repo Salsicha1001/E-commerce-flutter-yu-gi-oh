@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
@@ -78,8 +77,7 @@ class CardService {
       return listCard;
     } else {
       LoadCustom().closeLoad();
-      DialogsCustom().showDialogAlert(
-          context, 'Erro  ${response.statusCode}', ' ${msg['msg']}');
+      return [];
     }
   }
 

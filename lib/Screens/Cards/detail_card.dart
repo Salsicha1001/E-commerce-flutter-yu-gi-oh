@@ -16,7 +16,7 @@ import 'package:tab_container/tab_container.dart';
 
 class CardDetail extends StatefulWidget {
   CardDetailDto card;
-  List<CardList> list_cards;
+  List<CardList> list_cards =[];
   CardDetail(this.card, this.list_cards, {Key key}) : super(key: key);
   @override
   State<CardDetail> createState() => _CardDetailState();
@@ -47,18 +47,13 @@ class _CardDetailState extends State<CardDetail> {
   }
 
   List<String> _getTabs2() {
-    if (widget.card.archetype != null) {
       return <String>[
         LocaleProvider.of(context).description,
         LocaleProvider.of(context).prices,
+        if(widget.list_cards.isNotEmpty)
         LocaleProvider.of(context).carrelated_letterds
       ];
-    } else {
-      return <String>[
-        LocaleProvider.of(context).description,
-        LocaleProvider.of(context).prices
-      ];
-    }
+
   }
 
   Future openDialog(element) async {
@@ -87,148 +82,6 @@ class _CardDetailState extends State<CardDetail> {
   }
 
   List<Widget> _getChildren2() {
-    if (widget.card.archetype == null) {
-      return <Widget>[
-        ListView(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(children: [
-                if (widget.card.level > 0)
-                  const Text("Level:", style: TextStyle(fontSize: 20)),
-                for (int i = 0; i < widget.card.level; i++)
-                  Image.asset(
-                    'images/img_star.png',
-                    height: 23,
-                  )
-              ]),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-              child: Row(children: [
-                Expanded(
-                    flex: 2,
-                    child: Wrap(children: [
-                      Text(LocaleProvider.of(context).type_card + ':',
-                          style: const TextStyle(fontSize: 20)),
-                    ])),
-                Expanded(
-                    flex: 2,
-                    child: Wrap(
-                      children: [
-                        Text(LocaleProvider.of(context).type + ':',
-                            style: const TextStyle(fontSize: 20)),
-                      ],
-                    )),
-              ]),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-              child: Row(children: [
-                Expanded(
-                    flex: 2,
-                    child: Wrap(children: [
-                      Text("${widget.card.type}",
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
-                    ])),
-                Expanded(
-                    flex: 2,
-                    child: Wrap(
-                      children: [
-                        Text("${widget.card.race}",
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ],
-                    )),
-              ]),
-            ),
-            if (widget.card.type.contains("Monstro") ||
-                widget.card.type.contains("Monster"))
-              Container(
-                padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                child: Row(children: [
-                  Expanded(
-                      flex: 1,
-                      child: Wrap(children: [
-                        Text(LocaleProvider.of(context).attack + ':',
-                            style: const TextStyle(fontSize: 20)),
-                      ])),
-                  Expanded(
-                      flex: 1,
-                      child: Wrap(
-                        children: [
-                          Text(LocaleProvider.of(context).defense + ':',
-                              style: const TextStyle(fontSize: 20)),
-                        ],
-                      )),
-                  if (widget.card.attribute != null)
-                    Expanded(
-                        flex: 1,
-                        child: Wrap(
-                          children: [
-                            Text(LocaleProvider.of(context).attribute + ':',
-                                style: const TextStyle(fontSize: 20)),
-                          ],
-                        )),
-                ]),
-              ),
-            if (widget.card.type.contains("Monstro") ||
-                widget.card.type.contains("Monster"))
-              Container(
-                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                child: Row(children: [
-                  Expanded(
-                      flex: 1,
-                      child: Wrap(children: [
-                        Text("${widget.card.atk}",
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ])),
-                  Expanded(
-                      flex: 1,
-                      child: Wrap(
-                        children: [
-                          Text("${widget.card.def}",
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                        ],
-                      )),
-                  if (widget.card.attribute != null)
-                    Expanded(
-                        flex: 1,
-                        child: Wrap(
-                          children: [
-                            Text("${widget.card.attribute}",
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
-                          ],
-                        )),
-                ]),
-              ),
-            const SizedBox(height: 20),
-            Text(
-              LocaleProvider.of(context).description + ':',
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-              child: Wrap(children: [
-                Text(
-                  "${widget.card.desc}",
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ]),
-            ),
-          ],
-        ),
-        PriceDetail(price: widget.card.card_prices[0]),
-      ];
-    } else {
       return <Widget>[
         ListView(
           children: [
@@ -368,6 +221,7 @@ class _CardDetailState extends State<CardDetail> {
           ],
         ),
         PriceDetail(price: widget.card.card_prices[0]),
+        if(widget.list_cards.isNotEmpty)
         Card(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -385,7 +239,6 @@ class _CardDetailState extends State<CardDetail> {
           ),
         ),
       ];
-    }
   }
 
   @override

@@ -21,20 +21,20 @@ class RegisterUser extends StatefulWidget {
 class _RegisterUserState extends State<RegisterUser> {
   final formUser = FormGroup({
     'name':
-        FormControl<String>(validators: [Validators.required], value: 'Teste'),
+        FormControl<String>(validators: [Validators.required], value: ''),
     'email': FormControl<String>(
         validators: [Validators.required, Validators.email],
-        value: 'Teste@teste.com'),
+        value: ''),
     'cpf': FormControl<String>(validators: [
       requiredCPF,
-    ], value: '114.969.296-08'),
+    ], value: ''),
     'password': FormControl<String>(
         validators: [Validators.required, Validators.minLength(6)],
-        value: 'felipe1001'),
+        value: ''),
     'confirmPassword': FormControl<String>(
-        validators: [Validators.required], value: 'felipe1001'),
+        validators: [Validators.required], value: ''),
     'phone': FormControl<String>(
-        validators: [requiredPhone], value: '(00) 0000-0000'),
+        validators: [requiredPhone], value: ''),
     'typeUser': FormControl<int>(value: 1),
   }, validators: [
     mustMatch('password', 'confirmPassword')

@@ -33,8 +33,7 @@ class User {
       name: map['name'],
       email: map['email'],
       token: map['token'],
-      typeUser: map['typeUser'][0],
-
+      typeUser: map['typeUser'],
     );
   }
   factory User.fromJson(String source) => User.fromMap(json.decode(source));

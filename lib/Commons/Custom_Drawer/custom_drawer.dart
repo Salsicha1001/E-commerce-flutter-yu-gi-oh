@@ -7,7 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
-        final box = GetStorage();
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,10 +19,11 @@ class CustomDrawer extends StatelessWidget {
               iconData: Icons.list,
               title: LocaleProvider.of(context).cards,
               page: 1),
-          DrawerTitle(
-              iconData: Icons.playlist_add_check,
-              title: LocaleProvider.of(context).my_ordes,
-              page: 2),
+          if (Provider.of<UserManager>(context).isLoggedIn)
+            DrawerTitle(
+                iconData: Icons.playlist_add_check,
+                title: LocaleProvider.of(context).my_ordes,
+                page: 2),
           if (Provider.of<UserManager>(context).isLoggedIn)
             DrawerTitle(
                 iconData: Icons.shopping_cart_outlined,
@@ -32,7 +33,8 @@ class CustomDrawer extends StatelessWidget {
               iconData: Icons.settings,
               title: LocaleProvider.of(context).settings,
               page: 4),
-              if(box.read('admin'))
+          if (Provider.of<UserManager>(context).isLoggedIn)
+          if(box.read('ADMIN'))
           DrawerTitle(
               iconData: Icons.shopping_bag_outlined,
               title: 'ADMIN/ Lista de compras',

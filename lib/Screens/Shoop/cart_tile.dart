@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
@@ -44,7 +46,7 @@ class _CartTileState extends State<CartTile> {
                 .getCardByArctype(context, widget.cart.arcthype);
           }
           if (dto.id != null) {
-            Navigator.of(context)
+             Navigator.of(context)
                 .pushNamed("/detail-card", arguments: [dto, cards]);
           }
         },
@@ -83,9 +85,9 @@ class _CartTileState extends State<CartTile> {
                     ),
                   ),
                 ),
-                if (!widget.showDetail)
-                  Column(
-                    children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    if (!widget.showDetail)
                       IconButton(
                           onPressed: () async {
                             setState(() {
@@ -100,10 +102,11 @@ class _CartTileState extends State<CartTile> {
                           iconSize: 50,
                           icon: const Icon(Icons.add),
                           color: Color.fromARGB(255, 71, 191, 238)),
-                      Text(
-                        '$qty',
-                        style: const TextStyle(fontSize: 20),
-                      ),
+                    Text(
+                      '$qty',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    if (!widget.showDetail)
                       IconButton(
                           onPressed: () {
                             setState(() {
@@ -118,8 +121,8 @@ class _CartTileState extends State<CartTile> {
                           iconSize: 50,
                           icon: const Icon(Icons.remove),
                           color: Color.fromARGB(255, 71, 191, 238)),
-                    ],
-                  )
+                  ],
+                )
               ],
             ),
           ),

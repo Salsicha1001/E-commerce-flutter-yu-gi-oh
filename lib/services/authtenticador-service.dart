@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
@@ -12,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class UserService {
-  var urlauth = ("http://192.168.100.38:8080/auth");
   var url = ("http://192.168.100.38:8080");
   final box = GetStorage();
   loginUser(UserLogin userLogin, context) async {
@@ -20,7 +20,7 @@ class UserService {
       'email': userLogin.email,
       'password': userLogin.password,
     };
-    final response = await http.post(Uri.parse(urlauth + '/login'),
+    final response = await http.post(Uri.parse(url + '/auth/login'),
         headers: <String, String>{
           "Content-Type": "application/json;charset=UTF-8"
         },
@@ -31,7 +31,8 @@ class UserService {
         'id_user': msg['obj']['id'],
         'name': msg['obj']['username'],
         'email': msg['obj']['email'],
-        'token': '${msg['obj']['type']} ${msg['obj']['token']}'
+        'token': '${msg['obj']['type']} ${msg['obj']['token']}',
+        'typeUser':msg['obj']['typeUser'],
       };
       Map preferences = {
         'theme': msg['obj']['roles']['theme'],
@@ -52,13 +53,11 @@ class UserService {
       box.write('email', u.email);
       box.write('theme', c.theme);
       box.write('language', c.language);
-      if(u.typeUser =='ADMIN'){
-      box.write('admin', true);
-      }else{
-      box.write('admin', false);
-        
+      if (u.typeUser == 'ADMIN') {
+        box.write('ADMIN', true);
+      } else {
+        box.write('ADMIN', false);
       }
-
 
       LoadCustom().closeLoad();
       DialogsCustom().showAlertSucessRedirectMenu(context, ' ${msg['msg']}');
@@ -81,7 +80,7 @@ class UserService {
       'cpf': userRegister.cpf,
       'address_user': userRegister.address_user?.map((e) => e.toJson()).toList()
     };
-    final response = await http.post(Uri.parse(urlauth + '/add'),
+    final response = await http.post(Uri.parse(url + '/auth/add'),
         headers: <String, String>{
           "Content-Type": "application/json;charset=UTF-8"
         },
