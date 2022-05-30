@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:flutter_ecommerce/model/cart_shopp.dart';

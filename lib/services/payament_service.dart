@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class OrderPayament {
-  var url = ("http://192.168.100.38:8080");
+  var url = ("https://marcelogonzaga.dev.br");
   AddCartCred(CredCart card, context) async {
     Map data = {
       'cvv': card.cvv,
@@ -89,6 +89,26 @@ class OrderPayament {
       var msg = json.decode(utf8.decode(response.bodyBytes));
       if (msg['obj'] != null) {
         var listMap = (msg['obj'] as List);
+        List<OrderResponse> listCard = listMap
+            .map<OrderResponse>((json) => OrderResponse.fromJson(json))
+            .toList();
+
+        return listCard;
+      }
+    }
+  }
+
+  getOrders(context) async {
+    final response = await http.get(
+      Uri.parse(url + '/orders/admin'),
+      headers: <String, String>{
+        "Content-Type": "application/json;charset=UTF-8"
+      },
+    );
+    if (response.statusCode == 200) {
+      var msg = json.decode(utf8.decode(response.bodyBytes));
+      if (msg['obj'] != null) {
+        List listMap = (msg['obj'] as List);
         List<OrderResponse> listCard = listMap
             .map<OrderResponse>((json) => OrderResponse.fromJson(json))
             .toList();

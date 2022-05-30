@@ -6,6 +6,8 @@ import 'package:flutter_ecommerce/model/order_response.dart';
 import 'package:flutter_ecommerce/services/payament_service.dart';
 
 class OrdesScreen extends StatefulWidget {
+  bool isAdmin = false;
+  OrdesScreen({this.isAdmin});
   @override
   State<OrdesScreen> createState() => _OrdesScreenState();
 }
@@ -20,7 +22,12 @@ class _OrdesScreenState extends State<OrdesScreen> {
 
   getOrder() async {
     LoadCustom().openLoadMsg("Buscando...");
-    List<OrderResponse> list = await OrderPayament().getOrderByUser(context);
+    List<OrderResponse> list;
+    if (!widget.isAdmin) {
+      list = await OrderPayament().getOrderByUser(context);
+    } else {
+      list = await OrderPayament().getOrders(context);
+    }
     setState(() {
       listCard.addAll(list);
     });
@@ -43,7 +50,9 @@ class _OrdesScreenState extends State<OrdesScreen> {
                   children: listCard
                       .map((order) => OrdersCard(
                             order: order,
-                            totalqty: order.cardOrders.fold(0, (value, element) {
+                            isAdmin:widget.isAdmin,
+                            totalqty:
+                                order.cardOrders.fold(0, (value, element) {
                               return value + element.qty;
                             }),
                           ))

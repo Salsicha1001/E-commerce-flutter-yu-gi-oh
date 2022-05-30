@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Screens/Base/home_screen.dart';
 import 'package:flutter_ecommerce/Screens/Cards/cards_screens.dart';
 import 'package:flutter_ecommerce/Screens/Config/config_screen.dart';
@@ -42,9 +39,10 @@ class _BaseScreenState extends State<BaseScreen> {
             children: [
              HomeScreen(),
               CardsScreen(),
-             OrdesScreen(),
+             OrdesScreen(isAdmin: false),
             CartShoopScreen(),
-              ConfigScreen()
+              ConfigScreen(),
+             OrdesScreen(isAdmin:true),
               
             ],
           );

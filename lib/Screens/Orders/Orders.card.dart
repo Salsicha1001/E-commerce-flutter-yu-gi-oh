@@ -6,7 +6,8 @@ import 'package:intl/intl.dart';
 class OrdersCard extends StatefulWidget {
   final OrderResponse order;
   int totalqty;
-  OrdersCard({this.order, this.totalqty});
+  bool isAdmin;
+  OrdersCard({this.order, this.isAdmin, this.totalqty});
   @override
   State<OrdersCard> createState() => _OrdersCardState();
 }
@@ -39,6 +40,14 @@ class _OrdersCardState extends State<OrdersCard> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        if (widget.isAdmin)
+                          Text(
+                            widget.order.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18.0,
+                            ),
+                          ),
                         Text(DateFormat("d 'de' MMMM 'de' y", "pt_BR").format(
                                 DateFormat('dd/MM/yyyy')
                                     .parse(widget.order.dateShopp)) +
@@ -56,7 +65,7 @@ class _OrdersCardState extends State<OrdersCard> {
                               fontSize: 16.0, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Total R\$ ${widget.order.totalValue}',
+                          'Total R\$ ${double.parse(widget.order.totalValue).toStringAsFixed(2).replaceAll('.',',')}',
                           style: TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.bold),
                         )

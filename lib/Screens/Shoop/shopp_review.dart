@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/Commons/Custom_Drawer/cred_item.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
-import 'package:flutter_ecommerce/Screens/Base/home_screen.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/cart_tile.dart';
 import 'package:flutter_ecommerce/Screens/Shoop/price_cart.dart';
 import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';

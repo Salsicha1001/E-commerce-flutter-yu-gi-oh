@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
@@ -13,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class UserService {
-  var url = ("http://192.168.100.38:8080");
+  var url = ("https://marcelogonzaga.dev.br");
   final box = GetStorage();
   loginUser(UserLogin userLogin, context) async {
     Map data = {
@@ -32,7 +31,7 @@ class UserService {
         'name': msg['obj']['username'],
         'email': msg['obj']['email'],
         'token': '${msg['obj']['type']} ${msg['obj']['token']}',
-        'typeUser':msg['obj']['typeUser'],
+        'typeUser': msg['obj']['typeUser'],
       };
       Map preferences = {
         'theme': msg['obj']['roles']['theme'],

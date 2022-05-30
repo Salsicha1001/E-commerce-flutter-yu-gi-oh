@@ -1,7 +1,4 @@
-import 'dart:developer';
 import 'dart:math';
-
-import 'package:flutter_ecommerce/helpers/language.dart';
 import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
 import 'package:flutter_ecommerce/model/cart_shopp.dart';
 import 'package:provider/provider.dart';

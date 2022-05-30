@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_ecommerce/model/address.dart';
 
 class UserRegister {
