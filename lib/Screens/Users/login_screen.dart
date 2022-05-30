@@ -66,14 +66,14 @@ class LoginScreen extends StatelessWidget {
                   return null;
                 },
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: FlatButton(
-                  onPressed: () {},
-                  padding: EdgeInsets.zero,
-                  child: Text(LocaleProvider.of(context).forgot_password),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.centerRight,
+              //   child: FlatButton(
+              //     onPressed: () {},
+              //     padding: EdgeInsets.zero,
+              //     child: Text(LocaleProvider.of(context).forgot_password),
+              //   ),
+              // ),
               const SizedBox(height: 32),
               SizedBox(
                 height: 44,

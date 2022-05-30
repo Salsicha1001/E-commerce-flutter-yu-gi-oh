@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
@@ -57,7 +58,6 @@ class UserService {
       } else {
         box.write('ADMIN', false);
       }
-
       LoadCustom().closeLoad();
       DialogsCustom().showAlertSucessRedirectMenu(context, ' ${msg['msg']}');
     } else {

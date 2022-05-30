@@ -32,6 +32,7 @@ class DrawerTitle extends StatelessWidget {
             const SizedBox(width: 32),
             Text(
               title,
+                overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

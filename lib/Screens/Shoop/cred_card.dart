@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
 import 'package:flutter_ecommerce/services/payament_service.dart';
+import 'package:credit_card_validator/credit_card_validator.dart';
 
 class CredCardScreen extends StatefulWidget {
   @override
@@ -21,6 +24,7 @@ class _CredCardScreenState extends State<CredCardScreen> {
   bool useBackgroundImage = false;
   OutlineInputBorder border;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  CreditCardValidator _ccValidator = CreditCardValidator();
   @override
   void initState() {
     border = OutlineInputBorder(
@@ -172,9 +176,29 @@ class _CredCardScreenState extends State<CredCardScreen> {
                             ),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (formKey.currentState.validate()) {
-                            addCard();
+                            if (!_ccValidator
+                                .validateCCNum(cardNumber)
+                                .isValid) {
+                              setState(() {
+                                cardNumber = '';
+                              });
+                              await DialogsCustom()
+                                  .showAlertErro(context, "Cartão Invalido");
+                              return;
+                            } else if (!_ccValidator
+                                .validateExpDate(expiryDate)
+                                .isValid) {
+                              setState(() {
+                                expiryDate = '';
+                              });
+                              await DialogsCustom()
+                                  .showAlertErro(context, "Cartão Invalido");
+                              return;
+                            } else {
+                              addCard();
+                            }
                           } else {
                             DialogsCustom()
                                 .showAlertErro(context, "Cartão Invalido");

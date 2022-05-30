@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: const Text('Home/ Cartas Recomendadas'),
+        title: const Text('Cartas Recomendadas'),
         centerTitle: true,
       ),
       body: Card(

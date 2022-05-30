@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
@@ -81,8 +83,7 @@ class _CardsScreenState extends State<CardsScreen> {
         });
         return true;
       } else {
-        DialogsCustom().showDialogAlert(LocaleProvider.of(context).shit,
-            context, LocaleProvider.of(context).Could_not_find_these_cards);
+        refreshController.refreshCompleted();
         return false;
       }
     }

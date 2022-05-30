@@ -34,11 +34,11 @@ class CustomDrawer extends StatelessWidget {
               title: LocaleProvider.of(context).settings,
               page: 4),
           if (Provider.of<UserManager>(context).isLoggedIn)
-          if(box.read('ADMIN'))
-          DrawerTitle(
-              iconData: Icons.shopping_bag_outlined,
-              title: 'ADMIN/ Lista de compras',
-              page: 5),
+            if (box.read('ADMIN'))
+              DrawerTitle(
+                  iconData: Icons.shopping_bag_outlined,
+                  title: 'ADMIN/Compras Users',
+                  page: 5),
         ],
       ),
     );

@@ -297,7 +297,9 @@ class _FilterCardState extends State<FilterCard> {
     return <String>[
       LocaleProvider.of(context).monster,
       LocaleProvider.of(context).card_magic +
+          ' ' +
           LocaleProvider.of(context).and +
+          ' ' +
           LocaleProvider.of(context).card_trap
     ];
   }
@@ -338,7 +340,7 @@ class _FilterCardState extends State<FilterCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:const Color.fromARGB(255, 3, 107, 244),
+      backgroundColor: const Color.fromARGB(255, 3, 107, 244),
       appBar: AppBar(actions: [
         TextButton(
             onPressed: () {
@@ -383,7 +385,7 @@ class _FilterCardState extends State<FilterCard> {
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-                unselectedTextStyle:const TextStyle(
+                unselectedTextStyle: const TextStyle(
                   fontSize: 18,
                 ),
               ),
