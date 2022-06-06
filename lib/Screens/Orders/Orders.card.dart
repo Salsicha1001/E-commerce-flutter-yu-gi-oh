@@ -51,6 +51,7 @@ class _OrdersCardState extends State<OrdersCard> {
                         Text(DateFormat("d 'de' MMMM 'de' y", "pt_BR").format(
                                 DateFormat('dd/MM/yyyy')
                                     .parse(widget.order.dateShopp)) +
+                            "                                   " +
                             widget.order.hourShopp),
                         Text(
                           widget.order.codOrders,
@@ -65,7 +66,7 @@ class _OrdersCardState extends State<OrdersCard> {
                               fontSize: 16.0, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Total R\$ ${double.parse(widget.order.totalValue).toStringAsFixed(2).replaceAll('.',',')}',
+                          'Total R\$ ${double.parse(widget.order.totalValue).toStringAsFixed(2).replaceAll('.', ',')}',
                           style: TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.bold),
                         )

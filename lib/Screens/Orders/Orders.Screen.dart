@@ -39,7 +39,8 @@ class _OrdesScreenState extends State<OrdesScreen> {
     return Scaffold(
         drawer: CustomDrawer(),
         appBar: AppBar(
-          title: const Text('Meus Pedidos'),
+          title:
+              !widget.isAdmin ? Text('Meus Pedidos') : Text('Todas as compras'),
           centerTitle: true,
         ),
         body: Card(
@@ -50,7 +51,7 @@ class _OrdesScreenState extends State<OrdesScreen> {
                   children: listCard
                       .map((order) => OrdersCard(
                             order: order,
-                            isAdmin:widget.isAdmin,
+                            isAdmin: widget.isAdmin,
                             totalqty:
                                 order.cardOrders.fold(0, (value, element) {
                               return value + element.qty;

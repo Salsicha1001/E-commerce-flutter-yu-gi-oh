@@ -21,13 +21,13 @@ class CustomDrawer extends StatelessWidget {
               page: 1),
           if (Provider.of<UserManager>(context).isLoggedIn)
             DrawerTitle(
-                iconData: Icons.playlist_add_check,
-                title: LocaleProvider.of(context).my_ordes,
+                iconData: Icons.shopping_cart_outlined,
+                title: LocaleProvider.of(context).my_cart,
                 page: 2),
           if (Provider.of<UserManager>(context).isLoggedIn)
             DrawerTitle(
-                iconData: Icons.shopping_cart_outlined,
-                title: LocaleProvider.of(context).my_cart,
+                iconData: Icons.playlist_add_check,
+                title: LocaleProvider.of(context).my_ordes,
                 page: 3),
           DrawerTitle(
               iconData: Icons.settings,

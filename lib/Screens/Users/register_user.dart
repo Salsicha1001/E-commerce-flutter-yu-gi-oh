@@ -20,21 +20,17 @@ class RegisterUser extends StatefulWidget {
 
 class _RegisterUserState extends State<RegisterUser> {
   final formUser = FormGroup({
-    'name':
-        FormControl<String>(validators: [Validators.required], value: ''),
+    'name': FormControl<String>(validators: [Validators.required], value: ''),
     'email': FormControl<String>(
-        validators: [Validators.required, Validators.email],
-        value: ''),
+        validators: [Validators.required, Validators.email], value: ''),
     'cpf': FormControl<String>(validators: [
       requiredCPF,
     ], value: ''),
     'password': FormControl<String>(
-        validators: [Validators.required, Validators.minLength(6)],
-        value: ''),
-    'confirmPassword': FormControl<String>(
-        validators: [Validators.required], value: ''),
-    'phone': FormControl<String>(
-        validators: [requiredPhone], value: ''),
+        validators: [Validators.required, Validators.minLength(6)], value: ''),
+    'confirmPassword':
+        FormControl<String>(validators: [Validators.required], value: ''),
+    'phone': FormControl<String>(validators: [requiredPhone], value: ''),
     'typeUser': FormControl<int>(value: 1),
   }, validators: [
     mustMatch('password', 'confirmPassword')
@@ -105,11 +101,12 @@ class _RegisterUserState extends State<RegisterUser> {
       LoadCustom().closeLoad();
       if (response.contains('CPF')) {
         formUser.control('cpf').updateValue('');
-        formUser.control('cpf').markAsTouched();  
+        formUser.control('cpf').markAsTouched();
         return;
+      } else {
+        UserLogin login = UserLogin(user.email, user.password);
+        UserService().loginUser(login, context);
       }
-      UserLogin login = UserLogin(user.email, user.password);
-      UserService().loginUser(login, context);
     }
   }
 

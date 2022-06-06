@@ -83,6 +83,14 @@ class _CardDetailState extends State<CardDetail> {
         .then((value) {});
   }
 
+  List<Color> _getColors() {
+    return [
+      Color.fromARGB(255, 92, 138, 223),
+      Color.fromARGB(255, 92, 138, 223),
+      if (widget.list_cards != null) Color.fromARGB(255, 92, 138, 223),
+    ];
+  }
+
   List<Widget> _getChildren2() {
     return <Widget>[
       ListView(
@@ -211,7 +219,7 @@ class _CardDetailState extends State<CardDetail> {
             textAlign: TextAlign.center,
           ),
           Container(
-            padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+            padding: const EdgeInsets.fromLTRB(8, 8, 0, 30),
             child: Wrap(children: [
               Text(
                 "${widget.card.desc}",
@@ -225,6 +233,7 @@ class _CardDetailState extends State<CardDetail> {
       PriceDetail(price: widget.card.card_prices[0]),
       if (widget.list_cards != null)
         Card(
+          color: Color.fromARGB(255, 92, 138, 223),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -301,7 +310,8 @@ class _CardDetailState extends State<CardDetail> {
           ),
           const SizedBox(height: 20),
           Expanded(
-              child: Column(
+              child: ListView(
+            reverse: true,
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width,
@@ -327,6 +337,7 @@ class _CardDetailState extends State<CardDetail> {
                     },
                     children: _getChildren2(),
                     tabs: _getTabs2(),
+                    colors: _getColors(),
                     selectedTextStyle: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -348,7 +359,7 @@ class _CardDetailState extends State<CardDetail> {
             },
             elevation: 10.0,
             child: const Icon(Icons.shopping_cart_outlined),
-            backgroundColor: const Color.fromARGB(255, 4, 149, 233),
+            backgroundColor: Color.fromARGB(255, 5, 70, 250),
           ),
         ));
   }

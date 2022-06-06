@@ -19,7 +19,6 @@ class _BaseScreenState extends State<BaseScreen> {
   final PageController pageController = PageController();
   final box = GetStorage();
 
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -37,13 +36,12 @@ class _BaseScreenState extends State<BaseScreen> {
             controller: pageController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-             HomeScreen(),
+              HomeScreen(),
               CardsScreen(),
-             OrdesScreen(isAdmin: false),
-            CartShoopScreen(),
+              CartShoopScreen(),
+              OrdesScreen(isAdmin: false),
               ConfigScreen(),
-             OrdesScreen(isAdmin:true),
-              
+              OrdesScreen(isAdmin: true),
             ],
           );
         }));

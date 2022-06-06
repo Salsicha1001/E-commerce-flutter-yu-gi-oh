@@ -306,8 +306,8 @@ class _FilterCardState extends State<FilterCard> {
 
   List<Color> _getColors() {
     return [
-      Color.fromARGB(255, 147, 194, 241),
-      Color.fromARGB(255, 147, 194, 241),
+      Color.fromARGB(255, 41, 177, 255),
+      Color.fromARGB(255, 41, 177, 255),
     ];
   }
 
@@ -382,11 +382,11 @@ class _FilterCardState extends State<FilterCard> {
                 children: _getChildren2(),
                 tabs: _getTabs2(),
                 selectedTextStyle: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
                 unselectedTextStyle: const TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                 ),
               ),
             ),

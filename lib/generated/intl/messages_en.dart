@@ -81,7 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "delivery_address" : MessageLookupByLibrary.simpleMessage("Delivery Address"),
     "description" : MessageLookupByLibrary.simpleMessage("Description"),
     "district" : MessageLookupByLibrary.simpleMessage("District"),
-    "english" : MessageLookupByLibrary.simpleMessage("English"),
+    "english" : MessageLookupByLibrary.simpleMessage("English in production"),
     "forgot_password" : MessageLookupByLibrary.simpleMessage("Forgot My Password"),
     "log_in" : MessageLookupByLibrary.simpleMessage("Login"),
     "login_register" : MessageLookupByLibrary.simpleMessage("Login or Register"),

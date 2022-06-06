@@ -45,10 +45,10 @@ class LocaleProvider {
     );
   }
 
-  /// `English`
+  /// `English in production`
   String get english {
     return Intl.message(
-      'English',
+      'English in production',
       name: 'english',
       desc: '',
       args: [],
