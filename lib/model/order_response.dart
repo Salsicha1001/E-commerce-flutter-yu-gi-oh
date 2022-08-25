@@ -11,16 +11,15 @@ class OrderResponse {
   String name;
   CredCart credCard;
 
-  OrderResponse({
-    this.id,
-    this.codOrders,
-    this.totalValue,
-    this.dateShopp,
-    this.hourShopp,
-    this.credCard,
-    this.cardOrders,
-    this.name
-  });
+  OrderResponse(
+      {this.id,
+      this.codOrders,
+      this.totalValue,
+      this.dateShopp,
+      this.hourShopp,
+      this.credCard,
+      this.cardOrders,
+      this.name});
 
   Map toJson() => {
         'id': id,
@@ -30,9 +29,9 @@ class OrderResponse {
         'hourShopp': hourShopp,
         'credCard': credCard.toJson(),
         'cardOrders': cardOrders?.map((e) => e.toJson()).toList(),
-        'name':name
+        'name': name
       };
-  factory OrderResponse.fromJson(Map<String, dynamic> map) {
+  factory OrderResponse.fromJson(Map<String, dynamic> map, key) {
     return OrderResponse(
       id: map['id'] as int,
       codOrders: map['codOrders'] as String,
@@ -40,8 +39,9 @@ class OrderResponse {
       dateShopp: map['dateShopp'] as String,
       hourShopp: map['hourShopp'] as String,
       name: map['userId']['name'],
-      credCard:
-          map['credCard'] != null ? CredCart.fromJson(map['credCard']) : null,
+      credCard: map['credCard'] != null
+          ? CredCart.fromJson(map['credCard'], key)
+          : null,
       cardOrders: List<CartShopp>.from(
           map['cardOrders'].map((x) => CartShopp.fromJson(x))),
     );

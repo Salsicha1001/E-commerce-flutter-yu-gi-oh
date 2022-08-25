@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -155,18 +154,11 @@ class _RegisterUserState extends State<RegisterUser> {
                   decoration: const InputDecoration(hintText: "Nome Completo"),
                   keyboardType: TextInputType.text,
                   formControlName: 'name',
-                  validationMessages: (control) => {
-                    ValidationMessage.required: 'Esse campo é obrigatorio',
-                  },
                 ),
                 ReactiveTextField(
                   decoration: const InputDecoration(hintText: "E-mail"),
                   keyboardType: TextInputType.emailAddress,
                   formControlName: 'email',
-                  validationMessages: (control) => {
-                    ValidationMessage.required: 'Esse campo é obrigatorio',
-                    ValidationMessage.email: 'Insira um email valido',
-                  },
                 ),
                 Row(
                   children: [
@@ -181,10 +173,6 @@ class _RegisterUserState extends State<RegisterUser> {
                             TelefoneInputFormatter()
                           ],
                           formControlName: 'phone',
-                          validationMessages: (control) => {
-                            ValidationMessage.required:
-                                'Esse campo é obrigatorio',
-                          },
                         ),
                       ),
                     ),
@@ -199,10 +187,6 @@ class _RegisterUserState extends State<RegisterUser> {
                             CpfInputFormatter()
                           ],
                           formControlName: 'cpf',
-                          validationMessages: (control) => {
-                            ValidationMessage.required:
-                                'Esse campo é obrigatorio',
-                          },
                         ),
                       ),
                     )
@@ -217,10 +201,6 @@ class _RegisterUserState extends State<RegisterUser> {
                           decoration: const InputDecoration(hintText: "Senha"),
                           obscureText: true,
                           formControlName: 'password',
-                          validationMessages: (control) => {
-                            ValidationMessage.required:
-                                'Esse campo é obrigatorio',
-                          },
                         ),
                       ),
                     ),
@@ -233,10 +213,6 @@ class _RegisterUserState extends State<RegisterUser> {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: true,
                           formControlName: 'confirmPassword',
-                          validationMessages: (control) => {
-                            ValidationMessage.required:
-                                'Esse campo é obrigatorio',
-                          },
                         ),
                       ),
                     )
@@ -282,10 +258,6 @@ class _RegisterUserState extends State<RegisterUser> {
                                     const InputDecoration(hintText: "Número"),
                                 keyboardType: TextInputType.number,
                                 formControlName: 'number_address',
-                                validationMessages: (control) => {
-                                  ValidationMessage.required:
-                                      'Esse campo é obrigatorio',
-                                },
                               ),
                             ),
                           ),
@@ -297,10 +269,6 @@ class _RegisterUserState extends State<RegisterUser> {
                                     const InputDecoration(hintText: "Bairro"),
                                 keyboardType: TextInputType.text,
                                 formControlName: 'district',
-                                validationMessages: (control) => {
-                                  ValidationMessage.required:
-                                      'Esse campo é obrigatorio',
-                                },
                               ),
                             ),
                           )
@@ -316,10 +284,6 @@ class _RegisterUserState extends State<RegisterUser> {
                                     const InputDecoration(hintText: "Cidade"),
                                 keyboardType: TextInputType.text,
                                 formControlName: 'city',
-                                validationMessages: (control) => {
-                                  ValidationMessage.required:
-                                      'Esse campo é obrigatorio',
-                                },
                               ),
                             ),
                           ),
@@ -331,10 +295,6 @@ class _RegisterUserState extends State<RegisterUser> {
                                     const InputDecoration(hintText: "Estado"),
                                 keyboardType: TextInputType.text,
                                 formControlName: 'state',
-                                validationMessages: (control) => {
-                                  ValidationMessage.required:
-                                      'Esse campo é obrigatorio',
-                                },
                               ),
                             ),
                           ),

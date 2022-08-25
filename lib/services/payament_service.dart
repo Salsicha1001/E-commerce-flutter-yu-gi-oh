@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter_ecommerce/helpers/cripto.dart';
+import 'package:flutter_ecommerce/helpers/url.config.dart';
 import 'package:flutter_ecommerce/model/order_request.dart';
 import 'package:flutter_ecommerce/model/order_response.dart';
 import 'package:flutter_ecommerce/model/payament/cred-card.model.dart';
@@ -7,13 +9,17 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class OrderPayament {
-  var url = ("https://marcelogonzaga.dev.br");
+  var url = UrlConfig().urlLocal;
   AddCartCred(CredCart card, context) async {
     Map data = {
-      'cvv': card.cvv,
-      'expired': card.expired,
-      'name_card': card.name_card,
-      'number_card': card.number_card,
+      'cvv': Encrypt(card.cvv,
+          Provider.of<UserManager>(context, listen: false).user.email),
+      'expired': Encrypt(card.expired,
+          Provider.of<UserManager>(context, listen: false).user.email),
+      'name_card': Encrypt(card.name_card,
+          Provider.of<UserManager>(context, listen: false).user.email),
+      'number_card': Encrypt(card.number_card,
+          Provider.of<UserManager>(context, listen: false).user.email),
       'id_user': Provider.of<UserManager>(context, listen: false).user.id_user
     };
     final response = await http.post(Uri.parse(url + '/cred-card/save'),
@@ -42,8 +48,10 @@ class OrderPayament {
       var msg = json.decode(utf8.decode(response.bodyBytes));
       if (msg['obj'] != null) {
         var listMap = (msg['obj'] as List);
-        List<CredCart> listCard =
-            listMap.map<CredCart>((json) => CredCart.fromJson(json)).toList();
+        List<CredCart> listCard = listMap
+            .map<CredCart>((json) => CredCart.fromJson(json,
+                Provider.of<UserManager>(context, listen: false).user.email))
+            .toList();
         return listCard;
       } else {
         return [];
@@ -90,7 +98,8 @@ class OrderPayament {
       if (msg['obj'] != null) {
         var listMap = (msg['obj'] as List);
         List<OrderResponse> listCard = listMap
-            .map<OrderResponse>((json) => OrderResponse.fromJson(json))
+            .map<OrderResponse>((json) => OrderResponse.fromJson(json,
+                Provider.of<UserManager>(context, listen: false).user.email))
             .toList();
 
         return listCard;
@@ -110,7 +119,8 @@ class OrderPayament {
       if (msg['obj'] != null) {
         List listMap = (msg['obj'] as List);
         List<OrderResponse> listCard = listMap
-            .map<OrderResponse>((json) => OrderResponse.fromJson(json))
+            .map<OrderResponse>((json) => OrderResponse.fromJson(json,
+                Provider.of<UserManager>(context, listen: false).user.email))
             .toList();
 
         return listCard;

@@ -25,7 +25,7 @@ class UserRegister {
         'phone': phone,
         'cpf': cpf,
         'typeUser': typeUser,
-        'address_user': address_user?.map((e) => e.toJson()).toList()
+        'address_user': address_user.map((e) => e.toJson()).toList()
       };
   factory UserRegister.fromMap(Map<UserRegister, dynamic> map) {
     return UserRegister(

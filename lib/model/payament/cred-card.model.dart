@@ -1,26 +1,26 @@
+import 'package:flutter_ecommerce/helpers/cripto.dart';
+
 class CredCart {
-  int id_card ;
+  int id_card;
   CredCart({
     this.number_card,
     this.expired,
     this.cvv,
     this.name_card,
     this.id_card,
-    
   });
   String number_card;
   String expired;
   String cvv;
   String name_card;
 
-  factory CredCart.fromJson(Map<String, dynamic> json) {
+  factory CredCart.fromJson(Map<String, dynamic> json, key) {
     return CredCart(
-      number_card: json['number_card']as String,
-      expired: json['expired']as String,
-      cvv: json['cvv']as String,
-      name_card: json['name_card']as String,
-      id_card: json['id_card'] ,
-
+      number_card: Decrypt(json['number_card'] as String, key),
+      expired: json['expired'] as String,
+      cvv: json['cvv'] as String,
+      name_card: json['name_card'] as String,
+      id_card: json['id_card'],
     );
   }
 

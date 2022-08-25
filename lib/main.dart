@@ -20,6 +20,7 @@ import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
+import 'helpers/cripto.dart';
 
 void main() async {
   configLoading();
@@ -92,6 +93,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // String a = Encrypt('213');
+    // print(a);
+    // String b = Decrypt(a);
+    // print(b);
+    // // String b = Decrypt(a,'123456798');
     return Consumer<ThemeAppConfig>(builder: (_, themeAppConfig, __) {
       return MaterialApp(
         title: 'YU-GI-OH shopp',
@@ -129,8 +135,7 @@ class _MyAppState extends State<MyApp> {
                       ListCredCards(settings.arguments as List<CredCart>));
             case '/review':
               return MaterialPageRoute(
-                  builder: (_) =>
-                      ShoppReview(settings.arguments as CredCart));
+                  builder: (_) => ShoppReview(settings.arguments as CredCart));
             case '/detail-card':
               List<dynamic> args = settings.arguments;
               return MaterialPageRoute(

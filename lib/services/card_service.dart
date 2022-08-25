@@ -1,20 +1,23 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/helpers/language.dart';
+import 'package:flutter_ecommerce/helpers/url.config.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:flutter_ecommerce/model/card/cards_list.dart';
 import 'package:flutter_ecommerce/model/card/filter_request_card.dart';
 import 'package:http/http.dart' as http;
 
 class CardService {
-  var url = ("https://marcelogonzaga.dev.br/cards");
+  var url = UrlConfig().urlLocal;
 
   Future<List<CardList>> getCardPagination(context, page) async {
     LoadCustom().openLoadMsg(LocaleProvider.of(context).search + '....');
     final response = await http.get(
       Uri.parse(url +
+          '/cards' +
           '/getHomeCardsResume?' +
           "language=${getLanguge(context)}&linesPerPage=20&page=${page}"),
       headers: <String, String>{
@@ -38,8 +41,10 @@ class CardService {
   Future<CardDetailDto> getCardByName(context, name) async {
     LoadCustom().openLoadMsg(LocaleProvider.of(context).search + '....');
     final response = await http.get(
-      Uri.parse(
-          url + '/getByName?' + "name=${name}&language=${getLanguge(context)}"),
+      Uri.parse(url +
+          '/cards' +
+          '/getByName?' +
+          "name=${name}&language=${getLanguge(context)}"),
       headers: <String, String>{
         "Content-Type": "application/json;charset=UTF-8",
       },
@@ -62,6 +67,7 @@ class CardService {
   Future<List<CardList>> getCardByArctype(context, archetype) async {
     final response = await http.get(
       Uri.parse(url +
+          '/cards' +
           '/getByArchetype?' +
           "archetype=${archetype}&language=${getLanguge(context)}"),
       headers: <String, String>{
@@ -86,6 +92,7 @@ class CardService {
     LoadCustom().openLoadMsg("Buscando...");
     final response = await http.get(
       Uri.parse(url +
+          '/cards' +
           '/search?' +
           "&language=${getLanguge(context)}" +
           "&type=${request.type}" +
@@ -113,7 +120,7 @@ class CardService {
   Future<List<CardList>> getCardRecomend(context) async {
     LoadCustom().openLoadMsg('Buscando as cartas recomendadas...');
     final response = await http.get(
-      Uri.parse(url + '/random?language=${getLanguge(context)}'),
+      Uri.parse(url + '/cards' + '/random?language=${getLanguge(context)}'),
       headers: <String, String>{
         "Content-Type": "application/json;charset=UTF-8",
       },

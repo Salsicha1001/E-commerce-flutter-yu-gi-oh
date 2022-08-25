@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
+import 'package:flutter_ecommerce/helpers/url.config.dart';
 import 'package:flutter_ecommerce/model/Config/config.model.dart';
 import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
 import 'package:flutter_ecommerce/model/register_user.dart';
@@ -11,9 +11,11 @@ import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import '../helpers/cripto.dart';
 
 class UserService {
-  var url = ("https://marcelogonzaga.dev.br");
+  var url = UrlConfig().urlLocal;
+
   final box = GetStorage();
   loginUser(UserLogin userLogin, context) async {
     Map data = {
@@ -29,7 +31,7 @@ class UserService {
       var msg = json.decode(utf8.decode(response.bodyBytes));
       Map user = {
         'id_user': msg['obj']['id'],
-        'name': msg['obj']['username'],
+        'name': Decrypt(msg['obj']['username'], userLogin.email),
         'email': msg['obj']['email'],
         'token': '${msg['obj']['type']} ${msg['obj']['token']}',
         'typeUser': msg['obj']['typeUser'],
@@ -71,12 +73,12 @@ class UserService {
 
   registerUserAdd(UserRegister userRegister, context) async {
     Map data = {
-      'name': userRegister.name,
+      'name': Encrypt(userRegister.name, userRegister.email),
       'email': userRegister.email,
-      'phone': userRegister.phone,
+      'phone': Encrypt(userRegister.phone, userRegister.email),
       'password': userRegister.password,
       'typeUser': 1,
-      'cpf': userRegister.cpf,
+      'cpf': Encrypt(userRegister.cpf, userRegister.email),
       'address_user': userRegister.address_user?.map((e) => e.toJson()).toList()
     };
     final response = await http.post(Uri.parse(url + '/auth/add'),
