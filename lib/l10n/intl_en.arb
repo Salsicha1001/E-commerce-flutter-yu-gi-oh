@@ -84,5 +84,10 @@
     "prices": "Prices",
     "carrelated_letterds": "Related Letter",
     "attack": "Attack",
-    "defense": "Defense"
+    "defense": "Defense",
+    "preco_ebay": "Price na Ebay",
+    "preco_Amazon": "Price na Amazon",
+    "preco_TCGPLAYER": "Price na TCGPLAYER",
+    "preco_CARDMARKET": "Price na CARDMARKET",
+    "coin": "$"
 }

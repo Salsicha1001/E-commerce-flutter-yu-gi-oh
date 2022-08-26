@@ -7,17 +7,17 @@ class CustomDrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(21, 24, 16, 8),
-      height: 180,
+      padding: const EdgeInsets.fromLTRB(21, 30, 16, 20),
+      height: 200,
       child: Consumer<UserManager>(builder: (_, userManager, __) {
         return Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text(
-                "E-COMMERCE \n YU-GI-OH",
+                "Analise de Cartas\n YU-GI-OH",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
               ),
               Text(
                 LocaleProvider.of(context).welcome +
@@ -27,40 +27,6 @@ class CustomDrawerHeader extends StatelessWidget {
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  if (userManager.isLoggedIn) {
-                    userManager.logout();
-                  } else {
-                    Navigator.of(context).pushNamed("/login");
-                  }
-                },
-                child: Column(
-                  children: [
-                    // ignore: sdk_version_ui_as_code
-                    if (userManager.isLoggedIn == false) ...[
-                      Text(
-                        LocaleProvider.of(context).login_register,
-                        style: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic),
-                      ),
-                    ] else ...[
-                      Text(
-                        LocaleProvider.of(context).logout,
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic),
-                      ),
-                    ],
-                  ],
-                ),
-              )
             ]);
       }),
     );

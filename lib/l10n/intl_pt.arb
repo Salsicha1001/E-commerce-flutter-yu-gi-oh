@@ -84,5 +84,11 @@
     "prices": "Preços",
     "carrelated_letterds": "Cartas Relacionadas",
     "attack": "Ataque",
-    "defense": "Defesa"
+    "defense": "Defesa",
+    "preco_ebay": "Preço na Ebay",
+    "preco_Amazon": "Preço na Amazon",
+    "preco_TCGPLAYER": "Preço na TCGPLAYER",
+    "preco_CARDMARKET": "Preço na CARDMARKET",
+    "coin": "R$"
+
 }

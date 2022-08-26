@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
 import 'package:flutter_ecommerce/Screens/Cards/card_content.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_image.dart';
@@ -85,9 +82,9 @@ class _CardDetailState extends State<CardDetail> {
 
   List<Color> _getColors() {
     return [
-      Color.fromARGB(255, 92, 138, 223),
-      Color.fromARGB(255, 92, 138, 223),
-      if (widget.list_cards != null) Color.fromARGB(255, 92, 138, 223),
+      Color.fromARGB(255, 199, 219, 241),
+      Color.fromARGB(255, 199, 219, 241),
+      if (widget.list_cards != null) Color.fromARGB(255, 199, 219, 241),
     ];
   }
 
@@ -233,7 +230,7 @@ class _CardDetailState extends State<CardDetail> {
       PriceDetail(price: widget.card.card_prices[0]),
       if (widget.list_cards != null)
         Card(
-          color: Color.fromARGB(255, 92, 138, 223),
+          color: Color.fromARGB(255, 199, 219, 241),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -284,73 +281,75 @@ class _CardDetailState extends State<CardDetail> {
           ],
         ),
         body: Card(
+            color: Color.fromARGB(255, 92, 138, 223),
             child: Container(
                 child: Column(children: <Widget>[
-          Expanded(
-            child: Swiper(
-                itemBuilder: (context, index) {
-                  final img = images[index];
-                  return FadeInImage.assetNetwork(
-                    image: img,
-                    placeholder: 'images/load.gif',
-                    alignment: Alignment.topCenter,
-                  );
-                },
-                itemCount: images.length,
-                autoplay: true,
-                autoplayDisableOnInteraction: true,
-                duration: 1500,
-                physics: const ScrollPhysics(),
-                onTap: (img) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return DetailScreen(images[img]);
-                  }));
-                },
-                loop: true),
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-              child: ListView(
-            reverse: true,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: AspectRatio(
-                  aspectRatio: 10 / 8,
-                  child: TabContainer(
-                    radius: 25,
-                    tabEdge: TabEdge.top,
-                    tabCurve: Curves.easeInSine,
-                    transitionBuilder: (child, animation) {
-                      animation = CurvedAnimation(
-                          curve: Curves.easeIn, parent: animation);
-                      return SlideTransition(
-                        position: Tween(
-                          begin: const Offset(0.2, 0.0),
-                          end: const Offset(0.0, 0.0),
-                        ).animate(animation),
-                        child: FadeTransition(
-                          opacity: animation,
-                          child: child,
-                        ),
+              Expanded(
+                child: Swiper(
+                    itemBuilder: (context, index) {
+                      final img = images[index];
+                      return FadeInImage.assetNetwork(
+                        image: img,
+                        placeholder: 'images/load.gif',
+                        alignment: Alignment.topCenter,
                       );
                     },
-                    children: _getChildren2(),
-                    tabs: _getTabs2(),
-                    colors: _getColors(),
-                    selectedTextStyle: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    unselectedTextStyle: const TextStyle(
-                      fontSize: 18,
+                    itemCount: images.length,
+                    autoplay: true,
+                    autoplayDisableOnInteraction: true,
+                    duration: 1500,
+                    physics: const ScrollPhysics(),
+                    onTap: (img) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return DetailScreen(images[img]);
+                      }));
+                    },
+                    loop: images.length > 1 ? true : false),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                  child: ListView(
+                reverse: true,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: AspectRatio(
+                      aspectRatio: 10 / 8,
+                      child: TabContainer(
+                        radius: 25,
+                        tabEdge: TabEdge.top,
+                        tabCurve: Curves.easeInSine,
+                        transitionBuilder: (child, animation) {
+                          animation = CurvedAnimation(
+                              curve: Curves.easeIn, parent: animation);
+                          return SlideTransition(
+                            position: Tween(
+                              begin: const Offset(0.2, 0.0),
+                              end: const Offset(0.0, 0.0),
+                            ).animate(animation),
+                            child: FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            ),
+                          );
+                        },
+                        children: _getChildren2(),
+                        tabs: _getTabs2(),
+                        colors: _getColors(),
+                        selectedTextStyle: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        unselectedTextStyle: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ],
-          ))
-        ]))),
+                ],
+              ))
+            ]))),
         floatingActionButton: Visibility(
           visible: Provider.of<UserManager>(context, listen: false).isLoggedIn,
           child: FloatingActionButton(

@@ -20,7 +20,6 @@ import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-import 'helpers/cripto.dart';
 
 void main() async {
   configLoading();
@@ -93,14 +92,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // String a = Encrypt('213');
-    // print(a);
-    // String b = Decrypt(a);
-    // print(b);
-    // // String b = Decrypt(a,'123456798');
     return Consumer<ThemeAppConfig>(builder: (_, themeAppConfig, __) {
       return MaterialApp(
-        title: 'YU-GI-OH shopp',
+        title: 'YU-GI-OH ',
         supportedLocales: LocaleProvider.delegate.supportedLocales,
         localizationsDelegates: const [
           LocaleProvider.delegate,

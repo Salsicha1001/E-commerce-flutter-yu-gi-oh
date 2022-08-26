@@ -14,11 +14,11 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         children: [
           CustomDrawerHeader(),
-          const DrawerTitle(iconData: Icons.home, title: "Home", page: 0),
+          // const DrawerTitle(iconData: Icons.home, title: "Home", page: 0),
           DrawerTitle(
               iconData: Icons.list,
               title: LocaleProvider.of(context).cards,
-              page: 1),
+              page: 0),
           if (Provider.of<UserManager>(context).isLoggedIn)
             DrawerTitle(
                 iconData: Icons.shopping_cart_outlined,

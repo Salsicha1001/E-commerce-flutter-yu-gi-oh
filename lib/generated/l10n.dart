@@ -884,6 +884,56 @@ class LocaleProvider {
       args: [],
     );
   }
+
+  /// `Price na Ebay`
+  String get preco_ebay {
+    return Intl.message(
+      'Price na Ebay',
+      name: 'preco_ebay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price na Amazon`
+  String get preco_Amazon {
+    return Intl.message(
+      'Price na Amazon',
+      name: 'preco_Amazon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price na TCGPLAYER`
+  String get preco_TCGPLAYER {
+    return Intl.message(
+      'Price na TCGPLAYER',
+      name: 'preco_TCGPLAYER',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price na CARDMARKET`
+  String get preco_CARDMARKET {
+    return Intl.message(
+      'Price na CARDMARKET',
+      name: 'preco_CARDMARKET',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `$`
+  String get coin {
+    return Intl.message(
+      '\$',
+      name: 'coin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<LocaleProvider> {
@@ -892,6 +942,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<LocaleProvider> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'messages'),
       Locale.fromSubtags(languageCode: 'pt'),
     ];
   }
