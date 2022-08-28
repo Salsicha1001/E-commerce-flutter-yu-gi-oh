@@ -112,7 +112,8 @@ class CardService {
       return listCard;
     } else {
       LoadCustom().closeLoad();
-
+      DialogsCustom().showDialogAlert(context, 'Erro  ${response.statusCode}',
+          'Não foi encontrada nenhuma carta com esse nome');
       return null;
     }
   }

@@ -7,6 +7,8 @@ import 'package:flutter_ecommerce/Screens/Cards/detail_price.dart';
 import 'package:flutter_ecommerce/Screens/Cards/shopp_card_imgs.dart';
 import 'package:flutter_ecommerce/Utils/validate_animations.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
+import 'package:flutter_ecommerce/helpers/dolar-real.dart';
+import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_ecommerce/model/card/cards_list.dart';
@@ -27,8 +29,30 @@ class _CardDetailState extends State<CardDetail> {
 
   @override
   void initState() {
-    super.initState();
     _createCarousel();
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    if (Provider.of<ThemeAppConfig>(context).getLocale == Locale('pt', 'BR')) {
+      double valueDolar = await DolarToReal.getReal() as double;
+      widget.card.card_prices[0].amazon_price =
+          (double.parse(widget.card.card_prices[0].amazon_price) * valueDolar)
+              .toStringAsFixed(2);
+      widget.card.card_prices[0].cardmarket_price =
+          (double.parse(widget.card.card_prices[0].cardmarket_price) *
+                  valueDolar)
+              .toStringAsFixed(2);
+      widget.card.card_prices[0].ebay_price =
+          (double.parse(widget.card.card_prices[0].ebay_price) * valueDolar)
+              .toStringAsFixed(2);
+      widget.card.card_prices[0].tcgplayer_price =
+          (double.parse(widget.card.card_prices[0].tcgplayer_price) *
+                  valueDolar)
+              .toStringAsFixed(2);
+    }
   }
 
   _createCarousel() {
@@ -82,9 +106,9 @@ class _CardDetailState extends State<CardDetail> {
 
   List<Color> _getColors() {
     return [
-      Color.fromARGB(255, 199, 219, 241),
-      Color.fromARGB(255, 199, 219, 241),
-      if (widget.list_cards != null) Color.fromARGB(255, 199, 219, 241),
+      Color.fromARGB(255, 30, 101, 182),
+      Color.fromARGB(255, 30, 101, 182),
+      if (widget.list_cards != null) Color.fromARGB(255, 30, 101, 182),
     ];
   }
 
@@ -230,7 +254,7 @@ class _CardDetailState extends State<CardDetail> {
       PriceDetail(price: widget.card.card_prices[0]),
       if (widget.list_cards != null)
         Card(
-          color: Color.fromARGB(255, 199, 219, 241),
+          color: Color.fromARGB(255, 30, 101, 182),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -255,7 +279,7 @@ class _CardDetailState extends State<CardDetail> {
         appBar: AppBar(
           title: DefaultTextStyle(
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontFamily: 'Bobbers',
               ),
               child: AnimatedTextKit(
@@ -281,7 +305,7 @@ class _CardDetailState extends State<CardDetail> {
           ],
         ),
         body: Card(
-            color: Color.fromARGB(255, 92, 138, 223),
+            color: Color.fromARGB(255, 92, 129, 199),
             child: Container(
                 child: Column(children: <Widget>[
               Expanded(

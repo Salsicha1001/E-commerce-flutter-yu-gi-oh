@@ -20,21 +20,6 @@ class _PriceDetailState extends State<PriceDetail> {
   @override
   Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
-    if (Provider.of<ThemeAppConfig>(context).getLocale == Locale('pt', 'BR')) {
-      double valueDolar = await DolarToReal.getReal() as double;
-      widget.price.amazon_price =
-          (double.parse(widget.price.amazon_price) * valueDolar)
-              .toStringAsFixed(2);
-      widget.price.cardmarket_price =
-          (double.parse(widget.price.cardmarket_price) * valueDolar)
-              .toStringAsFixed(2);
-      widget.price.ebay_price =
-          (double.parse(widget.price.ebay_price) * valueDolar)
-              .toStringAsFixed(2);
-      widget.price.tcgplayer_price =
-          (double.parse(widget.price.tcgplayer_price) * valueDolar)
-              .toStringAsFixed(2);
-    }
   }
 
   @override

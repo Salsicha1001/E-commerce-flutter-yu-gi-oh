@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Consumer<ThemeAppConfig>(builder: (_, themeAppConfig, __) {
       return MaterialApp(
-        title: 'YU-GI-OH ',
+        title: 'YU-GI-OH',
         supportedLocales: LocaleProvider.delegate.supportedLocales,
         localizationsDelegates: const [
           LocaleProvider.delegate,
