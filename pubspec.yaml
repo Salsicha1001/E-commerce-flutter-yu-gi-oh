@@ -61,11 +61,6 @@ flutter:
 dependency_overrides:
   intl: ^0.17.0
 
-flutter_native_splash:
-  color: "#FFFFFF"
-  image: images/yugioh.png
-  android: true
-  ios: true
 
 flutter_icons:
   android: "ic_launcher"
