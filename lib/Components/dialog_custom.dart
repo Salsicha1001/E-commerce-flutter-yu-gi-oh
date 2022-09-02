@@ -1,9 +1,6 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/Screens/Shoop/cart_shopp.dart';
-import 'package:flutter_ecommerce/model/page_manager.dart';
-import 'package:provider/provider.dart';
 
 class DialogsCustom {
   showDialogAlert(context, titleMsg, descMsg) {

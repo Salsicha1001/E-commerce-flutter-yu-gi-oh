@@ -3,8 +3,7 @@ import 'package:flutter_ecommerce/model/page_manager.dart';
 import 'package:provider/provider.dart';
 
 class DrawerTitle extends StatelessWidget {
-  const DrawerTitle(
-      { this.iconData,  this.title,  this.page});
+  const DrawerTitle({this.iconData, this.title, this.page});
   final IconData iconData;
   final String title;
   final int page;
@@ -32,7 +31,7 @@ class DrawerTitle extends StatelessWidget {
             const SizedBox(width: 32),
             Text(
               title,
-                overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

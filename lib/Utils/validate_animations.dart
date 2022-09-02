@@ -1,6 +1,4 @@
 import 'dart:math';
-import 'package:flutter_ecommerce/model/Manager/card_shopp_manager.dart';
-import 'package:flutter_ecommerce/model/cart_shopp.dart';
 import 'package:provider/provider.dart';
 
 String getAnimation(name, context) {
@@ -228,44 +226,5 @@ String getAnimation(name, context) {
     return 'https://salsicha1001.github.io/repository_images_videos/assets/animation/en/card_yubel.mp4';
   } else {
     return null;
-  }
-}
-
-validateExodia(context) {
-  bool bracoDireito = false;
-  bool bracoEsquedo = false;
-  bool pernaDireita = false;
-  bool pernaEsquerda = false;
-  bool cabeca = false;
-  List<CartShopp> list = Provider.of<CartShoppManager>(context).getCarsShopps;
-  if (list.isNotEmpty) {
-    for (var element in list) {
-      if (element.name_card == 'Braço Direito de "O Proibido"') {
-        bracoDireito = true;
-      }
-      if (element.name_card == 'Braço Esquerdo de "O Proibido"') {
-        bracoEsquedo = true;
-      }
-      if (element.name_card == 'Perna Direita de "O Proibido"') {
-        pernaDireita = true;
-      }
-      if (element.name_card == 'Perna Esquerda de "O Proibido"') {
-        pernaEsquerda = true;
-      }
-      if (element.name_card == 'Exodia, "O Proibido"') {
-        cabeca = true;
-      }
-    }
-    if (bracoDireito &&
-        pernaEsquerda &&
-        bracoEsquedo &&
-        pernaDireita &&
-        cabeca) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    return false;
   }
 }

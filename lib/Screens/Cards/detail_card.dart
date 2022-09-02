@@ -4,7 +4,6 @@ import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
 import 'package:flutter_ecommerce/Screens/Cards/card_content.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_image.dart';
 import 'package:flutter_ecommerce/Screens/Cards/detail_price.dart';
-import 'package:flutter_ecommerce/Screens/Cards/shopp_card_imgs.dart';
 import 'package:flutter_ecommerce/Utils/validate_animations.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:flutter_ecommerce/helpers/dolar-real.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_ecommerce/model/Manager/config_manager.dart';
 import 'package:flutter_ecommerce/model/card/card_detail_dto.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_ecommerce/model/card/cards_list.dart';
-import 'package:flutter_ecommerce/model/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:tab_container/tab_container.dart';
 
@@ -86,19 +84,6 @@ class _CardDetailState extends State<CardDetail> {
               return AnimationCard(
                   video: getAnimation(
                       element != '' ? element : widget.card.name, context));
-            },
-            fullscreenDialog: true))
-        .then((value) {});
-  }
-
-  Future openDialogShoop() async {
-    String open = await Navigator.of(context)
-        .push(MaterialPageRoute<void>(
-            builder: (BuildContext context) {
-              return DialogCardSelect(
-                images: images,
-                cardDto: widget.card,
-              );
             },
             fullscreenDialog: true))
         .then((value) {});
@@ -276,114 +261,96 @@ class _CardDetailState extends State<CardDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: DefaultTextStyle(
-              style: const TextStyle(
-                fontSize: 20,
-                fontFamily: 'Bobbers',
-              ),
-              child: AnimatedTextKit(
-                animatedTexts: [TyperAnimatedText('${widget.card.name}')],
-                repeatForever: true,
-              )),
-          actions: [
-            if (getAnimation(widget.card.name, context) != null)
-              IconButton(
-                icon: const Icon(Icons.man_rounded),
-                onPressed: () {
-                  openDialog('');
-                },
-              ),
-            if (validateExodia(context) &&
-                widget.card.name == 'Exodia, "O Proibido"')
-              IconButton(
-                icon: const Icon(Icons.man_rounded),
-                onPressed: () {
-                  openDialog("exodia");
-                },
-              )
-          ],
-        ),
-        body: Card(
-            color: Color.fromARGB(255, 92, 129, 199),
-            child: Container(
-                child: Column(children: <Widget>[
-              Expanded(
-                child: Swiper(
-                    itemBuilder: (context, index) {
-                      final img = images[index];
-                      return FadeInImage.assetNetwork(
-                        image: img,
-                        placeholder: 'images/load.gif',
-                        alignment: Alignment.topCenter,
-                      );
-                    },
-                    itemCount: images.length,
-                    autoplay: true,
-                    autoplayDisableOnInteraction: true,
-                    duration: 1500,
-                    physics: const ScrollPhysics(),
-                    onTap: (img) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return DetailScreen(images[img]);
-                      }));
-                    },
-                    loop: images.length > 1 ? true : false),
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                  child: ListView(
-                reverse: true,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: AspectRatio(
-                      aspectRatio: 10 / 8,
-                      child: TabContainer(
-                        radius: 25,
-                        tabEdge: TabEdge.top,
-                        tabCurve: Curves.easeInSine,
-                        transitionBuilder: (child, animation) {
-                          animation = CurvedAnimation(
-                              curve: Curves.easeIn, parent: animation);
-                          return SlideTransition(
-                            position: Tween(
-                              begin: const Offset(0.2, 0.0),
-                              end: const Offset(0.0, 0.0),
-                            ).animate(animation),
-                            child: FadeTransition(
-                              opacity: animation,
-                              child: child,
-                            ),
-                          );
-                        },
-                        children: _getChildren2(),
-                        tabs: _getTabs2(),
-                        colors: _getColors(),
-                        selectedTextStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        unselectedTextStyle: const TextStyle(
-                          fontSize: 18,
-                        ),
+      appBar: AppBar(
+        title: DefaultTextStyle(
+            style: const TextStyle(
+              fontSize: 20,
+              fontFamily: 'Bobbers',
+            ),
+            child: AnimatedTextKit(
+              animatedTexts: [TyperAnimatedText('${widget.card.name}')],
+              repeatForever: true,
+            )),
+        actions: [
+          if (getAnimation(widget.card.name, context) != null)
+            IconButton(
+              icon: const Icon(Icons.man_rounded),
+              onPressed: () {
+                openDialog('');
+              },
+            ),
+        ],
+      ),
+      body: Card(
+          color: Color.fromARGB(255, 92, 129, 199),
+          child: Container(
+              child: Column(children: <Widget>[
+            Expanded(
+              child: Swiper(
+                  itemBuilder: (context, index) {
+                    final img = images[index];
+                    return FadeInImage.assetNetwork(
+                      image: img,
+                      placeholder: 'images/load.gif',
+                      alignment: Alignment.topCenter,
+                    );
+                  },
+                  itemCount: images.length,
+                  autoplay: true,
+                  autoplayDisableOnInteraction: true,
+                  duration: 1500,
+                  physics: const ScrollPhysics(),
+                  onTap: (img) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return DetailScreen(images[img]);
+                    }));
+                  },
+                  loop: images.length > 1 ? true : false),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+                child: ListView(
+              reverse: true,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: AspectRatio(
+                    aspectRatio: 10 / 8,
+                    child: TabContainer(
+                      radius: 25,
+                      tabEdge: TabEdge.top,
+                      tabCurve: Curves.easeInSine,
+                      transitionBuilder: (child, animation) {
+                        animation = CurvedAnimation(
+                            curve: Curves.easeIn, parent: animation);
+                        return SlideTransition(
+                          position: Tween(
+                            begin: const Offset(0.2, 0.0),
+                            end: const Offset(0.0, 0.0),
+                          ).animate(animation),
+                          child: FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          ),
+                        );
+                      },
+                      children: _getChildren2(),
+                      tabs: _getTabs2(),
+                      colors: _getColors(),
+                      selectedTextStyle: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      unselectedTextStyle: const TextStyle(
+                        fontSize: 18,
                       ),
                     ),
                   ),
-                ],
-              ))
-            ]))),
-        floatingActionButton: Visibility(
-          visible: Provider.of<UserManager>(context, listen: false).isLoggedIn,
-          child: FloatingActionButton(
-            onPressed: () {
-              openDialogShoop();
-            },
-            elevation: 10.0,
-            child: const Icon(Icons.shopping_cart_outlined),
-            backgroundColor: Color.fromARGB(255, 5, 70, 250),
-          ),
-        ));
+                ),
+              ],
+            ))
+          ]))),
+    );
   }
 }

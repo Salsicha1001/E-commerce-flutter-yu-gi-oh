@@ -17,7 +17,7 @@ class CardService {
     final response = await http.get(
       Uri.parse(url +
           '/cards' +
-          '/getHomeCardsResume?' +
+          '/all?' +
           "language=${getLanguge(context)}&linesPerPage=20&page=${page}"),
       headers: <String, String>{
         "Content-Type": "application/json;charset=UTF-8",
@@ -114,28 +114,6 @@ class CardService {
       DialogsCustom().showDialogAlert(context, 'Erro  ${response.statusCode}',
           'Não foi encontrada nenhuma carta com esse nome');
       return null;
-    }
-  }
-
-  Future<List<CardList>> getCardRecomend(context) async {
-    LoadCustom().openLoadMsg('Buscando as cartas recomendadas...');
-    final response = await http.get(
-      Uri.parse(url + '/cards' + '/random?language=${getLanguge(context)}'),
-      headers: <String, String>{
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    );
-    var msg = json.decode(utf8.decode(response.bodyBytes));
-    if (response.statusCode == 200) {
-      var listMap = (msg as List);
-      List<CardList> listCard =
-          listMap.map<CardList>((json) => CardList.fromJson(json)).toList();
-      LoadCustom().closeLoad();
-      return listCard;
-    } else {
-      LoadCustom().closeLoad();
-      DialogsCustom().showDialogAlert(
-          context, 'Erro  ${response.statusCode}', ' ${msg['msg']}');
     }
   }
 }

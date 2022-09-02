@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
-import 'package:flutter_ecommerce/model/user_model.dart';
-import 'package:flutter_ecommerce/services/authtenticador-service.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/Manager/config_manager.dart';
@@ -13,12 +11,6 @@ class ConfigScreen extends StatefulWidget {
 }
 
 class _ConfigScreenState extends State<ConfigScreen> {
-  saveConfg(context) async {
-    if (Provider.of<UserManager>(context, listen: false).isLoggedIn) {
-      UserService().setThemeConfigUser(context);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +46,6 @@ class _ConfigScreenState extends State<ConfigScreen> {
                             onChanged: (value) {
                               setState(() {
                                 themeAppConfig.setThemeAppConfig = value;
-                                saveConfg(context);
                               });
                             })),
                   ],
@@ -103,7 +94,6 @@ class _ConfigScreenState extends State<ConfigScreen> {
                                       listen: false)
                                   .setLocaleConfig = const Locale('en', 'US');
                             }
-                            saveConfg(context);
                           });
                         }),
                   ),
