@@ -34,7 +34,7 @@ class _ConfigScreenState extends State<ConfigScreen> {
                   children: [
                     const SizedBox(width: 10),
                     Expanded(
-                        flex: 4,
+                        flex: 5,
                         child: Text(
                           LocaleProvider.of(context).dark_mode,
                           style: TextStyle(fontSize: 16),

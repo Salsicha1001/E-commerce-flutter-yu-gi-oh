@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/custom_drawer.dart';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
@@ -30,6 +31,7 @@ class _CardsScreenState extends State<CardsScreen> {
   final TextEditingController _filter = TextEditingController();
   int page = 0;
   final RefreshController refreshController = RefreshController();
+  final ScrollController scrollControlle = ScrollController();
 
   @override
   void didChangeDependencies() {
@@ -43,7 +45,7 @@ class _CardsScreenState extends State<CardsScreen> {
       return false;
     }
     if (!filter) {
-      if (isRefresh || page < 20) {
+      if (isRefresh || page < 100) {
         page = 0;
       }
       List<CardList> card =
@@ -54,7 +56,7 @@ class _CardsScreenState extends State<CardsScreen> {
         } else {
           cards.addAll(card);
         }
-        page = page + 20;
+        page = page + 100;
         Timer(const Duration(seconds: 1), () {
           LoadCustom().closeLoad();
           refreshController.loadComplete();
@@ -165,47 +167,50 @@ class _CardsScreenState extends State<CardsScreen> {
         ]),
         body: Card(
           margin: const EdgeInsets.all(8.0),
-          child: SmartRefresher(
-            controller: refreshController,
-            enablePullUp: true,
-            onRefresh: () async {
-              final res = await getCards(isRefresh: true);
-              if (res) {
-                refreshController.refreshCompleted();
-              } else {
-                page = cards.length;
-                refreshController.refreshFailed();
-              }
-            },
-            onLoading: () async {
-              final res = await getCards();
-              if (res) {
-                refreshController.refreshCompleted();
-              } else {
-                page = cards.length;
-                refreshController.loadFailed();
-              }
-            },
-            child: ListView(
-              children: <Widget>[
-                Container(
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10.0,
-                            mainAxisSpacing: 5.0,
-                            mainAxisExtent: 280),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: const ScrollPhysics(),
-                    itemCount: cards.length,
-                    itemBuilder: (context, index) => CardContent(
-                      cardList: cards[index],
+          child: Scrollbar(
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: true,
+              controller: refreshController,
+              onRefresh: () async {
+                final res = await getCards(isRefresh: true);
+                if (res) {
+                  refreshController.refreshCompleted();
+                } else {
+                  page = cards.length;
+                  refreshController.refreshFailed();
+                }
+              },
+              onLoading: () async {
+                final res = await getCards();
+                if (res) {
+                  refreshController.refreshCompleted();
+                } else {
+                  page = cards.length;
+                  refreshController.loadFailed();
+                }
+              },
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 10.0,
+                              mainAxisSpacing: 5.0,
+                              mainAxisExtent: 280),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: PageScrollPhysics(),
+                      itemCount: cards.length,
+                      itemBuilder: (context, index) => CardContent(
+                        cardList: cards[index],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

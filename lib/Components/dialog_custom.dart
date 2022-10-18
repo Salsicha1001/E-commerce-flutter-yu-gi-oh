@@ -18,6 +18,7 @@ class DialogsCustom {
       type: CoolAlertType.error,
       title: titleMsg,
       text: descMsg,
+      
     );
   }
 

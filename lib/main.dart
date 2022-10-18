@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_ecommerce/Screens/Base/base_screen.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_ecommerce/model/card/cards_list.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 void main() async {
   configLoading();
@@ -58,8 +60,20 @@ class _MyAppState extends State<MyApp> {
     return Consumer<ThemeAppConfig>(builder: (_, themeAppConfig, __) {
       return MaterialApp(
         title: 'YU-GI-OH',
+        scrollBehavior: MaterialScrollBehavior().copyWith(
+          dragDevices: {
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.touch,
+            PointerDeviceKind.stylus,
+            PointerDeviceKind.unknown,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.invertedStylus
+          },
+        ),
+        debugShowCheckedModeBanner: false,
         supportedLocales: LocaleProvider.delegate.supportedLocales,
         localizationsDelegates: const [
+          RefreshLocalizations.delegate,
           LocaleProvider.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,

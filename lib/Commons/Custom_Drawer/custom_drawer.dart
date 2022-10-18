@@ -3,6 +3,7 @@ import 'package:flutter_ecommerce/Commons/Custom_Drawer/Custom_Drawer_Header.dar
 import 'package:flutter_ecommerce/Commons/Custom_Drawer/drawer_title.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
 import 'package:get_storage/get_storage.dart';
+import 'dart:html' as html;
 
 class CustomDrawer extends StatelessWidget {
   final box = GetStorage();
@@ -20,6 +21,12 @@ class CustomDrawer extends StatelessWidget {
               iconData: Icons.settings,
               title: LocaleProvider.of(context).settings,
               page: 1),
+          ElevatedButton(
+            onPressed: () {
+              html.window.open('https://forms.gle/K7HQrdcmwMWHtEj38', "_blank");
+            },
+            child: Text("Avalie a gente"),
+          ),
         ],
       ),
     );

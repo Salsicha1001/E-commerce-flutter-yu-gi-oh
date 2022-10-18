@@ -29,7 +29,9 @@ class _BaseScreenState extends State<BaseScreen> {
           children: [
             CardsScreen(),
             ConfigScreen(),
+            
           ],
         ));
   }
 }
+ 

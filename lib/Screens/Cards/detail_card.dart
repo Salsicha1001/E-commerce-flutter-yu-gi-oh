@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Screens/Cards/animation_card.dart';
@@ -35,7 +37,7 @@ class _CardDetailState extends State<CardDetail> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     if (Provider.of<ThemeAppConfig>(context).getLocale == Locale('pt', 'BR')) {
-      var value = await DolarToReal.getReal();
+      DolarEuro value = await DolarToReal.getReal();
       widget.card.card_prices[0].amazon_price =
           (double.parse(widget.card.card_prices[0].amazon_price) * value.dolar)
               .toStringAsFixed(2);
@@ -98,14 +100,15 @@ class _CardDetailState extends State<CardDetail> {
   }
 
   List<Widget> _getChildren2() {
-    return <Widget>[
+    return [
       ListView(
         children: [
           Container(
             padding: const EdgeInsets.all(8.0),
             child: Row(children: [
               if (widget.card.level > 0)
-                const Text("Level:", style: const TextStyle(fontSize: 20)),
+                const Text("Level:",
+                    style: const TextStyle(fontSize: 20, color: Colors.white)),
               for (int i = 0; i < widget.card.level; i++)
                 Image.asset(
                   'images/img_star.png',
@@ -120,14 +123,15 @@ class _CardDetailState extends State<CardDetail> {
                   flex: 2,
                   child: Wrap(children: [
                     Text(LocaleProvider.of(context).type_card + ':',
-                        style: TextStyle(fontSize: 20)),
+                        style: TextStyle(fontSize: 20, color: Colors.white)),
                   ])),
               Expanded(
                   flex: 2,
                   child: Wrap(
                     children: [
                       Text(LocaleProvider.of(context).type + ':',
-                          style: const TextStyle(fontSize: 20)),
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white)),
                     ],
                   )),
             ]),
@@ -140,7 +144,9 @@ class _CardDetailState extends State<CardDetail> {
                   child: Wrap(children: [
                     Text("${widget.card.type}",
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
                   ])),
               Expanded(
                   flex: 2,
@@ -148,7 +154,9 @@ class _CardDetailState extends State<CardDetail> {
                     children: [
                       Text("${widget.card.race}",
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
                     ],
                   )),
             ]),
@@ -162,14 +170,16 @@ class _CardDetailState extends State<CardDetail> {
                     flex: 1,
                     child: Wrap(children: [
                       Text(LocaleProvider.of(context).attack + ':',
-                          style: const TextStyle(fontSize: 20)),
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white)),
                     ])),
                 Expanded(
                     flex: 1,
                     child: Wrap(
                       children: [
                         Text(LocaleProvider.of(context).defense + ':',
-                            style: const TextStyle(fontSize: 20)),
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white)),
                       ],
                     )),
                 if (widget.card.attribute != null)
@@ -178,7 +188,8 @@ class _CardDetailState extends State<CardDetail> {
                       child: Wrap(
                         children: [
                           Text(LocaleProvider.of(context).attribute + ':',
-                              style: const TextStyle(fontSize: 20)),
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.white)),
                         ],
                       )),
               ]),
@@ -193,7 +204,9 @@ class _CardDetailState extends State<CardDetail> {
                     child: Wrap(children: [
                       Text("${widget.card.atk}",
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
                     ])),
                 Expanded(
                     flex: 1,
@@ -201,7 +214,9 @@ class _CardDetailState extends State<CardDetail> {
                       children: [
                         Text("${widget.card.def}",
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
                       ],
                     )),
                 if (widget.card.attribute != null)
@@ -211,7 +226,9 @@ class _CardDetailState extends State<CardDetail> {
                         children: [
                           Text("${widget.card.attribute}",
                               style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
                         ],
                       )),
               ]),
@@ -219,9 +236,7 @@ class _CardDetailState extends State<CardDetail> {
           const SizedBox(height: 20),
           Text(
             LocaleProvider.of(context).description,
-            style: const TextStyle(
-              fontSize: 20,
-            ),
+            style: const TextStyle(fontSize: 20, color: Colors.white),
             textAlign: TextAlign.center,
           ),
           Container(
@@ -229,8 +244,10 @@ class _CardDetailState extends State<CardDetail> {
             child: Wrap(children: [
               Text(
                 "${widget.card.desc}",
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               )
             ]),
           ),
@@ -242,7 +259,7 @@ class _CardDetailState extends State<CardDetail> {
           color: Color.fromARGB(255, 30, 101, 182),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 5,
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 5.0,
                 mainAxisExtent: 140),
@@ -264,9 +281,7 @@ class _CardDetailState extends State<CardDetail> {
       appBar: AppBar(
         title: DefaultTextStyle(
             style: const TextStyle(
-              fontSize: 20,
-              fontFamily: 'Bobbers',
-            ),
+                fontSize: 20, fontFamily: 'Bobbers', color: Colors.white),
             child: AnimatedTextKit(
               animatedTexts: [TyperAnimatedText('${widget.card.name}')],
               repeatForever: true,
@@ -308,13 +323,12 @@ class _CardDetailState extends State<CardDetail> {
                   },
                   loop: images.length > 1 ? true : false),
             ),
-            const SizedBox(height: 20),
             Expanded(
                 child: ListView(
-              reverse: true,
+              shrinkWrap: true,
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.5,
                   child: AspectRatio(
                     aspectRatio: 10 / 8,
                     child: TabContainer(
@@ -339,12 +353,11 @@ class _CardDetailState extends State<CardDetail> {
                       tabs: _getTabs2(),
                       colors: _getColors(),
                       selectedTextStyle: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      unselectedTextStyle: const TextStyle(
-                        fontSize: 18,
-                      ),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                      unselectedTextStyle:
+                          const TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),

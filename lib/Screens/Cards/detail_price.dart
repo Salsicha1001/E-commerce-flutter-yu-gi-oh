@@ -33,13 +33,13 @@ class _PriceDetailState extends State<PriceDetail> {
               Expanded(
                 child: Text(
                   LocaleProvider.of(context).preco_ebay,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18,color: Colors.white),
                 ),
                 flex: 2,
               ),
               Expanded(
                 child: Text(LocaleProvider.of(context).preco_Amazon,
-                    style: TextStyle(fontSize: 18)),
+                    style: TextStyle(fontSize: 18,color: Colors.white)),
                 flex: 2,
               )
             ],
@@ -50,14 +50,14 @@ class _PriceDetailState extends State<PriceDetail> {
                 child: Text(
                     "${LocaleProvider.of(context).coin}  ${widget.price.ebay_price}",
                     style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.white)),
                 flex: 2,
               ),
               Expanded(
                 child: Text(
                     "${LocaleProvider.of(context).coin}  ${widget.price.amazon_price}",
                     style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.white)),
                 flex: 2,
               )
             ],
@@ -68,13 +68,13 @@ class _PriceDetailState extends State<PriceDetail> {
               Expanded(
                 child: Text(
                   LocaleProvider.of(context).preco_TCGPLAYER,
-                  style: TextStyle(fontSize: 17),
+                  style: TextStyle(fontSize: 17,color: Colors.white),
                 ),
                 flex: 2,
               ),
               Expanded(
                 child: Text(LocaleProvider.of(context).preco_CARDMARKET,
-                    style: TextStyle(fontSize: 17)),
+                    style: TextStyle(fontSize: 17,color: Colors.white)),
                 flex: 2,
               )
             ],
@@ -85,7 +85,7 @@ class _PriceDetailState extends State<PriceDetail> {
                 child: Text(
                     "${LocaleProvider.of(context).coin}  ${widget.price.tcgplayer_price}",
                     style:
-                        TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 17, fontWeight: FontWeight.bold,color: Colors.white)),
                 flex: 2,
               ),
               if (Provider.of<ThemeAppConfig>(context).getLocale ==
@@ -94,7 +94,7 @@ class _PriceDetailState extends State<PriceDetail> {
                   child: Text(
                       "${LocaleProvider.of(context).coin}  ${widget.price.cardmarket_price}",
                       style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold,color: Colors.white)),
                   flex: 2,
                 ),
               if (Provider.of<ThemeAppConfig>(context).getLocale !=
@@ -102,7 +102,7 @@ class _PriceDetailState extends State<PriceDetail> {
                 Expanded(
                   child: Text(" ${widget.price.cardmarket_price}€",
                       style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold,color: Colors.white)),
                   flex: 2,
                 )
             ],
