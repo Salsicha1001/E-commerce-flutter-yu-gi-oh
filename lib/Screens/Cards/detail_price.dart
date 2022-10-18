@@ -88,13 +88,23 @@ class _PriceDetailState extends State<PriceDetail> {
                         TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 flex: 2,
               ),
-              Expanded(
-                child: Text(
-                    "${LocaleProvider.of(context).coin}  ${widget.price.cardmarket_price}",
-                    style:
-                        TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-                flex: 2,
-              )
+              if (Provider.of<ThemeAppConfig>(context).getLocale ==
+                  Locale('pt', 'BR'))
+                Expanded(
+                  child: Text(
+                      "${LocaleProvider.of(context).coin}  ${widget.price.cardmarket_price}",
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                  flex: 2,
+                ),
+              if (Provider.of<ThemeAppConfig>(context).getLocale !=
+                  Locale('pt', 'BR'))
+                Expanded(
+                  child: Text(" ${widget.price.cardmarket_price}€",
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                  flex: 2,
+                )
             ],
           ),
           const SizedBox(height: 30),

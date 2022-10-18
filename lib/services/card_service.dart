@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter_ecommerce/Components/dialog_custom.dart';
 import 'package:flutter_ecommerce/Components/load_custom.dart';
 import 'package:flutter_ecommerce/generated/l10n.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_ecommerce/model/card/filter_request_card.dart';
 import 'package:http/http.dart' as http;
 
 class CardService {
-  var url = UrlConfig().urlLocal;
+  var url = UrlConfig().urlHK;
 
   Future<List<CardList>> getCardPagination(context, page) async {
     LoadCustom().openLoadMsg(LocaleProvider.of(context).search + '....');

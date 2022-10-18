@@ -35,20 +35,20 @@ class _CardDetailState extends State<CardDetail> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     if (Provider.of<ThemeAppConfig>(context).getLocale == Locale('pt', 'BR')) {
-      double valueDolar = await DolarToReal.getReal() as double;
+      var value = await DolarToReal.getReal();
       widget.card.card_prices[0].amazon_price =
-          (double.parse(widget.card.card_prices[0].amazon_price) * valueDolar)
+          (double.parse(widget.card.card_prices[0].amazon_price) * value.dolar)
               .toStringAsFixed(2);
       widget.card.card_prices[0].cardmarket_price =
           (double.parse(widget.card.card_prices[0].cardmarket_price) *
-                  valueDolar)
+                  value.euro)
               .toStringAsFixed(2);
       widget.card.card_prices[0].ebay_price =
-          (double.parse(widget.card.card_prices[0].ebay_price) * valueDolar)
+          (double.parse(widget.card.card_prices[0].ebay_price) * value.dolar)
               .toStringAsFixed(2);
       widget.card.card_prices[0].tcgplayer_price =
           (double.parse(widget.card.card_prices[0].tcgplayer_price) *
-                  valueDolar)
+                  value.dolar)
               .toStringAsFixed(2);
     }
   }
