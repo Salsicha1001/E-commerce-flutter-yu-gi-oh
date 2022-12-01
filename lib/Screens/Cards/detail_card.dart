@@ -37,7 +37,7 @@ class _CardDetailState extends State<CardDetail> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     if (Provider.of<ThemeAppConfig>(context).getLocale == Locale('pt', 'BR')) {
-      DolarEuro value = await DolarToReal.getReal();
+       DolarEuro value = await DolarToReal.getReal();
       widget.card.card_prices[0].amazon_price =
           (double.parse(widget.card.card_prices[0].amazon_price) * value.dolar)
               .toStringAsFixed(2);
@@ -259,7 +259,7 @@ class _CardDetailState extends State<CardDetail> {
           color: Color.fromARGB(255, 30, 101, 182),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
+                crossAxisCount:3,
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 5.0,
                 mainAxisExtent: 140),

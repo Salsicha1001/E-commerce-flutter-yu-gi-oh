@@ -19,7 +19,7 @@ class CardService {
       Uri.parse(url +
           '/cards' +
           '/all?' +
-          "language=${getLanguge(context)}&linesPerPage=100&page=${page}"),
+          "language=${getLanguge(context)}&linesPerPage=10&page=${page}"),
       headers: <String, String>{
         "Content-Type": "application/json;charset=UTF-8",
       },

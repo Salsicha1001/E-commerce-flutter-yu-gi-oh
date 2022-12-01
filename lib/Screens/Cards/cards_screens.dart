@@ -56,7 +56,7 @@ class _CardsScreenState extends State<CardsScreen> {
         } else {
           cards.addAll(card);
         }
-        page = page + 100;
+        page = page + 20;
         Timer(const Duration(seconds: 1), () {
           LoadCustom().closeLoad();
           refreshController.loadComplete();
@@ -119,6 +119,9 @@ class _CardsScreenState extends State<CardsScreen> {
       if (this._searchIcon.icon == Icons.search) {
         this._searchIcon = const Icon(Icons.close);
         this._appBarTitle = TextField(
+          textInputAction: TextInputAction.go,
+          showCursor: true,
+          cursorColor: Colors.white,
           controller: _filter,
           decoration: const InputDecoration(
             prefixIcon: Icon(Icons.search, color: Colors.white),
@@ -196,10 +199,10 @@ class _CardsScreenState extends State<CardsScreen> {
                     child: GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4,
+                              crossAxisCount: 2,
                               crossAxisSpacing: 10.0,
                               mainAxisSpacing: 5.0,
-                              mainAxisExtent: 280),
+                              mainAxisExtent: 300),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       physics: PageScrollPhysics(),

@@ -12,7 +12,7 @@ class CustomDrawerHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              "Analise de Cartas\n YU-GI-OH",
+              "YU-GI-OH",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
             ),
