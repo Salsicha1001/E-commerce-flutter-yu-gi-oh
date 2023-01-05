@@ -18,7 +18,7 @@ class CardService {
     final response = await http.get(
       Uri.parse(url +
           '/cards' +
-          '/all?' +
+          '/all?' + 
           "language=${getLanguge(context)}&linesPerPage=10&page=${page}"),
       headers: <String, String>{
         "Content-Type": "application/json;charset=UTF-8",
